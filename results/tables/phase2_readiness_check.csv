@@ -1,0 +1,7 @@
+file,required_or_optional,status,rows,columns,notes
+pseudo_crew.csv,required,✓ loaded,4,9,
+domain_scores.csv,required,✓ loaded,4,6,
+baci_scores.csv,required,✓ loaded,4,4,
+deviation_scores.csv,optional,✓ loaded,4,20,
+baci_sensitivity.csv,optional,✓ loaded,12,4,
+crew_level_summary.csv,optional,✓ loaded,4,7,

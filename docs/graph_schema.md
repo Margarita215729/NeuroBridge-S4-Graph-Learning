@@ -59,58 +59,65 @@ Each node can include:
 
 | Edge type | Meaning |
 |---|---|
-| Conceptual biological relationship | Literature-plausible or mechanistic relationship. |
-| Observed correlation | Data-derived correlation in the reference population. |
-| Co-deviation relationship | Two domains show coordinated deviation in a subject. |
-| Temporal coupling | Two domains change together over time in longitudinal data. |
-| Decision-support relationship | Biological pattern maps to monitoring priority or countermeasure category. |
+| `conceptual_biological_relationship` | Literature-plausible or mechanistic relationship between two biological domains (Phase 3, implemented). |
+| `within_subject_coactivation` | Both domains show activation ≥ threshold in this subject (Phase 3, implemented). |
+| `observed_reference_relationship` | Data-derived relationship from reference population (Phase 4+, future). |
+| `decision_support_relationship` | Biological pattern maps to monitoring priority or countermeasure category (future). |
 
-## Edge attributes
+## Edge attributes (Phase 3)
 
 | Attribute | Description |
 |---|---|
-| `edge_type` | Conceptual, observed, co-deviation, temporal, or decision-support. |
-| `weight` | Relationship strength. |
-| `source` | Literature, reference data, subject data, or expert schema. |
-| `directional` | Whether edge direction is meaningful. |
-| `confidence` | Confidence in relationship interpretation. |
+| `edge_type` | One of the types above. |
+| `relationship` | Plain-language description of the relationship. |
+| `weight` | Relationship strength (1.0 for conceptual; mean activation for co-activation). |
+| `source` | NeuroBridge-S4 graph schema or processed proxy outputs. |
+| `interpretation` | Guardrail-aware plain-language phrase. |
+| `coactivation` | Boolean — True if a conceptual edge also shows co-activation. |
+| `coactivation_weight` | Mean activation when co-activation is annotated on a conceptual edge. |
 
-## Initial conceptual edges
+## Graph-level attributes (Phase 3)
 
-Examples:
+| Attribute | Value |
+|---|---|
+| `subject_id` | Participant identifier |
+| `baci_score` | BACI from baci_scores.csv |
+| `baci_category` | Coherence category string |
+| `n_domains` | Number of domain nodes |
+| `n_active_domains` | Domains with activation ≥ 1.0 |
+| `max_domain_activation` | Highest activation value |
+| `top_domain` | Domain with highest activation |
+| `graph_type` | `subject_level_biological_adaptation_graph` |
+| `source_project` | `NeuroBridge-S4 Graph Learning` |
+| `guardrail` | `Research interpretation only; not diagnosis or treatment guidance.` |
 
-- Sleep / circadian regulation ↔ Autonomic regulation
-- Sleep / circadian regulation ↔ Cognitive load
-- Autonomic regulation ↔ HPA/stress biology proxy
-- Immune / inflammatory status ↔ Fatigue / recovery proxy
-- Metabolic regulation ↔ Fatigue / recovery proxy
-- Cognitive load ↔ Emotional regulation
-- Recovery capacity ↔ Sleep / circadian regulation
-- Recovery capacity ↔ Autonomic regulation
-- Monitoring priority → Follow-up data stream
-- Monitoring priority → Countermeasure consideration
+## Phase 3 conceptual edge schema
 
-## Interpretation rules
+Implemented edges (both endpoints must be present in domain_scores.csv):
 
-1. Conceptual edges are not causal proof.
-2. Observed edges are not medical claims.
-3. A graph pattern is a signal for human review, not diagnosis.
-4. Node activation should be interpreted relative to data quality and missingness.
-5. Graph novelty should be interpreted as reference-relative unusualness, not disease.
+| Domain A | Domain B | Biological rationale |
+|---|---|---|
+| Cardiovascular regulation | Metabolic regulation | Shared regulatory feedback loops |
+| Metabolic regulation | Body composition / physical status | Bidirectional coupling |
+| Inflammation / immune-adjacent | Metabolic regulation | Inflammatory signalling modulates metabolism |
+| Hematologic / oxygen-carrying | Cardiovascular regulation | Oxygen capacity coupled to cardiac function |
+| Sleep / circadian regulation | Autonomic regulation | Sleep regulates autonomic tone |
+| Autonomic regulation | Cardiovascular regulation | Autonomic modulation of heart rate |
+| Sleep / circadian regulation | Recovery capacity | Sleep drives physiological recovery |
+| Cognitive load | Recovery-related markers | Cognitive demand influences recovery |
+| Emotional regulation | Cognitive load | Shared neuroregulatory substrate |
+| Recovery capacity | Inflammation / immune-adjacent | Recovery involves inflammatory resolution |
 
-## Future longitudinal extension
+## Interactive visualization outputs (Phase 3)
 
-In longitudinal data, each subject becomes a sequence of graphs:
+- `results/html/subject_graph_<ID>.html` — one interactive HTML per subject
+- `results/html/index.html` — index page linking all subject graphs
 
-```text
-G_baseline → G_exposure → G_recovery
-```
+HTML files are self-contained (no internet required when using pyvis inline CDN).
+Nodes are draggable; hover tooltips show domain score, activation level, and interpretation.
 
-Future temporal features:
+## Future extensions
 
-- graph delta from baseline;
-- edge activation changes;
-- persistent active subgraphs;
-- recovery slope;
-- return-to-baseline time;
-- temporal BACI.
+- `measured_variable` nodes connecting individual biomarkers to domain nodes
+- `observed_reference_relationship` edges from reference population data
+- `decision_support_relationship` edges connecting domain patterns to monitoring priorities

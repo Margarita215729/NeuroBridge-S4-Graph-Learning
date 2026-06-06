@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d22" for="edge" attr.name="interpretation" attr.type="string"/>
+<key id="d21" for="edge" attr.name="source" attr.type="string"/>
+<key id="d20" for="edge" attr.name="weight" attr.type="string"/>
+<key id="d19" for="edge" attr.name="relationship" attr.type="string"/>
+<key id="d18" for="edge" attr.name="edge_type" attr.type="string"/>
+<key id="d17" for="node" attr.name="interpretation" attr.type="string"/>
+<key id="d16" for="node" attr.name="data_source" attr.type="string"/>
+<key id="d15" for="node" attr.name="node_type" attr.type="string"/>
+<key id="d14" for="node" attr.name="activation_level" attr.type="string"/>
+<key id="d13" for="node" attr.name="activation" attr.type="string"/>
+<key id="d12" for="node" attr.name="domain_score" attr.type="string"/>
+<key id="d11" for="node" attr.name="domain" attr.type="string"/>
+<key id="d10" for="node" attr.name="subject_id" attr.type="string"/>
+<key id="d9" for="graph" attr.name="guardrail" attr.type="string"/>
+<key id="d8" for="graph" attr.name="source_project" attr.type="string"/>
+<key id="d7" for="graph" attr.name="graph_type" attr.type="string"/>
+<key id="d6" for="graph" attr.name="top_domain" attr.type="string"/>
+<key id="d5" for="graph" attr.name="max_domain_activation" attr.type="string"/>
+<key id="d4" for="graph" attr.name="n_active_domains" attr.type="string"/>
+<key id="d3" for="graph" attr.name="n_domains" attr.type="string"/>
+<key id="d2" for="graph" attr.name="baci_category" attr.type="string"/>
+<key id="d1" for="graph" attr.name="baci_score" attr.type="string"/>
+<key id="d0" for="graph" attr.name="subject_id" attr.type="string"/>
+<graph edgedefault="undirected"><data key="d0">Crew 94465</data>
+<data key="d1">22.1</data>
+<data key="d2">low coherence</data>
+<data key="d3">6</data>
+<data key="d4">1</data>
+<data key="d5">1.32253</data>
+<data key="d6">Body composition / physical status</data>
+<data key="d7">subject_level_biological_adaptation_graph</data>
+<data key="d8">NeuroBridge-S4 Graph Learning</data>
+<data key="d9">Research interpretation only; not diagnosis or treatment guidance.</data>
+<node id="Cardiovascular regulation">
+  <data key="d10">Crew 94465</data>
+  <data key="d11">Cardiovascular regulation</data>
+  <data key="d12">0.948613</data>
+  <data key="d13">0.948613</data>
+  <data key="d14">mild</data>
+  <data key="d15">biological_domain</data>
+  <data key="d16">processed NeuroBridge-S4 proxy outputs</data>
+  <data key="d17">Cardiovascular regulation: mild reference-relative signal (slightly above typical range; monitor if sustained).</data>
+</node>
+<node id="Metabolic regulation">
+  <data key="d10">Crew 94465</data>
+  <data key="d11">Metabolic regulation</data>
+  <data key="d12">0.835169</data>
+  <data key="d13">0.835169</data>
+  <data key="d14">mild</data>
+  <data key="d15">biological_domain</data>
+  <data key="d16">processed NeuroBridge-S4 proxy outputs</data>
+  <data key="d17">Metabolic regulation: mild reference-relative signal (slightly above typical range; monitor if sustained).</data>
+</node>
+<node id="Body composition / physical status">
+  <data key="d10">Crew 94465</data>
+  <data key="d11">Body composition / physical status</data>
+  <data key="d12">1.32253</data>
+  <data key="d13">1.32253</data>
+  <data key="d14">moderate</data>
+  <data key="d15">biological_domain</data>
+  <data key="d16">processed NeuroBridge-S4 proxy outputs</data>
+  <data key="d17">Body composition / physical status: moderate domain activation (notable deviation from reference; warrants review).</data>
+</node>
+<node id="Inflammation / immune-adjacent">
+  <data key="d10">Crew 94465</data>
+  <data key="d11">Inflammation / immune-adjacent</data>
+  <data key="d12">0.496448</data>
+  <data key="d13">0.496448</data>
+  <data key="d14">low</data>
+  <data key="d15">biological_domain</data>
+  <data key="d16">processed NeuroBridge-S4 proxy outputs</data>
+  <data key="d17">Inflammation / immune-adjacent: reference-relative signal is low (within typical reference range).</data>
+</node>
+<node id="Hematologic / oxygen-carrying">
+  <data key="d10">Crew 94465</data>
+  <data key="d11">Hematologic / oxygen-carrying</data>
+  <data key="d12">0.627734</data>
+  <data key="d13">0.627734</data>
+  <data key="d14">low</data>
+  <data key="d15">biological_domain</data>
+  <data key="d16">processed NeuroBridge-S4 proxy outputs</data>
+  <data key="d17">Hematologic / oxygen-carrying: reference-relative signal is low (within typical reference range).</data>
+</node>
+<node id="Recovery-related markers">
+  <data key="d10">Crew 94465</data>
+  <data key="d11">Recovery-related markers</data>
+  <data key="d12">0.806384</data>
+  <data key="d13">0.806384</data>
+  <data key="d14">mild</data>
+  <data key="d15">biological_domain</data>
+  <data key="d16">processed NeuroBridge-S4 proxy outputs</data>
+  <data key="d17">Recovery-related markers: mild reference-relative signal (slightly above typical range; monitor if sustained).</data>
+</node>
+<edge source="Cardiovascular regulation" target="Metabolic regulation">
+  <data key="d18">conceptual_biological_relationship</data>
+  <data key="d19">Cardiovascular and metabolic systems share regulatory feedback loops.</data>
+  <data key="d20">1.0</data>
+  <data key="d21">NeuroBridge-S4 graph schema</data>
+  <data key="d22">Conceptual biological relationship; not causal proof. Flags domains for co-review.</data>
+</edge>
+<edge source="Cardiovascular regulation" target="Hematologic / oxygen-carrying">
+  <data key="d18">conceptual_biological_relationship</data>
+  <data key="d19">Oxygen-carrying capacity is tightly coupled to cardiovascular function.</data>
+  <data key="d20">1.0</data>
+  <data key="d21">NeuroBridge-S4 graph schema</data>
+  <data key="d22">Conceptual biological relationship; not causal proof. Flags domains for co-review.</data>
+</edge>
+<edge source="Metabolic regulation" target="Body composition / physical status">
+  <data key="d18">conceptual_biological_relationship</data>
+  <data key="d19">Metabolic state and body composition are bidirectionally coupled.</data>
+  <data key="d20">1.0</data>
+  <data key="d21">NeuroBridge-S4 graph schema</data>
+  <data key="d22">Conceptual biological relationship; not causal proof. Flags domains for co-review.</data>
+</edge>
+<edge source="Metabolic regulation" target="Inflammation / immune-adjacent">
+  <data key="d18">conceptual_biological_relationship</data>
+  <data key="d19">Inflammatory signalling modulates metabolic pathways.</data>
+  <data key="d20">1.0</data>
+  <data key="d21">NeuroBridge-S4 graph schema</data>
+  <data key="d22">Conceptual biological relationship; not causal proof. Flags domains for co-review.</data>
+</edge>
+</graph></graphml>

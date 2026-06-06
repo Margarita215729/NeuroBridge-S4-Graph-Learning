@@ -41,15 +41,28 @@ Deliverables:
 
 ## Phase 3 — Subject-level biological adaptation graphs
 
-Goal: convert each participant into a graph.
+Status: **implemented**.
+
+Goal: convert each participant into a computable biological adaptation graph.
 
 Deliverables:
 
-- `src/neurobridge_graph/graph_builder.py`
-- node/edge tables
-- one graph visualization per pseudo-crew participant
+- `src/neurobridge_graph/graph_builder.py` — full graph construction pipeline
+- `src/neurobridge_graph/visualization.py` — static PNG figures
+- `src/neurobridge_graph/interactive.py` — interactive HTML graph export (pyvis)
+- `notebooks/01_Build_Biological_Adaptation_Graphs.ipynb` — reviewer-friendly notebook
+- `results/graphs/*.graphml` — one GraphML file per participant
+- `results/tables/subject_nodes.csv` — all node attributes
+- `results/tables/subject_edges.csv` — all edge attributes
+- `results/tables/phase3_graph_summary.csv` — graph-level summary
+- `results/figures/subject_graph_*.png` — static PNG graph visualizations
+- `results/html/subject_graph_*.html` — interactive HTML graph visualizations
+- `results/html/index.html` — index page linking all subject graphs
+- `results/reports/phase3_subject_graph_report.txt` — plain-language report
+- `tests/test_graph_builder.py` — unit tests
+- `tests/test_interactive_export.py` — HTML export tests
 
-## Phase 4 — Graph feature extraction
+## Phase 4 — Graph feature extraction ← next
 
 Goal: compute interpretable graph-level and node-level features.
 
