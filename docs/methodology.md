@@ -186,3 +186,35 @@ contribution_share = absolute_delta / total_absolute_delta (per subject-timepoin
 Each subject-timepoint receives a plain-language explanation card and feeds a Phase 7 report.
 Outputs are monitoring-relevant patterns and candidates for expert review — not diagnosis,
 treatment guidance, exposure measurement, or causal proof.
+
+## Reference-calibrated trajectory envelope
+
+Phase 8 adds a **secondary calibration layer** on top of the within-subject trajectory. The
+self-baseline comparison **remains primary**: Phase 8 never asks whether a subject is normal
+compared with healthy people. It asks whether the subject's own change from baseline is larger
+than expected under a reference-calibrated variability envelope.
+
+> The reference envelope does not define whether a person is healthy or unhealthy. It
+> calibrates how large a within-subject graph change is relative to expected variability in
+> available proxy or analog data.
+
+How reference/analog data calibrate expected variability:
+
+- For each feature (biological domain, graph metric, or hazard context), reference deltas are
+  summarized into a **median delta** (envelope center), a **MAD** (robust spread), and
+  **5th/95th-percentile bounds** (the expected-variability envelope).
+- A within-subject delta is scored with a **robust z-score**,
+  `(delta − median) / (1.4826 × MAD)`, and classified as `within_expected_envelope`,
+  `near_envelope_boundary`, `outside_expected_envelope`, or `insufficient_reference`.
+
+What envelope bounds mean: the band represents the range of baseline-relative change that is
+expected given reference/analog variability. A delta inside the band is unremarkable under the
+current calibration; a delta outside the band is larger than expected.
+
+Why envelope exceedance is not diagnosis or risk: exceedance is a **descriptive** comparison of
+magnitude against a calibration band. It does not classify health status, does not score risk,
+and (for hazard-context features) does not measure exposure.
+
+How this supports expert review: in small crews where group inference is impossible, the
+envelope helps reviewers avoid overreacting to expected variability while flagging unusually
+large self-baseline shifts as candidates for closer expert review.

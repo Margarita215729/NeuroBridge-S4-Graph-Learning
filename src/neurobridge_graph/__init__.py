@@ -88,3 +88,28 @@ from neurobridge_graph.attribution_visualization import (  # noqa: F401
     plot_recovery_attribution_summary,
     plot_subject_explanation_panel,
 )
+from neurobridge_graph.reference_envelope import (  # noqa: F401
+    load_reference_envelope_inputs,
+    create_example_reference_envelope,
+    build_envelope_from_reference_deltas,
+    build_envelope_from_summary_table,
+    compute_robust_z_score,
+    classify_envelope_position,
+    score_node_deltas_against_envelope,
+    score_graph_deltas_against_envelope,
+    score_hazard_deltas_against_envelope,
+    build_phase8_envelope_summary,
+    CORE_ENVELOPE_STATEMENT,
+    SCHEMA_DEMO_DATA_TYPE as ENVELOPE_SCHEMA_DEMO_DATA_TYPE,
+)
+from neurobridge_graph.envelope_visualization import (  # noqa: F401
+    plot_domain_delta_envelope,
+    plot_graph_metric_envelope,
+    plot_hazard_delta_envelope,
+    plot_envelope_exceedance_heatmap,
+    plot_reference_envelope_overview,
+)
+from neurobridge_graph.envelope_reporting import (  # noqa: F401
+    generate_envelope_interpretation,
+    generate_phase8_report,
+)
