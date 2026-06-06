@@ -38,12 +38,24 @@ environmental context
 | sleep / circadian regulation             | sleep_duration, sleep_efficiency, sleep_latency, wake_after_sleep_onset | sleep_activity |
 | cognitive load                           | reaction_time, accuracy, psychomotor_vigilance, cognitive_score | cognitive    |
 | emotional regulation                     | stress_score, mood_score, anxiety_score, affect_score         | questionnaire  |
-| recovery capacity                        | fatigue_score, soreness_score, recovery_score, readiness_score | questionnaire |
+| recovery capacity                        | recovery_score, perceived_recovery                            | questionnaire  |
+| recovery-related markers                 | fatigue_score, soreness_score, muscle_soreness, readiness_score, sleep_recovery_score, restoration_score | questionnaire |
 | environmental context                    | co2, temperature, humidity, noise, light_exposure             | environmental  |
 
-`recovery-related markers` is part of the canonical domain set (shared with the
-single-timepoint pipeline) but has no default adapter variable patterns yet; it
-is reported as `absent` until variables are added.
+### Recovery capacity vs recovery-related markers
+
+The mapping is one-to-one (each variable pattern maps to a single domain), so a
+deliberate split is used:
+
+- **recovery capacity** — self-assessed *composite capacity to recover*
+  (`recovery_score`, `perceived_recovery`).
+- **recovery-related markers** — observed *recovery / strain-state indicators*
+  (`fatigue_score`, `soreness_score`, `muscle_soreness`, `readiness_score`,
+  `sleep_recovery_score`, `restoration_score`).
+
+Limitation: some variables (e.g. `readiness_score`) could reasonably belong to
+either domain. Because the current design does not support clean one-to-many
+mapping, the most appropriate single domain is chosen and documented here.
 
 ## Matching strategy
 
@@ -61,14 +73,31 @@ Each mapping row carries an `expected_unit` and a non-clinical `direction_hint`
 (`context`). These are informational only and do **not** drive any scoring; the
 default domain score is the mean absolute self-baseline delta.
 
+## Intentionally unmapped variables
+
+Steps are intentionally left unmapped by default because their interpretation
+depends on protocol context, mission phase, workload, exercise prescription, and
+activity constraints. Users may map steps explicitly in project-specific
+configurations. Unmapped variables are surfaced in the mapping and coverage
+reports rather than force-mapped to a biological domain.
+
+## Unit standardization
+
+Phase 10 includes a unit-standardization placeholder, but broad biomedical unit
+conversion is not yet implemented. Units are tracked and unsupported conversions
+are reported rather than silently transformed. `standardize_units_if_known`
+records a `unit_conversion_status` per row (`already_standard`, `not_provided`,
+`unsupported_conversion`, `not_applied`) and emits
+`adapter_unit_conversion_report.csv`.
+
 ## Limitations
 
 - The mapping is approximate and intended as a structural scaffold, not a
   clinical assignment.
 - Some variables (e.g. activity `steps`) are intentionally left unmapped until a
-  suitable domain is defined.
+  suitable domain is defined (see above).
 - Units are not converted automatically; `expected_unit` documents the assumed
-  unit only.
+  unit only, and `standardize_units_if_known` is a tracking placeholder.
 - Domain coverage depends on which variables are present in the input data.
 
 ## How to extend the mapping

@@ -286,6 +286,46 @@ and `docs/domain_mapping.md`.
 Interpretation: The adapter validates and transforms data. It does not diagnose, score risk,
 infer exposure, or recommend treatment.
 
+Note: Phase 10 includes a unit-standardization placeholder, but broad biomedical unit conversion is
+not yet implemented. Units are tracked and unsupported conversions are reported rather than silently
+transformed. Steps are intentionally left unmapped by default (their interpretation depends on
+protocol context, mission phase, workload, exercise prescription, and activity constraints); users
+may map steps explicitly in project-specific configurations.
+
+---
+
+## Phase 11: Operational Resilience Interpretation Layer
+
+Phase 11 translates longitudinal graph trajectory outputs into adaptive resilience state
+interpretations.
+
+It combines:
+- within-subject graph deltas;
+- attribution;
+- reference-calibrated envelope status;
+- recovery/persistence information;
+- HRP hazard-context alignment;
+- data coverage from the HRP-like adapter layer.
+
+Run:
+
+`notebooks/08_Operational_Resilience_Interpretation_Layer.ipynb`
+
+Outputs:
+- resilience state table;
+- mission relevance translation table;
+- adaptive resilience interpretation cards;
+- Phase 11 report;
+- dashboard Operational Resilience tab.
+
+Adaptive resilience states (transparent, rule-based): stable compensated trajectory, localized
+adaptive shift, distributed adaptive load, systemic strain pattern, persistent displacement,
+recovery lag pattern, multi-domain instability, coverage-limited interpretation.
+
+Interpretation: This is a research-review layer. It is not diagnosis, treatment guidance, health
+risk scoring, exposure measurement, mission readiness classification, or an operational medical
+decision.
+
 ---
 
 ## Interpretation guardrails
@@ -337,4 +377,5 @@ NeuroBridge-S4-Graph-Learning/
 - **Phase 8** — implemented: reference-calibrated trajectory envelope (calibration layer).
 - **Phase 9** — complete: interactive longitudinal review dashboard (Streamlit).
 - **Phase 10** — implemented: HRP-like data adapter layer (ingestion + validation + domain mapping).
-- **Phase 11** — next: monitoring priority translation layer.
+- **Phase 11** — implemented: operational resilience interpretation layer (adaptive resilience states).
+- **Phase 12** — next: self-supervised within-subject temporal graph learning.

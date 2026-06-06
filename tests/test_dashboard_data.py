@@ -20,6 +20,8 @@ from neurobridge_graph.dashboard_data import (
     get_attribution_panel_data,
     get_envelope_panel_data,
     get_recovery_panel_data,
+    get_resilience_panel_data,
+    PHASE11_MISSING_MESSAGE,
 )
 
 
@@ -260,3 +262,52 @@ def test_envelope_panel_safe_dict_when_missing():
     assert data["available"] is False
     assert data["note"]
     assert data["overall_flag"] == "n/a"
+
+
+# --------------------------------------------------------------------------
+# Phase 11 resilience panel
+# --------------------------------------------------------------------------
+
+def _resilience_tables():
+    state = pd.DataFrame([{
+        "subject_id": "S1", "timepoint": "T2_inflight", "mission_phase": "inflight",
+        "resilience_state": "systemic_strain_pattern",
+        "resilience_state_label": "Systemic strain pattern",
+        "confidence_level": "high",
+        "dominant_adaptation_mode": "Multi-subgraph distributed",
+        "top_hazard_context_alignment": "radiation",
+        "recovery_persistence_summary": "ok",
+        "data_gap_summary": "11/12 covered",
+        "evidence_chain_short": "a | b | c",
+        "interpretation": "Systemic strain pattern: ...",
+    }])
+    chains = pd.DataFrame([
+        {"subject_id": "S1", "timepoint": "T2_inflight", "evidence_order": 2, "evidence": "second"},
+        {"subject_id": "S1", "timepoint": "T2_inflight", "evidence_order": 1, "evidence": "first"},
+    ])
+    mr = pd.DataFrame([{
+        "subject_id": "S1", "timepoint": "T2_inflight", "mission_phase": "inflight",
+        "resilience_state_label": "Systemic strain pattern",
+        "mission_relevance_context": "review", "expert_review_context": "review",
+        "data_streams_that_would_strengthen_interpretation": "none", "guardrail": "g"}])
+    return {"resilience_state": state, "evidence_chains": chains, "mission_relevance": mr}
+
+
+def test_resilience_panel_available_and_ordered_chain():
+    data = get_resilience_panel_data(_resilience_tables(), "S1", "T2_inflight")
+    assert data["available"] is True
+    assert data["state_row"]["resilience_state_label"] == "Systemic strain pattern"
+    assert data["evidence_chain"] == ["first", "second"]
+    assert data["mission_relevance"]["mission_relevance_context"] == "review"
+
+
+def test_resilience_panel_missing_outputs_message():
+    data = get_resilience_panel_data({}, "S1", "T2_inflight")
+    assert data["available"] is False
+    assert data["note"] == PHASE11_MISSING_MESSAGE
+
+
+def test_resilience_panel_unknown_subject():
+    data = get_resilience_panel_data(_resilience_tables(), "ZZ", "TX")
+    assert data["available"] is False
+    assert data["note"]

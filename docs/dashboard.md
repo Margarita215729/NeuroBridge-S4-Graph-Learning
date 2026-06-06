@@ -98,10 +98,38 @@ not risk scoring, and not diagnosis.
 - explainable trajectory attribution;
 - reference-calibrated envelope status;
 - recovery behavior;
+- operational resilience interpretation (Phase 11);
 - data readiness and limitations.
 
 The sidebar provides a subject selector, a timepoint selector, and optional
 toggles to show raw tables, method notes, and the input readiness report.
+
+### Operational resilience tab (Phase 11)
+
+The **Operational resilience** tab shows, for the selected subject/timepoint:
+
+- the adaptive resilience state and its display label;
+- the dominant adaptation mode;
+- the confidence level (high / moderate / low / coverage_limited);
+- the ordered evidence chain;
+- the HRP hazard-context alignment;
+- the recovery / persistence interpretation;
+- data coverage and data gaps;
+- the mission-relevant expert review context and data streams that would
+  strengthen the interpretation;
+- the research-review guardrail.
+
+It reads `results/tables/resilience_state_table.csv`,
+`results/tables/mission_relevance_translation.csv`, and
+`results/tables/resilience_evidence_chains.csv` (all produced by
+`notebooks/08_Operational_Resilience_Interpretation_Layer.ipynb`). If these
+Phase 11 outputs are missing, the tab shows "Operational resilience
+interpretation is unavailable. Run the Phase 11 notebook first." and does not
+crash.
+
+The resilience state is a rule-based research-review interpretation. It is not
+diagnosis, treatment guidance, health risk scoring, exposure measurement,
+mission readiness classification, or an operational medical decision.
 
 ## Guardrails
 

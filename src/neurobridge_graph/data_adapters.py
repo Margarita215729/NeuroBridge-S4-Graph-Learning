@@ -349,6 +349,71 @@ def combine_standardized_streams(
     return combined[STANDARDIZED_COLUMNS]
 
 
+UNIT_CONVERSION_STATUSES = (
+    "already_standard", "not_provided", "unsupported_conversion", "not_applied",
+)
+
+
+def standardize_units_if_known(
+    df: pd.DataFrame,
+) -> "tuple[pd.DataFrame, pd.DataFrame]":
+    """Placeholder for unit standardization.
+
+    Current behavior (intentionally conservative):
+
+    - does **not** perform broad biomedical unit conversion;
+    - records a ``unit_conversion_status`` per row;
+    - marks units that already match the mapping's ``expected_unit`` as
+      ``already_standard``;
+    - marks rows without a usable unit as ``not_provided``;
+    - marks mismatched units as ``unsupported_conversion`` (left untransformed);
+    - otherwise marks ``not_applied``.
+
+    Returns ``(df_with_status, unit_conversion_report)``. Values are never
+    silently transformed.
+    """
+    if df is None or df.empty or "variable_name" not in df.columns:
+        out = (df.copy() if df is not None else pd.DataFrame())
+        if isinstance(out, pd.DataFrame) and "variable_name" in out.columns:
+            out["unit_conversion_status"] = "not_applied"
+        report = pd.DataFrame(columns=[
+            "variable_name", "unit", "expected_unit", "unit_conversion_status", "count"])
+        return out, report
+
+    mapping = get_default_variable_domain_mapping()
+    expected_by_norm = {
+        normalize_variable_name(r["canonical_variable"]): str(r["expected_unit"])
+        for _, r in mapping.iterrows()
+    }
+
+    out = df.copy()
+    units = out["unit"].astype(str) if "unit" in out.columns else pd.Series(
+        ["unknown"] * len(out), index=out.index)
+
+    def _status(var: str, unit: str) -> str:
+        u = str(unit).strip().lower()
+        if u in ("", "unknown", "n/a", "nan", "none"):
+            return "not_provided"
+        expected = expected_by_norm.get(normalize_variable_name(var))
+        if expected is None:
+            return "not_applied"
+        if u == str(expected).strip().lower():
+            return "already_standard"
+        return "unsupported_conversion"
+
+    out["unit_conversion_status"] = [
+        _status(v, u) for v, u in zip(out["variable_name"].astype(str), units)
+    ]
+
+    rep = out.copy()
+    rep["expected_unit"] = rep["variable_name"].astype(str).map(
+        lambda v: expected_by_norm.get(normalize_variable_name(v), "unknown"))
+    report = (rep.groupby(
+        ["variable_name", "unit", "expected_unit", "unit_conversion_status"],
+        dropna=False).size().reset_index(name="count"))
+    return out, report
+
+
 # ---------------------------------------------------------------------------
 # 5. Baseline-relative variable deltas
 # ---------------------------------------------------------------------------
@@ -616,6 +681,7 @@ def run_adapter_pipeline(
 
     readiness = build_input_readiness_report(loaded_tables)
     standardized = combine_standardized_streams(standardized_list)
+    standardized, unit_report = standardize_units_if_known(standardized)
     variable_deltas = compute_variable_baseline_deltas(standardized)
     domain_scores_long, mapping_report = build_domain_scores_from_variables(
         variable_deltas, aggregation="mean_abs_delta")
@@ -644,6 +710,7 @@ def run_adapter_pipeline(
     _write("adapter_domain_scores_long.csv", domain_scores_long)
     _write("adapter_domain_scores_wide.csv", domain_scores_wide)
     _write("adapter_generated_longitudinal_domain_scores.csv", generated)
+    _write("adapter_unit_conversion_report.csv", unit_report)
 
     # Plain-language report.
     from neurobridge_graph.adapter_reporting import generate_adapter_report

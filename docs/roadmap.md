@@ -12,9 +12,9 @@ Phase 6 — Within-subject longitudinal graph trajectories: complete
 Phase 7 — Explainable trajectory attribution: complete
 Phase 8 — Reference-calibrated trajectory envelope: complete
 Phase 9 — Interactive longitudinal review dashboard: complete
-Phase 10 — HRP-like data adapter layer: implemented
-Phase 11 — Monitoring priority translation layer: next
-Phase 12 — Experimental graph sequence models: future
+Phase 10 — HRP-like data adapter layer: complete
+Phase 11 — Operational resilience interpretation layer: implemented
+Phase 12 — Self-supervised within-subject temporal graph learning: next
 Phase 13 — Portfolio release: future
 ```
 
@@ -255,7 +255,7 @@ monitoring, diagnosis, treatment guidance, exposure measurement, or health risk 
 
 ## Phase 10 — HRP-like data adapter layer
 
-Status: implemented.
+Status: complete.
 
 Goal: ingest HRP-like multimodal longitudinal/analog data (biomarker, sleep/activity, cognitive,
 questionnaire, environmental, and generic wide/long tables) and transform them into the
@@ -279,11 +279,42 @@ Deliverables:
 The adapter validates and transforms data. It does not diagnose, score risk, infer exposure, or
 recommend treatment.
 
-## Phase 11 — Monitoring priority translation layer ← next
+Phase 10 also includes a unit-standardization placeholder (`standardize_units_if_known`); broad
+biomedical unit conversion is not yet implemented. Steps are intentionally left unmapped by default.
 
-Goal: translate envelope and attribution outputs into reviewer-facing monitoring priorities.
+## Phase 11 — Operational resilience interpretation layer
 
-## Phase 12 — Experimental graph sequence models / graph autoencoders
+Status: implemented.
+
+Goal: translate within-subject longitudinal graph dynamics into a serious HRP-facing interpretation
+layer focused on adaptive resilience state, dominant adaptation mode, persistence vs recovery,
+distributed vs localized graph displacement, HRP hazard-context alignment, evidence-chain reasoning,
+and data-gap-aware interpretation. This replaces the earlier, weaker "monitoring priority
+translation" idea.
+
+Flow: load Phase 6-10 outputs → derive transparent evidence per subject/timepoint →
+rule-based adaptive resilience state + dominant adaptation mode → evidence chains, cards, report,
+figures, dashboard tab.
+
+Adaptive resilience states (rule-based research interpretations): stable compensated trajectory,
+localized adaptive shift, distributed adaptive load, systemic strain pattern, persistent
+displacement, recovery lag pattern, multi-domain instability, coverage-limited interpretation.
+
+Deliverables:
+
+- `src/neurobridge_graph/resilience_rules.py` (transparent rule engine);
+- `src/neurobridge_graph/resilience_interpretation.py` (orchestration, state/mission tables);
+- `src/neurobridge_graph/resilience_reporting.py` (cards + full report);
+- `src/neurobridge_graph/resilience_visualization.py` (matplotlib figures);
+- `notebooks/08_Operational_Resilience_Interpretation_Layer.ipynb`;
+- dashboard "Operational resilience" tab;
+- `tests/test_resilience_rules.py`, `tests/test_resilience_interpretation.py`,
+  `tests/test_resilience_reporting.py`.
+
+This is a research-review layer. It is not diagnosis, treatment guidance, health risk scoring,
+exposure measurement, mission readiness classification, or an operational medical decision.
+
+## Phase 12 — Self-supervised within-subject temporal graph learning ← next
 
 Only after transparent trajectory baselines work. No supervised training on n=4.
 

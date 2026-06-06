@@ -37,6 +37,7 @@ Variable-to-domain mapping
 - variables mapped to domains: 23
 - variables unmapped: 1
   unmapped variables: steps
+  note: Steps are intentionally left unmapped by default because their interpretation depends on protocol context, mission phase, workload, exercise prescription, and activity constraints. Users may map steps explicitly in project-specific configurations.
 
 Domain coverage
 ---------------
@@ -46,12 +47,12 @@ Domain coverage
 - body composition / physical status: 0 variable(s) [absent]
 - inflammation / immune-adjacent status: 1 variable(s) [covered]
 - hematologic / oxygen-carrying capacity: 2 variable(s) [covered]
-- recovery-related markers: 0 variable(s) [absent]
+- recovery-related markers: 1 variable(s) [covered]
 - sleep / circadian regulation: 3 variable(s) [covered]
 - autonomic regulation: 1 variable(s) [covered]
 - cognitive load: 3 variable(s) [covered]
 - emotional regulation: 2 variable(s) [covered]
-- recovery capacity: 2 variable(s) [covered]
+- recovery capacity: 1 variable(s) [covered]
 - environmental context: 5 variable(s) [covered]
 
 Missingness
@@ -72,6 +73,7 @@ Transformations applied
 - column-name reconciliation to the standard longitudinal schema
 - standardization into a long variable table
 - self-baseline transformation (delta and percent change from personal baseline)
+- unit-standardization placeholder: units are tracked and unsupported conversions are reported, not silently transformed (broad biomedical unit conversion is not yet implemented)
 - variable-to-domain mapping
 - per-domain aggregation into graph-ready domain scores (mean absolute self-baseline delta)
 

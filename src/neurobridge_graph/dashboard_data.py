@@ -457,3 +457,67 @@ def get_envelope_panel_data(
     if not out["available"]:
         out["note"] = "No Phase 8 reference-envelope tables available for this selection."
     return out
+
+
+# ---------------------------------------------------------------------------
+# Phase 11 — operational resilience interpretation
+# ---------------------------------------------------------------------------
+
+PHASE11_MISSING_MESSAGE = (
+    "Operational resilience interpretation is unavailable. "
+    "Run the Phase 11 notebook first."
+)
+
+
+def load_resilience_tables(
+    results_dir: "str | Path" = "results/tables",
+) -> dict[str, pd.DataFrame]:
+    """Load Phase 11 resilience outputs if present. Never raises."""
+    results_dir = Path(results_dir)
+    out: dict[str, pd.DataFrame] = {}
+    for key, fname in (("resilience_state", "resilience_state_table.csv"),
+                       ("mission_relevance", "mission_relevance_translation.csv"),
+                       ("evidence_chains", "resilience_evidence_chains.csv")):
+        fpath = results_dir / fname
+        if fpath.exists():
+            try:
+                out[key] = pd.read_csv(fpath)
+            except Exception:  # noqa: BLE001 - corrupt file should not crash UI
+                continue
+    return out
+
+
+def get_resilience_panel_data(
+    resilience_tables: dict[str, pd.DataFrame],
+    subject_id: str,
+    timepoint: str,
+) -> dict:
+    """Return the Phase 11 resilience interpretation for one subject/timepoint."""
+    state = resilience_tables.get("resilience_state", pd.DataFrame())
+    if state is None or state.empty:
+        return _empty_note(PHASE11_MISSING_MESSAGE)
+
+    row = filter_subject_timepoint(state, subject_id, timepoint)
+    if row.empty:
+        return _empty_note(
+            "No operational resilience interpretation for this subject/timepoint.")
+
+    r = row.iloc[0].to_dict()
+    out: dict = {"available": True, "state_row": r}
+
+    # Evidence chain bullets (ordered) for this subject/timepoint.
+    ev = resilience_tables.get("evidence_chains", pd.DataFrame())
+    ev = filter_subject_timepoint(ev, subject_id, timepoint)
+    if not ev.empty and "evidence" in ev.columns:
+        if "evidence_order" in ev.columns:
+            ev = ev.sort_values("evidence_order")
+        out["evidence_chain"] = ev["evidence"].astype(str).tolist()
+    else:
+        short = str(r.get("evidence_chain_short", ""))
+        out["evidence_chain"] = [s.strip() for s in short.split("|") if s.strip()]
+
+    # Mission-relevance review context.
+    mr = resilience_tables.get("mission_relevance", pd.DataFrame())
+    mr = filter_subject_timepoint(mr, subject_id, timepoint)
+    out["mission_relevance"] = mr.iloc[0].to_dict() if not mr.empty else {}
+    return out

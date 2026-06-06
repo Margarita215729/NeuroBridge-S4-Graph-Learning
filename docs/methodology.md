@@ -245,7 +245,47 @@ Coverage reporting: the adapter reports which domains are covered, which variabl
 and per-timepoint domain availability, so reviewers can see exactly how much each domain score
 rests on.
 
-Limitations: mapping is approximate; units are not auto-converted; domain scores depend on
-available variables; missing data reduce coverage; template/example data are not evidence; and
-no clinical interpretation is performed. The adapter does not diagnose, score risk, infer
-exposure, or recommend treatment.
+Limitations: mapping is approximate; units are not auto-converted (a unit-standardization
+placeholder tracks units and reports unsupported conversions rather than silently transforming
+them); steps are intentionally left unmapped by default; domain scores depend on available
+variables; missing data reduce coverage; template/example data are not evidence; and no clinical
+interpretation is performed. The adapter does not diagnose, score risk, infer exposure, or
+recommend treatment.
+
+## Operational resilience interpretation
+
+Why this is stronger than monitoring priority: a monitoring-priority label only says *what to look
+at next*. Operational resilience interpretation asks *what adaptive pattern is visible in the
+longitudinal graph trajectory*, producing a structured, evidence-backed interpretation for expert
+review rather than a single attention flag.
+
+Adaptive resilience states: a transparent rule engine assigns one of eight states —
+stable compensated trajectory, localized adaptive shift, distributed adaptive load, systemic strain
+pattern, persistent displacement, recovery lag pattern, multi-domain instability, or
+coverage-limited interpretation. The state is chosen by an explicit priority cascade over the
+evidence (coverage first, then strain/persistence/recovery, then breadth of displacement, then a
+stable default), so every classification is inspectable via its rule triggers.
+
+Evidence-chain reasoning: each interpretation is built from an ordered evidence chain — top
+baseline-relative domain contributor, leading graph-metric displacement, dominant biological
+subgraph and how many subgraphs are involved, reference-calibrated outside-envelope counts, HRP
+hazard-context alignment, recovery/persistence categories, and data coverage. The card and tables
+expose this chain so a reviewer can trace the interpretation back to the underlying numbers.
+
+How it uses Phases 6-8: within-subject deltas (Phase 6) define the trajectory; Phase 7 node,
+graph-metric, subgraph, hazard, and recovery attribution supply the dominant contributors and the
+dominant adaptation mode; Phase 8 reference-calibrated envelope status supplies the outside-envelope
+counts and overall flag that distinguish localized shifts from systemic strain patterns.
+
+How it uses Phase 10 coverage/missingness: the Phase 10 domain coverage report drives the
+coverage-limited gate and the data-gap interpretation. When too few domains are covered, the state
+is forced to coverage-limited and confidence is reported as `coverage_limited`, preventing
+overinterpretation of sparse data.
+
+How HRP hazard context is handled: hazard-context alignment from Phases 5-7 is included only as
+alignment for expert review. It is never treated as exposure measurement or causal attribution.
+
+Guardrails: resilience states are rule-based research interpretations, not validated operational
+states, clinical labels, mission-readiness categories, or health-risk levels. Operational resilience
+interpretation is a research-review layer. It is not diagnosis, treatment guidance, health risk
+scoring, exposure measurement, or an operational medical decision.

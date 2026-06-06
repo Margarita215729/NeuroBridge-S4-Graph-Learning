@@ -33,9 +33,11 @@ from neurobridge_graph.dashboard_data import (
     get_graph_metric_panel_data,
     get_hazard_context_panel_data,
     get_recovery_panel_data,
+    get_resilience_panel_data,
     get_subject_timepoint_context,
     has_required_tables,
     load_dashboard_tables,
+    load_resilience_tables,
     MISSING_REQUIRED_MESSAGE,
 )
 from neurobridge_graph.dashboard_text import (
@@ -57,6 +59,11 @@ RESULTS_TABLES = _REPO_ROOT / "results" / "tables"
 @st.cache_data(show_spinner=False)
 def _load(results_dir: str) -> dict:
     return load_dashboard_tables(results_dir)
+
+
+@st.cache_data(show_spinner=False)
+def _load_resilience(results_dir: str) -> dict:
+    return load_resilience_tables(results_dir)
 
 
 def main() -> None:
@@ -111,10 +118,14 @@ def main() -> None:
     graph_panel = get_graph_metric_panel_data(tables, subject_id)
     hazard_panel = get_hazard_context_panel_data(tables, subject_id)
     recovery_panel = get_recovery_panel_data(tables, subject_id)
+    resilience_tables = _load_resilience(str(RESULTS_TABLES))
+    resilience_panel = get_resilience_panel_data(
+        resilience_tables, subject_id, timepoint)
 
     tabs = st.tabs([
         "Overview", "Domain trajectory", "Graph metrics", "HRP hazard context",
-        "Attribution", "Reference envelope", "Recovery", "Data & limitations",
+        "Attribution", "Reference envelope", "Recovery", "Operational resilience",
+        "Data & limitations",
     ])
 
     with tabs[0]:
@@ -146,6 +157,10 @@ def main() -> None:
         dc.render_recovery_panel(recovery_panel)
 
     with tabs[7]:
+        st.subheader(f"Operational resilience — {subject_id} @ {timepoint}")
+        dc.render_resilience_panel(resilience_panel)
+
+    with tabs[8]:
         st.subheader("Data & limitations")
         st.markdown(f"**Guardrail.** {get_guardrail_text()}")
         data_type = str(context.get("data_type", "unknown"))
