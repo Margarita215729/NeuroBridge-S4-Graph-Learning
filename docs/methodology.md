@@ -289,3 +289,49 @@ Guardrails: resilience states are rule-based research interpretations, not valid
 states, clinical labels, mission-readiness categories, or health-risk levels. Operational resilience
 interpretation is a research-review layer. It is not diagnosis, treatment guidance, health risk
 scoring, exposure measurement, or an operational medical decision.
+
+## Self-supervised temporal graph representation learning (Phase 12)
+
+Phase 12 adds a PyTorch self-supervised representation-learning layer on top of the transparent,
+rule-based pipeline. It learns compact latent representations of graph-derived, baseline-relative,
+within-subject biological adaptation trajectories.
+
+Why Phase 12 is self-supervised: there are no clinical outcome labels in this project, and there is
+no population large enough to support supervised population-level prediction. Instead, the model
+optimizes a reconstruction objective — it learns to reproduce a standardized trajectory feature
+vector from itself, and to reproduce the full vector from a partially masked version. The learning
+signal comes entirely from the internal structure of the data, not from external labels.
+
+Why it does not train a clinical predictor: the model has no health outcome target, no risk target,
+and no mission-readiness target. Reconstruction error measures how faithfully the model can
+reconstruct a trajectory feature vector; it is a representation-quality signal, not a risk score,
+and not a clinical category.
+
+Why features and timepoints are not treated as independent people: the row unit is a graph-derived
+trajectory state (subject × timepoint), not a person treated as a population sample. Multiple rows
+from the same subject are repeated within-subject observations, and multiple features describe the
+same biological state. Phase 12 does not treat domains, features, or timepoints as independent
+people; the independent subject count remains small.
+
+How reconstruction learning works: a small fully connected autoencoder maps the input feature vector
+to a low-dimensional latent bottleneck (encoder) and back to a reconstructed vector (decoder),
+trained with mean-squared-error loss. A fraction of input entries is masked to zero so the model
+must infer them from the remaining structure, which encourages it to capture relationships across
+feature families (domain, graph-metric, hazard-context, attribution, envelope, and recovery
+features).
+
+How latent embeddings and reconstruction mismatch are interpreted: latent embeddings are a compact
+view of trajectory-state structure, useful for visualizing and comparing trajectory shapes. Cosine
+similarity over embeddings is representation similarity, not shared health state. Reconstruction
+mismatch indicates how hard a particular state or feature is to reconstruct; it is not a risk or
+severity score.
+
+How Phase 11 resilience states are used: Phase 11 operational resilience states are attached only as
+annotation metadata, used to color and group the learned representation. They are not training
+labels and are not treated as ground truth. The resulting comparison is a consistency view, not a
+validation of either layer.
+
+Guardrails: Phase 12 is an experimental self-supervised representation-learning prototype. It is not
+diagnosis, treatment guidance, health risk scoring, exposure measurement, mission readiness
+classification, or an operational medical decision system, and it is not a validated prediction
+model.

@@ -189,6 +189,28 @@ by hand.
 This is a research-review layer. It is not diagnosis, treatment guidance, health risk scoring,
 exposure measurement, mission readiness classification, or an operational medical decision.
 
+## Why temporal graph representation learning matters for HRP
+
+- **Small crew missions need within-subject modeling.** With only a handful of crew members,
+  population-level supervised models are not appropriate. Self-supervised representation learning on
+  repeated, baseline-relative graph states is a better fit: it models how each subject's own
+  biological graph trajectory is structured over time rather than comparing people to a population.
+- **Repeated graph-derived observations can support representation learning.** Each subject
+  contributes multiple structured graph states (baseline, pre, inflight, post, recovery). These
+  repeated within-subject observations carry learnable structure, which a reconstruction objective
+  can capture without any outcome labels.
+- **Learned embeddings can help compare trajectory shapes.** A compact latent space lets reviewers
+  compare the shape of one trajectory state against another, and group similar trajectory states,
+  as a research aid for hypothesis generation.
+- **Model outputs support research review, not automated decisions.** Latent embeddings,
+  reconstruction mismatch, and the consistency view against Phase 11 resilience annotations are
+  inputs to expert review. They are not automated operational decisions, risk scores, or readiness
+  classifications.
+
+Phase 12 is an experimental ML showcase. It is not diagnosis, treatment guidance, health risk
+scoring, exposure measurement, mission readiness classification, or an operational medical decision
+system.
+
 ## Important distinction
 
 This repository is not an official NASA project and does not include actual Artemis II data. It is an independent research prototype inspired by small-N human spaceflight data challenges.

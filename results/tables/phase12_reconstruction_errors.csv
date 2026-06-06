@@ -1,0 +1,11 @@
+trajectory_id,subject_id,timepoint,mission_phase,resilience_state_label,dominant_adaptation_mode,confidence_level,reconstruction_mse,reconstruction_rmse
+Demo_Crew_01__T0_baseline,Demo_Crew_01,T0_baseline,baseline,Stable compensated trajectory,Cardiometabolic-recovery dominant,high,0.02448147,0.15646555
+Demo_Crew_01__T1_pre,Demo_Crew_01,T1_pre,pre_mission,Localized adaptive shift,Multi-subgraph distributed,high,0.02282721,0.15108676
+Demo_Crew_01__T2_inflight,Demo_Crew_01,T2_inflight,inflight,Systemic strain pattern,Multi-subgraph distributed,high,0.07365265,0.27139022
+Demo_Crew_01__T3_post,Demo_Crew_01,T3_post,postflight,Systemic strain pattern,Multi-subgraph distributed,high,0.15344925,0.39172599
+Demo_Crew_01__T4_recovery,Demo_Crew_01,T4_recovery,recovery,Persistent displacement,Multi-subgraph distributed,high,0.05377855,0.23190203
+Demo_Crew_02__T0_baseline,Demo_Crew_02,T0_baseline,baseline,Stable compensated trajectory,Cardiometabolic-recovery dominant,high,0.10073677,0.31739056
+Demo_Crew_02__T1_pre,Demo_Crew_02,T1_pre,pre_mission,Localized adaptive shift,Multi-subgraph distributed,high,0.0538932,0.23214909
+Demo_Crew_02__T2_inflight,Demo_Crew_02,T2_inflight,inflight,Systemic strain pattern,Multi-subgraph distributed,high,0.04454725,0.21106219
+Demo_Crew_02__T3_post,Demo_Crew_02,T3_post,postflight,Systemic strain pattern,Multi-subgraph distributed,high,0.06751003,0.25982693
+Demo_Crew_02__T4_recovery,Demo_Crew_02,T4_recovery,recovery,Localized adaptive shift,Multi-subgraph distributed,high,0.07201902,0.26836359
