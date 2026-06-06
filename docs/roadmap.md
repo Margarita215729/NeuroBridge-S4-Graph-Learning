@@ -14,8 +14,8 @@ Phase 8 — Reference-calibrated trajectory envelope: complete
 Phase 9 — Interactive longitudinal review dashboard: complete
 Phase 10 — HRP-like data adapter layer: complete
 Phase 11 — Operational resilience interpretation layer: complete
-Phase 12 — PyTorch temporal graph autoencoder showcase: implemented
-Phase 13 — Portfolio release: next
+Phase 12 — PyTorch temporal graph autoencoder showcase: complete
+Phase 13 — Public GitHub Pages research showcase: implemented
 ```
 
 > **Primary methodological direction:** within-subject longitudinal graph trajectories.
@@ -347,14 +347,27 @@ Guardrails: experimental ML showcase only — not diagnosis, treatment guidance,
 scoring, exposure measurement, mission readiness classification, or an operational medical
 decision system.
 
-## Phase 13 — Portfolio and reviewer polish
+## Phase 13 — Public GitHub Pages research showcase
 
-Goal: make the repository useful for scientific outreach and job applications.
+Status: implemented in this package.
 
-Tasks:
+Goal: package the project as a public, zero-install GitHub Pages showcase so a biologist, HRP
+reviewer, recruiter, or hiring manager can open one URL and understand the project without running
+commands. This phase adds no new scientific modeling.
 
-- add Colab links;
-- add architecture diagram;
-- add sample figures;
-- add release notes;
-- add reviewer-facing summary.
+Deliverables:
+
+- `docs/index.html` — polished static landing page (served by GitHub Pages from `/docs`);
+- `docs/phase12_pytorch_showcase.html` — the published, self-contained PyTorch showcase with a
+  back-navigation bar;
+- `docs/assets/css/site.css` and `docs/assets/*` asset directories;
+- `PROJECT_OVERVIEW.md`, `QUICKSTART.md`, `RELEASE_NOTES_v1.md`;
+- `docs/architecture.md`, `docs/notebook_index.md`, `docs/github_pages.md`;
+- `scripts/build_pages_site.py`, `scripts/validate_pages_site.py`, `tests/test_pages_site.py`.
+
+Enable GitHub Pages: Settings → Pages → Deploy from a branch → `main` → `/docs`. Expected URL:
+`https://Margarita215729.github.io/NeuroBridge-S4-Graph-Learning/` (see `docs/github_pages.md`).
+
+Guardrails: the public site is a static review artifact and a research engineering prototype. It is
+not diagnosis, treatment guidance, health risk scoring, exposure measurement, mission readiness
+classification, or an operational medical decision system.

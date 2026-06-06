@@ -1,6 +1,36 @@
 # NeuroBridge-S4 Graph Learning
 
-Graph learning extension of **NeuroBridge-S4** for small-N biomedical human adaptation modeling using real public proxy datasets.
+End-to-end ML research engineering prototype for within-subject biological graph trajectory analysis
+in small-N human spaceflight contexts.
+
+**Status: v1.0 Portfolio Release | 12 phases implemented | 301 tests passing | PyTorch showcase | GitHub Pages-ready**
+
+One-sentence summary: HRP-like longitudinal data → self-baseline biological graph trajectories →
+operational resilience interpretation → PyTorch temporal graph autoencoder showcase.
+
+> Research prototype only. Not diagnosis, not treatment guidance, not health risk scoring, not
+> exposure measurement, and not mission readiness classification.
+
+## Quick links
+
+- **Public GitHub Pages showcase:** `https://Margarita215729.github.io/NeuroBridge-S4-Graph-Learning/`
+- **PyTorch HTML showcase:** [`docs/phase12_pytorch_showcase.html`](docs/phase12_pytorch_showcase.html)
+- **Project overview:** [`PROJECT_OVERVIEW.md`](PROJECT_OVERVIEW.md)
+- **Quickstart:** [`QUICKSTART.md`](QUICKSTART.md)
+- **Architecture:** [`docs/architecture.md`](docs/architecture.md)
+- **Notebook index:** [`docs/notebook_index.md`](docs/notebook_index.md)
+- **Dashboard instructions:** [`docs/dashboard.md`](docs/dashboard.md)
+
+## What this project demonstrates
+
+- scientific software engineering
+- longitudinal data modeling
+- graph-based biological representation
+- HRP-like data adapters
+- explainable interpretation layer
+- PyTorch self-supervised learning
+- dashboard and static public showcase
+- robust testing and documentation
 
 > This is an independent research prototype. It is not an official NASA project and does not contain actual Artemis II astronaut data.
 

@@ -143,3 +143,16 @@ This project supports:
   view does not validate either the resilience layer or the learned representation.
 - **Example/schema data are not evidence**: when schema-demonstration or example data are used, all
   outputs are illustrative only and are not scientific evidence.
+
+## Phase 13 public showcase limitations
+
+- **GitHub Pages is static**: the public site is plain HTML/CSS with no backend and no live
+  computation.
+- **The Streamlit dashboard is not hosted on Pages**: interactive review requires running the
+  dashboard locally (`streamlit run app.py`).
+- **The Pages demo is a review artifact**: it is for orientation and portfolio review, not an
+  operational tool.
+- **Schema-demonstration data are not evidence**: any data shown on the public site are illustrative
+  only.
+- **The PyTorch showcase is experimental**: it is a self-supervised representation-learning
+  prototype, not a clinical predictor, risk score, or mission-readiness classifier.
