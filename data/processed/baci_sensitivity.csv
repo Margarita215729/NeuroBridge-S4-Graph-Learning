@@ -1,0 +1,13 @@
+participant,threshold,BACI,category
+Crew 97774,0.75,49.1,mild coherence
+Crew 94465,0.75,53.1,moderate coherence
+Crew 99813,0.75,42.0,mild coherence
+Crew 100987,0.75,28.6,mild coherence
+Crew 97774,1.0,41.5,mild coherence
+Crew 94465,1.0,22.1,low coherence
+Crew 99813,1.0,31.5,mild coherence
+Crew 100987,1.0,28.6,mild coherence
+Crew 97774,1.25,41.5,mild coherence
+Crew 94465,1.25,22.1,low coherence
+Crew 99813,1.25,8.1,low coherence
+Crew 100987,1.25,28.6,mild coherence

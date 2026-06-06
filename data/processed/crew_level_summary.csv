@@ -1,0 +1,5 @@
+Participant ID,Top biological domain,BACI score,BACI category,Primary pattern / cluster,Suggested monitoring priority,Recommended follow-up data stream
+Crew 97774,Hematologic / oxygen-carrying,41.5,mild coherence,Oxygen-carrying shift,Oxygen-carrying capacity monitoring,hemoglobin / hematocrit follow-up; oxygen-carrying capacity
+Crew 94465,Body composition / physical status,22.1,low coherence,Physical-status shift,Physical conditioning & body-composition tracking,body-composition tracking; physical conditioning load review
+Crew 99813,Metabolic regulation,31.5,mild coherence,Metabolic / fatigue pattern,Nutrition / metabolic follow-up,fasting glucose and lipid re-check; nutrition / metabolic follow-up
+Crew 100987,Cardiovascular regulation,28.6,mild coherence,Autonomic / cardiovascular strain,Autonomic / cardiovascular monitoring,HRV / autonomic monitoring; resting HR and blood-pressure tracking
