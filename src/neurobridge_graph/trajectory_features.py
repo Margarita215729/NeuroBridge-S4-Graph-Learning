@@ -9,14 +9,35 @@ treatment guidance, exposure measurement, or health outcome prediction.
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any
 
 import numpy as np
 import pandas as pd
 
-from neurobridge_graph.hazard_mapping import interpret_hazard_score
+from neurobridge_graph.hazard_mapping import (
+    HAZARD_CANONICAL,
+    HAZARD_DISPLAY_NAMES,
+    get_default_hazard_domain_mapping,
+    interpret_hazard_score,
+    normalize_domain_name,
+)
 
 _EPSILON = 1e-6
+
+# Canonical column order for the longitudinal hazard-context delta table.
+LONGITUDINAL_HAZARD_DELTA_COLUMNS: list[str] = [
+    "subject_id",
+    "timepoint",
+    "mission_phase",
+    "hazard",
+    "baseline_hazard_relevance",
+    "current_hazard_relevance",
+    "delta_hazard_relevance",
+    "coverage_fraction",
+    "top_contributing_domain",
+    "interpretation",
+]
 
 
 def compute_recovery_slope(
@@ -187,6 +208,273 @@ def compute_hazard_context_delta(
             })
 
     return pd.DataFrame(rows)
+
+
+def _hazard_delta_interpretation(
+    hazard: str,
+    delta: float,
+    coverage_fraction: float,
+    top_domain: str,
+    baseline_assumed: bool,
+) -> str:
+    """Reviewer-facing interpretation for one hazard-context delta row.
+
+    Avoids exposure/risk/diagnosis language by construction.
+    """
+    display = HAZARD_DISPLAY_NAMES.get(hazard, hazard.replace("_", " "))
+    if pd.isna(delta):
+        return (
+            f"No computable hazard-context delta for {display} "
+            "(no mapped biological domains available in the current proxy "
+            "dataset). This is a domain-coverage limitation, not a finding."
+        )
+    text = (
+        f"Hazard-context relevance shift for {display}: delta {delta:+.2f} from "
+        f"personal baseline, mainly via '{top_domain}'. This is a "
+        "monitoring-relevant hazard-context pattern shift, not exposure "
+        "measurement, not risk scoring, and not diagnosis."
+    )
+    if baseline_assumed:
+        text += (
+            " Baseline hazard-context relevance was assumed to be 0.0 because "
+            "only domain deltas (no baseline/current activations) were available."
+        )
+    if coverage_fraction < 0.5:
+        text += (
+            f" Interpretation is domain-coverage-limited "
+            f"(only {coverage_fraction * 100:.0f}% of mapped domains available)."
+        )
+    return text
+
+
+def derive_longitudinal_hazard_deltas(
+    node_deltas: pd.DataFrame,
+    hazard_mapping: pd.DataFrame | None = None,
+    baseline_phase: str = "baseline",
+) -> pd.DataFrame:
+    """Derive hazard-context deltas from longitudinal node (domain) deltas.
+
+    For each subject / timepoint / hazard, biological domain activations are
+    mapped onto HRP hazard-context relevance using the conceptual
+    domain → hazard weight mapping. When per-domain ``baseline_activation`` and
+    ``current_activation`` are available, baseline and current hazard-context
+    relevance are computed as weighted means over the mapped domains that are
+    present, and the delta is their difference. When only ``delta_activation``
+    is available, the delta hazard-context relevance is computed directly as the
+    weighted domain delta and the baseline is documented as an assumed 0.0.
+
+    This is hazard-context relevance, not exposure measurement, not risk
+    scoring, and not diagnosis.
+
+    Parameters
+    ----------
+    node_deltas:
+        Long table with at least ``subject_id``, ``timepoint``, ``domain`` and
+        either (``baseline_activation`` and ``current_activation``) or
+        ``delta_activation``. ``mission_phase`` is used when present.
+    hazard_mapping:
+        Optional domain → hazard weight mapping; defaults to
+        :func:`hazard_mapping.get_default_hazard_domain_mapping`.
+
+    Returns
+    -------
+    pandas.DataFrame
+        Columns :data:`LONGITUDINAL_HAZARD_DELTA_COLUMNS`. Empty (with those
+        columns) when the inputs do not allow any derivation.
+    """
+    if node_deltas is None or node_deltas.empty:
+        return pd.DataFrame(columns=LONGITUDINAL_HAZARD_DELTA_COLUMNS)
+
+    if not {"subject_id", "timepoint", "domain"}.issubset(node_deltas.columns):
+        return pd.DataFrame(columns=LONGITUDINAL_HAZARD_DELTA_COLUMNS)
+
+    has_levels = {"baseline_activation", "current_activation"}.issubset(node_deltas.columns)
+    has_delta = "delta_activation" in node_deltas.columns
+    if not has_levels and not has_delta:
+        return pd.DataFrame(columns=LONGITUDINAL_HAZARD_DELTA_COLUMNS)
+
+    mapping = (get_default_hazard_domain_mapping()
+               if hazard_mapping is None else hazard_mapping)
+    # Pre-group mapping rows per hazard as (canonical_domain, weight).
+    mapping_by_hazard: dict[str, list[tuple[str, float]]] = {}
+    for hazard in HAZARD_CANONICAL:
+        haz_rows = mapping[mapping["hazard"] == hazard]
+        mapping_by_hazard[hazard] = [
+            (normalize_domain_name(r["domain"]), float(r["weight"]))
+            for _, r in haz_rows.iterrows()
+        ]
+
+    rows: list[dict] = []
+    group_cols = ["subject_id", "timepoint"]
+    for (subject_id, timepoint), grp in node_deltas.groupby(group_cols, sort=False):
+        mission_phase = (str(grp.iloc[0]["mission_phase"])
+                         if "mission_phase" in grp.columns else "unknown")
+
+        baseline_by_domain: dict[str, float] = {}
+        current_by_domain: dict[str, float] = {}
+        delta_by_domain: dict[str, float] = {}
+        for _, r in grp.iterrows():
+            dom = normalize_domain_name(r["domain"])
+            if has_levels:
+                try:
+                    baseline_by_domain[dom] = float(r["baseline_activation"])
+                    current_by_domain[dom] = float(r["current_activation"])
+                except (TypeError, ValueError):
+                    continue
+            else:
+                try:
+                    delta_by_domain[dom] = float(r["delta_activation"])
+                except (TypeError, ValueError):
+                    continue
+
+        for hazard in HAZARD_CANONICAL:
+            mapped = mapping_by_hazard[hazard]
+            expected = len(mapped)
+            num_b = num_c = num_d = den = 0.0
+            available = 0
+            top_domain = "n/a"
+            best_abs_contrib = -np.inf
+
+            for dom, weight in mapped:
+                if has_levels and dom in current_by_domain:
+                    b = baseline_by_domain.get(dom, 0.0)
+                    c = current_by_domain[dom]
+                    num_b += b * weight
+                    num_c += c * weight
+                    den += weight
+                    available += 1
+                    contrib = abs((c - b) * weight)
+                    if contrib > best_abs_contrib:
+                        best_abs_contrib = contrib
+                        top_domain = dom
+                elif (not has_levels) and dom in delta_by_domain:
+                    d = delta_by_domain[dom]
+                    num_d += d * weight
+                    den += weight
+                    available += 1
+                    contrib = abs(d * weight)
+                    if contrib > best_abs_contrib:
+                        best_abs_contrib = contrib
+                        top_domain = dom
+
+            coverage_fraction = (available / expected) if expected else 0.0
+
+            if available == 0 or den == 0:
+                baseline_rel = float("nan")
+                current_rel = float("nan")
+                delta_rel = float("nan")
+                top_domain = "n/a"
+                baseline_assumed = False
+            elif has_levels:
+                baseline_rel = round(num_b / den, 5)
+                current_rel = round(num_c / den, 5)
+                delta_rel = round(current_rel - baseline_rel, 5)
+                baseline_assumed = False
+            else:
+                baseline_rel = 0.0
+                delta_rel = round(num_d / den, 5)
+                current_rel = round(baseline_rel + delta_rel, 5)
+                baseline_assumed = True
+
+            rows.append({
+                "subject_id":                subject_id,
+                "timepoint":                 timepoint,
+                "mission_phase":             mission_phase,
+                "hazard":                    hazard,
+                "baseline_hazard_relevance": baseline_rel,
+                "current_hazard_relevance":  current_rel,
+                "delta_hazard_relevance":    delta_rel,
+                "coverage_fraction":         round(coverage_fraction, 5),
+                "top_contributing_domain":   top_domain,
+                "interpretation":            _hazard_delta_interpretation(
+                    hazard, delta_rel, coverage_fraction, top_domain, baseline_assumed),
+            })
+
+    return pd.DataFrame(rows, columns=LONGITUDINAL_HAZARD_DELTA_COLUMNS)
+
+
+def ensure_longitudinal_hazard_deltas(
+    results_dir: "str | Path" = "results/tables",
+) -> pd.DataFrame:
+    """Load ``longitudinal_hazard_deltas.csv`` or derive it when missing.
+
+    Behavior:
+
+    1. If ``<results_dir>/longitudinal_hazard_deltas.csv`` exists, load it and
+       guarantee the expected columns are present (missing columns such as
+       ``top_contributing_domain`` are added with safe defaults).
+    2. If it is missing, attempt to derive it from
+       ``longitudinal_node_deltas.csv`` plus the HRP hazard-domain mapping
+       (``hazard_domain_mapping.csv`` when present, otherwise the built-in
+       default mapping), and save the derived table back to
+       ``longitudinal_hazard_deltas.csv``.
+    3. If derivation is not possible (no node deltas, or no mapped domains
+       overlap), return an empty DataFrame with the expected columns. The
+       reason is recorded in ``df.attrs['note']``.
+
+    The output is hazard-context relevance, not exposure measurement, not risk
+    scoring, and not diagnosis.
+    """
+    results_dir = Path(results_dir)
+    target = results_dir / "longitudinal_hazard_deltas.csv"
+
+    # 1. Use the explicit table when available.
+    if target.exists():
+        try:
+            df = pd.read_csv(target)
+        except Exception:  # noqa: BLE001 - corrupt file falls through to derivation
+            df = pd.DataFrame()
+        if not df.empty:
+            for col in LONGITUDINAL_HAZARD_DELTA_COLUMNS:
+                if col not in df.columns:
+                    df[col] = "n/a" if col == "top_contributing_domain" else np.nan
+            df.attrs["note"] = "Loaded from longitudinal_hazard_deltas.csv."
+            df.attrs["source"] = "file"
+            return df
+
+    # 2. Derive from longitudinal node deltas + hazard-domain mapping.
+    node_path = results_dir / "longitudinal_node_deltas.csv"
+    if not node_path.exists():
+        empty = pd.DataFrame(columns=LONGITUDINAL_HAZARD_DELTA_COLUMNS)
+        empty.attrs["note"] = (
+            "Cannot derive hazard-context deltas: longitudinal_node_deltas.csv "
+            "not found."
+        )
+        empty.attrs["source"] = "unavailable"
+        return empty
+
+    try:
+        node_deltas = pd.read_csv(node_path)
+    except Exception:  # noqa: BLE001
+        node_deltas = pd.DataFrame()
+
+    mapping_path = results_dir / "hazard_domain_mapping.csv"
+    hazard_mapping = None
+    if mapping_path.exists():
+        try:
+            loaded = pd.read_csv(mapping_path)
+            if {"hazard", "domain", "weight"}.issubset(loaded.columns):
+                hazard_mapping = loaded
+        except Exception:  # noqa: BLE001
+            hazard_mapping = None
+
+    derived = derive_longitudinal_hazard_deltas(node_deltas, hazard_mapping)
+    if derived.empty:
+        derived.attrs["note"] = (
+            "Cannot derive hazard-context deltas: required domain-delta columns "
+            "or mapped domains were not available."
+        )
+        derived.attrs["source"] = "unavailable"
+        return derived
+
+    results_dir.mkdir(parents=True, exist_ok=True)
+    derived.to_csv(target, index=False)
+    derived.attrs["note"] = (
+        "Derived from longitudinal_node_deltas.csv and the HRP hazard-domain "
+        "mapping, then saved to longitudinal_hazard_deltas.csv."
+    )
+    derived.attrs["source"] = "derived"
+    return derived
 
 
 def compute_recovery_metrics_table(

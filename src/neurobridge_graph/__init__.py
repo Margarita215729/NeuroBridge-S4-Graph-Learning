@@ -66,6 +66,9 @@ from neurobridge_graph.trajectory_features import (  # noqa: F401
     compute_hazard_context_delta,
     compute_recovery_metrics_table,
     identify_dominant_trajectory_shift,
+    derive_longitudinal_hazard_deltas,
+    ensure_longitudinal_hazard_deltas,
+    LONGITUDINAL_HAZARD_DELTA_COLUMNS,
 )
 from neurobridge_graph.trajectory_attribution import (  # noqa: F401
     load_phase6_delta_tables,
@@ -112,4 +115,26 @@ from neurobridge_graph.envelope_visualization import (  # noqa: F401
 from neurobridge_graph.envelope_reporting import (  # noqa: F401
     generate_envelope_interpretation,
     generate_phase8_report,
+)
+from neurobridge_graph.dashboard_data import (  # noqa: F401
+    load_dashboard_tables,
+    has_required_tables,
+    build_dashboard_readiness_report,
+    get_available_subjects,
+    get_available_timepoints,
+    get_subject_timepoint_context,
+    filter_subject_timepoint,
+    get_domain_delta_panel_data,
+    get_graph_metric_panel_data,
+    get_hazard_context_panel_data,
+    get_attribution_panel_data,
+    get_envelope_panel_data,
+    get_recovery_panel_data,
+    REQUIRED_TABLES as DASHBOARD_REQUIRED_TABLES,
+    OPTIONAL_TABLES as DASHBOARD_OPTIONAL_TABLES,
+)
+from neurobridge_graph.dashboard_text import (  # noqa: F401
+    DASHBOARD_GUARDRAIL,
+    get_dashboard_intro_text,
+    get_guardrail_text,
 )

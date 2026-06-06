@@ -11,6 +11,9 @@ from neurobridge_graph.trajectory_features import (
     compute_hazard_context_delta,
     compute_recovery_metrics_table,
     identify_dominant_trajectory_shift,
+    derive_longitudinal_hazard_deltas,
+    ensure_longitudinal_hazard_deltas,
+    LONGITUDINAL_HAZARD_DELTA_COLUMNS,
 )
 
 
@@ -115,3 +118,117 @@ def test_identify_dominant_trajectory_shift():
     assert len(result) == 1
     assert result.iloc[0]["dominant_domain"] == "Cardiovascular regulation"
     assert result.iloc[0]["dominant_hazard"] == "gravity_fields"
+
+
+# ---------------------------------------------------------------------------
+# Longitudinal hazard-context delta generation / fallback
+# ---------------------------------------------------------------------------
+
+def _node_deltas_with_levels() -> pd.DataFrame:
+    """Two domains that map onto gravity_fields, across two timepoints."""
+    return pd.DataFrame([
+        # baseline (delta 0)
+        {"subject_id": "S1", "timepoint": "T0_baseline", "mission_phase": "baseline",
+         "domain": "Cardiovascular regulation", "baseline_activation": 0.8,
+         "current_activation": 0.8, "delta_activation": 0.0},
+        {"subject_id": "S1", "timepoint": "T0_baseline", "mission_phase": "baseline",
+         "domain": "Body composition / physical status", "baseline_activation": 0.6,
+         "current_activation": 0.6, "delta_activation": 0.0},
+        # inflight (increase)
+        {"subject_id": "S1", "timepoint": "T2_inflight", "mission_phase": "inflight",
+         "domain": "Cardiovascular regulation", "baseline_activation": 0.8,
+         "current_activation": 1.1, "delta_activation": 0.3},
+        {"subject_id": "S1", "timepoint": "T2_inflight", "mission_phase": "inflight",
+         "domain": "Body composition / physical status", "baseline_activation": 0.6,
+         "current_activation": 0.7, "delta_activation": 0.1},
+    ])
+
+
+def test_derive_has_expected_columns_and_guardrail():
+    out = derive_longitudinal_hazard_deltas(_node_deltas_with_levels())
+    assert list(out.columns) == LONGITUDINAL_HAZARD_DELTA_COLUMNS
+    assert not out.empty
+    # every hazard appears per timepoint
+    assert set(out["hazard"]).issuperset({"gravity_fields"})
+    # guardrail language present, forbidden language absent
+    joined = " ".join(out["interpretation"].tolist()).lower()
+    assert "not exposure measurement" in joined
+    assert "not risk scoring" in joined
+    assert "not diagnosis" in joined
+    for bad in ("hazard risk score", "exposure detected", "radiation effect", "health risk"):
+        assert bad not in joined
+
+
+def test_derive_levels_baseline_and_current():
+    out = derive_longitudinal_hazard_deltas(_node_deltas_with_levels())
+    gf = out[(out["timepoint"] == "T2_inflight") & (out["hazard"] == "gravity_fields")].iloc[0]
+    # baseline computed from baseline_activation (not assumed 0)
+    assert gf["baseline_hazard_relevance"] > 0
+    assert gf["delta_hazard_relevance"] > 0
+    assert gf["top_contributing_domain"] != "n/a"
+
+
+def test_derive_delta_only_assumes_zero_baseline():
+    node_deltas = _node_deltas_with_levels().drop(
+        columns=["baseline_activation", "current_activation"])
+    out = derive_longitudinal_hazard_deltas(node_deltas)
+    gf = out[(out["timepoint"] == "T2_inflight") & (out["hazard"] == "gravity_fields")].iloc[0]
+    assert gf["baseline_hazard_relevance"] == 0.0
+    assert gf["delta_hazard_relevance"] > 0
+    assert "assumed to be 0.0" in gf["interpretation"]
+
+
+def test_derive_empty_inputs_safe():
+    out = derive_longitudinal_hazard_deltas(pd.DataFrame())
+    assert out.empty
+    assert list(out.columns) == LONGITUDINAL_HAZARD_DELTA_COLUMNS
+
+
+def test_derive_missing_required_columns_safe():
+    bad = pd.DataFrame([{"subject_id": "S1", "foo": 1}])
+    out = derive_longitudinal_hazard_deltas(bad)
+    assert out.empty
+    assert list(out.columns) == LONGITUDINAL_HAZARD_DELTA_COLUMNS
+
+
+def test_ensure_loads_existing_file(tmp_path):
+    tdir = tmp_path / "tables"
+    tdir.mkdir()
+    existing = pd.DataFrame([{
+        "subject_id": "S1", "timepoint": "T0", "mission_phase": "baseline",
+        "hazard": "gravity_fields", "baseline_hazard_relevance": 0.5,
+        "current_hazard_relevance": 0.5, "delta_hazard_relevance": 0.0,
+        "coverage_fraction": 1.0, "interpretation": "existing row",
+    }])
+    existing.to_csv(tdir / "longitudinal_hazard_deltas.csv", index=False)
+    out = ensure_longitudinal_hazard_deltas(tdir)
+    assert out.attrs.get("source") == "file"
+    # missing expected column added
+    assert "top_contributing_domain" in out.columns
+    assert out.iloc[0]["interpretation"] == "existing row"
+
+
+def test_ensure_derives_and_saves_when_missing(tmp_path):
+    tdir = tmp_path / "tables"
+    tdir.mkdir()
+    _node_deltas_with_levels().to_csv(tdir / "longitudinal_node_deltas.csv", index=False)
+    target = tdir / "longitudinal_hazard_deltas.csv"
+    assert not target.exists()
+    out = ensure_longitudinal_hazard_deltas(tdir)
+    assert out.attrs.get("source") == "derived"
+    assert not out.empty
+    assert list(out.columns) == LONGITUDINAL_HAZARD_DELTA_COLUMNS
+    # file was saved
+    assert target.exists()
+    reloaded = pd.read_csv(target)
+    assert "top_contributing_domain" in reloaded.columns
+
+
+def test_ensure_unavailable_when_no_inputs(tmp_path):
+    tdir = tmp_path / "tables"
+    tdir.mkdir()
+    out = ensure_longitudinal_hazard_deltas(tdir)
+    assert out.empty
+    assert list(out.columns) == LONGITUDINAL_HAZARD_DELTA_COLUMNS
+    assert out.attrs.get("source") == "unavailable"
+    assert "not found" in out.attrs.get("note", "")

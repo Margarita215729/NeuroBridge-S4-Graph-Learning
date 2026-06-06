@@ -10,9 +10,9 @@ Phase 4 — Single-timepoint graph feature extraction: complete
 Phase 5 — Hazard-aware graph-feature similarity mapping: complete
 Phase 6 — Within-subject longitudinal graph trajectories: complete
 Phase 7 — Explainable trajectory attribution: complete
-Phase 8 — Reference-calibrated trajectory envelope: implemented
-Phase 9 — Interactive longitudinal dashboard: next
-Phase 10 — HRP-like data adapter layer: future
+Phase 8 — Reference-calibrated trajectory envelope: complete
+Phase 9 — Interactive longitudinal review dashboard: implemented
+Phase 10 — HRP-like data adapter layer: next
 Phase 11 — Monitoring priority translation layer: future
 Phase 12 — Experimental graph sequence models: future
 Phase 13 — Portfolio release: future
@@ -231,12 +231,29 @@ Deliverables:
 - `results/reports/phase8_reference_calibrated_trajectory_report.txt`
 - `tests/test_reference_envelope.py`, `tests/test_envelope_reporting.py`
 
-## Phase 9 — Interactive longitudinal dashboard ← next
+## Phase 9 — Interactive longitudinal review dashboard
 
-Goal: reviewer-facing interactive exploration of trajectories, attribution, and envelope
-exceedance together.
+Status: implemented.
 
-## Phase 10 — HRP-like data adapter layer
+Goal: turn the Phase 6–8 notebooks, CSV outputs, figures, and reports into a local,
+reviewer-facing Streamlit dashboard so a non-programmer reviewer can inspect within-subject
+trajectories, attribution, hazard-context shifts, and reference-calibrated envelope exceedance
+together.
+
+Deliverables:
+
+- `app.py` (Streamlit entry point);
+- `src/neurobridge_graph/dashboard_data.py` (Streamlit-free data layer);
+- `src/neurobridge_graph/dashboard_text.py` (reviewer-facing copy + guardrails);
+- `src/neurobridge_graph/dashboard_components.py` (Streamlit render helpers);
+- `docs/dashboard.md`;
+- `tests/test_dashboard_data.py`.
+
+Run with `streamlit run app.py`. The dashboard reads `results/tables/` and degrades gracefully
+when optional tables are missing. It is a local research-review prototype — not clinical
+monitoring, diagnosis, treatment guidance, exposure measurement, or health risk scoring.
+
+## Phase 10 — HRP-like data adapter layer ← next
 
 Goal: adapter to ingest HRP-style longitudinal/analog data into the trajectory pipeline.
 

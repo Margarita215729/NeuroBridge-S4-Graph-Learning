@@ -131,6 +131,23 @@ The envelope is a calibration layer, never a health-status verdict. Outside-enve
 baseline-relative change is larger than expected under the current calibration data — a
 candidate for expert review, not diagnosis, a risk score, or an exposure measurement.
 
+## Why a review dashboard matters for HRP
+
+HRP-style human spaceflight studies involve very few subjects, many longitudinal measurements,
+and reviewers who are domain experts rather than programmers. A local longitudinal review
+dashboard supports that workflow:
+
+- it lets a reviewer move through **within-subject trajectories, attribution, hazard-context
+  alignment, and reference-calibrated envelope status** for one subject/timepoint in a single
+  coherent view;
+- it surfaces **monitoring-relevant patterns** (large self-baseline shifts, persistent
+  non-recovery) as candidates for **expert review support**, not as automated outputs;
+- it keeps the **personal baseline** as the primary comparison and the reference envelope as a
+  secondary calibration layer, consistent with the rest of the pipeline.
+
+The dashboard is a local research-review prototype. It is not a clinical monitoring system, not
+diagnosis, not treatment guidance, not exposure measurement, and not health risk scoring.
+
 ## Important distinction
 
 This repository is not an official NASA project and does not include actual Artemis II data. It is an independent research prototype inspired by small-N human spaceflight data challenges.
