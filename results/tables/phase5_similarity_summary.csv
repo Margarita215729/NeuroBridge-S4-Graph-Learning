@@ -1,0 +1,7 @@
+subject_a,subject_b,cosine_similarity,euclidean_distance
+Crew 100987,Crew 94465,0.34812,3.81684
+Crew 94465,Crew 99813,-0.02917,6.00354
+Crew 100987,Crew 97774,-0.33218,7.96081
+Crew 100987,Crew 99813,-0.52708,7.77448
+Crew 97774,Crew 99813,-0.52953,9.72074
+Crew 94465,Crew 97774,-0.67974,8.1902

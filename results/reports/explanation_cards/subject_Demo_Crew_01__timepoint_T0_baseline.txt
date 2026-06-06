@@ -1,0 +1,9 @@
+Subject: Demo_Crew_01
+Timepoint: T0_baseline
+Mission phase: baseline
+Primary graph shift: For subject Demo_Crew_01 at the baseline timepoint T0_baseline, the biological adaptation graph matches the personal baseline, so there is no baseline-relative shift to attribute. Guardrail: This is a monitoring-relevant pattern for expert review. It is not diagnosis, not treatment guidance, not causal proof, and not exposure measurement. Hazard-context alignment is not hazard exposure.
+Top biological domain contributors: Body composition / physical status
+Top subgraph contributor: cardiometabolic
+Top HRP hazard-context alignment: hazard-context layer unavailable (alignment, not exposure)
+Recovery note: returned_near_baseline:4
+Guardrail: Monitoring-relevant pattern for expert review. Not diagnosis, not treatment guidance, not causal proof, not exposure measurement.

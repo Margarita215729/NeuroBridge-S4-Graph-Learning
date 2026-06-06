@@ -4,17 +4,47 @@ Graph learning extension of **NeuroBridge-S4** for small-N biomedical human adap
 
 > This is an independent research prototype. It is not an official NASA project and does not contain actual Artemis II astronaut data.
 
-## Purpose
+## Primary methodological direction: within-subject trajectories
 
-The original NeuroBridge-S4 project demonstrated a methodology for small-N human research data: real proxy datasets, biological domain mapping, BACI, graph representation, and reviewer-friendly adaptation profiles.
+**NeuroBridge-S4 Graph Learning is primarily a within-subject longitudinal graph trajectory framework for small-N human research.**
 
-This repository begins the next stage: making those graphs computational.
+The primary target use case is longitudinal self-baseline tracking:
 
-The goal is to represent each participant as a connected biological adaptation graph rather than as isolated rows and columns in a biomedical dataset.
+```text
+subject baseline → mission phase → postflight → recovery
+```
+
+Reference cohorts remain useful for calibration, noise estimation, rarity context, and feature
+scaling, but the most astronaut-relevant signal is how each individual's biological adaptation
+graph changes relative to their own baseline.
+
+> The primary signal is within-subject change from the individual's own baseline. Population
+> reference data are used only to calibrate scale, estimate noise, contextualize rarity, and
+> stabilize feature geometry.
+
+## Why self-baseline matters
+
+- Astronauts are not generic population subjects; individual baselines matter more than population-normal ranges.
+- Mission-relevant changes can occur **inside** population-normal ranges.
+- Stable individual differences can be misread if compared only to generic healthy cohorts.
+- Reference cohorts remain useful for scale, noise, rarity, and feature geometry — but not as the main endpoint.
+
+> Healthy population ranges are insufficient for astronaut monitoring because operationally
+> meaningful changes may occur within population-normal ranges, while stable individual
+> baselines may differ from generic norms.
+
+**Conceptual hierarchy:**
+
+```text
+Primary comparison:    Current astronaut state vs that astronaut's own baseline.
+Secondary calibration: Reference cohort distribution for scale, noise, rarity, and feature geometry.
+Interpretation layer:  NASA HRP five hazards as operational context, not exposure measurement.
+```
 
 ## Core question
 
-How can we represent each participant as a connected biological system and determine whether their adaptation graph is unusual, coherent, or research-relevant relative to a real reference population?
+How has this individual's biological adaptation graph changed relative to their own baseline
+over time, across mission and recovery phases?
 
 ## What Phase 1 contains
 
@@ -33,18 +63,18 @@ No model training is performed in Phase 1.
 
 ```text
 Processed NeuroBridge-S4 outputs
-→ participant-level biological domains
-→ subject-level biological adaptation graphs
-→ graph features
-→ graph embeddings
-→ reference-relative novelty detection
-→ explainable subgraph profiles
-→ longitudinal graph trajectories
+→ participant + timepoint biological domains
+→ subject-timepoint biological adaptation graphs
+→ graph features per timepoint
+→ within-subject trajectory (delta from personal baseline)
+→ hazard-context shift tracking
+→ recovery trajectory metrics
+→ reference-calibrated trajectory novelty (future)
 ```
 
-## Phase 3: Biological Adaptation Graph Construction
+## Phase 3: Single-Timepoint Biological Adaptation Graphs
 
-Phase 3 converts each pseudo-crew participant into a biological adaptation graph.
+Phase 3 builds a biological adaptation graph for a single subject-timepoint.
 
 Run: `notebooks/01_Build_Biological_Adaptation_Graphs.ipynb`
 
@@ -62,11 +92,10 @@ Interpretation: The graphs are research interpretation artifacts, not diagnostic
 
 ---
 
-## Phase 4: Interpretable Graph Feature Extraction
+## Phase 4: Single-Timepoint Graph Feature Extraction
 
-Phase 4 turns biological adaptation graphs into measurable features.
-This creates the foundation for graph embeddings, similarity mapping,
-and novelty detection in Phase 5.
+Phase 4 extracts graph features per subject-timepoint.
+This creates the foundation for trajectory deltas and hazard-context mapping.
 
 Run: `notebooks/02_Graph_Features_and_Embeddings_Foundation.ipynb`
 
@@ -79,6 +108,88 @@ Outputs:
 - Phase 4 interpretation report (`results/reports/phase4_graph_feature_report.txt`).
 
 Interpretation: These features are not diagnostic. They prepare the project for Phase 5.
+
+---
+
+## Phase 5: Hazard-Aware Graph-Feature Similarity Mapping
+
+Phase 5 maps graph-feature profiles and HRP hazard-context features into a shared feature
+space for structural comparison. This is a useful demonstration, but **not the final
+astronaut-monitoring endpoint** — within-subject longitudinal trajectory analysis (Phase 6)
+is the primary operationally relevant direction.
+
+It adds NASA HRP's five human spaceflight hazards as an interpretation context:
+
+- Space Radiation
+- Isolation and Confinement
+- Distance from Earth
+- Gravity Fields
+- Hostile / Closed Environments
+
+Run:
+
+`notebooks/03_Hazard_Aware_Graph_Embeddings_and_Similarity_Mapping.ipynb`
+
+Outputs:
+- hazard-domain mapping;
+- hazard relevance scores;
+- hazard coverage report;
+- hazard-aware feature matrix;
+- similarity and distance matrices;
+- PCA graph-feature embedding;
+- hazard-aware similarity figures;
+- plain-language Phase 5 report.
+
+> NeuroBridge-S4 connects individual biological adaptation patterns to NASA's five human
+> spaceflight hazard categories without claiming actual exposure, diagnosis, or causal proof.
+
+Interpretation: Hazard relevance is not exposure measurement, diagnosis, or causal attribution.
+Phase 5 similarity is structural comparison in graph-feature space, not the final monitoring
+endpoint.
+
+---
+
+## Phase 6: Within-Subject Longitudinal Graph Trajectories
+
+Run:
+
+`notebooks/04_Within_Subject_Longitudinal_Graph_Trajectories.ipynb`
+
+Outputs:
+- longitudinal biological adaptation graphs (one per subject-timepoint);
+- node activation deltas from personal baseline;
+- graph feature deltas;
+- hazard-context deltas;
+- recovery metrics;
+- trajectory figures;
+- plain-language trajectory report.
+
+Interpretation: These outputs describe within-subject graph changes. They are not diagnosis,
+exposure measurements, or treatment guidance.
+
+---
+
+## Phase 7: Explainable Within-Subject Trajectory Attribution
+
+Phase 7 explains what drives each baseline-relative graph trajectory.
+
+It decomposes longitudinal graph changes into:
+
+- biological domain contributors;
+- graph metric contributors;
+- biological subgraph contributors;
+- HRP hazard-context contributors;
+- recovery attribution.
+
+Run:
+
+`notebooks/05_Explainable_Trajectory_Attribution.ipynb`
+
+Attribution is transparent arithmetic — `contribution share = absolute delta / total absolute
+delta` per subject-timepoint — so reviewers can re-derive every number by hand.
+
+Interpretation: Attribution identifies monitoring-relevant graph-shift contributors for expert
+review. It is not diagnosis, treatment guidance, exposure attribution, or causal proof.
 
 ---
 
@@ -97,9 +208,10 @@ This project does:
 
 - use real public proxy data in later phases;
 - create a transparent graph schema;
-- compare small-N participants to larger reference graph spaces;
+- track within-subject longitudinal graph trajectories from personal baseline;
+- use reference cohorts for calibration, not as the primary comparison endpoint;
 - support human-review and research interpretation;
-- generate explainable graph-based adaptation profiles.
+- generate explainable longitudinal adaptation profiles.
 
 ## Repository structure
 
@@ -124,4 +236,7 @@ NeuroBridge-S4-Graph-Learning/
 - **Phase 2** — complete: data import from NeuroBridge-S4 outputs.
 - **Phase 3** — complete: biological adaptation graphs + improved interactive HTML.
 - **Phase 4** — complete: interpretable graph feature extraction.
-- **Phase 5** — next: graph embeddings and similarity mapping.
+- **Phase 5** — implemented: hazard-aware graph-feature similarity mapping (structural demonstration).
+- **Phase 6** — complete: within-subject longitudinal graph trajectories (primary direction).
+- **Phase 7** — implemented: explainable within-subject trajectory attribution.
+- **Phase 8** — next: reference-calibrated trajectory envelope.

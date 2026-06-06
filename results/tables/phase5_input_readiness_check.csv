@@ -1,0 +1,5 @@
+file,status,rows,columns,required_or_optional
+graph_level_features.csv,present,4,18,required
+node_level_features.csv,present,24,11,required
+subgraph_features.csv,present,20,11,recommended
+edge_level_features.csv,present,17,8,recommended

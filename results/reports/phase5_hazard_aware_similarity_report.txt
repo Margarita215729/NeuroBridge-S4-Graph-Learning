@@ -1,0 +1,66 @@
+NeuroBridge-S4 Graph Learning — Phase 5 Report
+Hazard-Aware Graph Embeddings and Similarity Mapping
+================================================================
+
+NeuroBridge-S4 connects individual biological adaptation patterns to NASA's five human spaceflight hazard categories without claiming actual exposure, diagnosis, or causal proof.
+
+Overview
+----------------------------------------------------------------
+Phase 5 maps each biological adaptation graph into a hazard-aware graph-feature
+space and adds NASA HRP five-hazard context relevance scores. It does not assign
+clinical labels. It maps biological adaptation graphs into a hazard-aware feature
+space so that reviewers can inspect structural similarity and HRP hazard-context
+relevance.
+
+Analysis summary
+----------------------------------------------------------------
+Participants analyzed       : 4
+Total graph features used   : 22
+Hazard relevance features   : 5
+Subgraph features used      : 4
+
+Strongest hazard-context pattern per participant
+----------------------------------------------------------------
+  Crew 100987: Distance from Earth (relevance 1.88, coverage 20%)
+  Crew 94465: Distance from Earth (relevance 0.95, coverage 20%)
+  Crew 97774: Gravity Fields (relevance 1.18, coverage 83%)
+  Crew 99813: Isolation and Confinement (relevance 1.10, coverage 17%)
+
+Most similar participant pair
+----------------------------------------------------------------
+  Crew 100987 <-> Crew 94465 (cosine similarity 0.348, Euclidean distance 3.817)
+
+Most distinct participant
+----------------------------------------------------------------
+  Crew 97774 (mean distance to others 8.62392)
+
+Top features contributing to separation
+----------------------------------------------------------------
+  PC1: mean_node_activation (loading +0.279)
+  PC1: total_node_activation (loading +0.279)
+  PC1: coactivation_edge_count (loading +0.263)
+  PC1: max_edge_weight (loading +0.263)
+  PC1: graph_density (loading +0.263)
+  PC1: mean_edge_weight (loading +0.263)
+
+Domain coverage limitations
+----------------------------------------------------------------
+  Space Radiation: 4/5 domains (80%).
+  Isolation and Confinement: 1/6 domains (17%).
+  Distance from Earth: 1/5 domains (20%).
+  Gravity Fields: 5/6 domains (83%).
+  Hostile / Closed Environments: 3/6 domains (50%).
+  The current NHANES-derived proxy has limited coverage for isolation/confinement
+  and distance-from-Earth autonomy contexts. Additional Artemis II data streams
+  (sleep/circadian, autonomic, emotional, cognitive-load) would strengthen coverage.
+
+Interpretation guardrail
+----------------------------------------------------------------
+  Hazard relevance is not exposure measurement, risk scoring, diagnosis, or causal
+  attribution. Similarity is structural, not clinical. PCA is a visualization, not a
+  classifier. No clinical or psychological conditions are inferred.
+
+Next step
+----------------------------------------------------------------
+  Phase 6 — reference-relative graph novelty detection: learn a reference graph space
+  from many proxy participants and interpret the n=4 pseudo-crew relative to it.

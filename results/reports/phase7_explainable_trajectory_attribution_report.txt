@@ -1,0 +1,82 @@
+==============================================================================
+NeuroBridge-S4 Graph Learning
+Phase 7 — Explainable Within-Subject Trajectory Attribution
+==============================================================================
+
+OVERVIEW
+------------------------------------------------------------------------------
+Phase 6 measured how each subject's biological adaptation graph changed from personal baseline over time. Phase 7 explains which biological domains, subgraphs, graph metrics, HRP hazard contexts, and recovery components contributed most to those baseline-relative changes. Attribution is transparent arithmetic (absolute delta / total absolute delta), not a black-box model.
+
+INPUT DATA STATUS
+------------------------------------------------------------------------------
+Data provenance: schema demonstration only — not scientific evidence.
+  - Node-level attribution: available
+  - Graph-metric attribution: available
+  - Subgraph attribution: available
+  - Hazard-context attribution: available
+  - Recovery attribution: available
+
+SCOPE
+------------------------------------------------------------------------------
+  Subjects analyzed:           2
+  Subject-timepoints analyzed: 10
+
+STRONGEST BIOLOGICAL DOMAIN CONTRIBUTORS (across subject-timepoints)
+------------------------------------------------------------------------------
+  - Inflammation / immune-adjacent: mean contribution share 22%
+  - Metabolic regulation: mean contribution share 18%
+  - Body composition / physical status: mean contribution share 18%
+  - Cardiovascular regulation: mean contribution share 18%
+  - Hematologic / oxygen-carrying: mean contribution share 14%
+
+STRONGEST SUBGRAPH CONTRIBUTORS
+------------------------------------------------------------------------------
+  - cardiometabolic: mean contribution share 43%
+  - immune_metabolic: mean contribution share 40%
+  - hematologic_cardiovascular: mean contribution share 34%
+  - cognitive_emotional_recovery: mean contribution share 8%
+
+STRONGEST HAZARD-CONTEXT CONTRIBUTORS (alignment, not exposure)
+------------------------------------------------------------------------------
+  - Isolation and Confinement: mean contribution share 24%
+  - Distance from Earth: mean contribution share 20%
+  - Hostile / Closed Environments: mean contribution share 19%
+  - Space Radiation: mean contribution share 18%
+  - Gravity Fields: mean contribution share 18%
+
+RECOVERY PATTERNS
+------------------------------------------------------------------------------
+  - returned_near_baseline: 8 metric(s)
+
+PER SUBJECT-TIMEPOINT INTERPRETATION
+------------------------------------------------------------------------------
+  [Demo_Crew_01 @ T0_baseline] At T0_baseline (baseline), the graph matches personal baseline; no baseline-relative shift to attribute.
+  [Demo_Crew_01 @ T1_pre] At T1_pre (pre_mission), the baseline-relative graph shift is driven primarily by Cardiovascular regulation (21% of node change); the dominant subgraph is cardiometabolic; hazard-context alignment is strongest for isolation and confinement. Monitoring-relevant pattern for expert review. Not diagnosis, not treatment guidance, not causal proof, and not exposure measurement.
+  [Demo_Crew_01 @ T2_inflight] At T2_inflight (inflight), the baseline-relative graph shift is driven primarily by Body composition / physical status (26% of node change); the dominant subgraph is cardiometabolic; hazard-context alignment is strongest for isolation and confinement. Monitoring-relevant pattern for expert review. Not diagnosis, not treatment guidance, not causal proof, and not exposure measurement.
+  [Demo_Crew_01 @ T3_post] At T3_post (postflight), the baseline-relative graph shift is driven primarily by Body composition / physical status (24% of node change); the dominant subgraph is cardiometabolic; hazard-context alignment is strongest for isolation and confinement. Monitoring-relevant pattern for expert review. Not diagnosis, not treatment guidance, not causal proof, and not exposure measurement.
+  [Demo_Crew_01 @ T4_recovery] At T4_recovery (recovery), the baseline-relative graph shift is driven primarily by Inflammation / immune-adjacent (24% of node change); the dominant subgraph is cardiometabolic; hazard-context alignment is strongest for isolation and confinement. Monitoring-relevant pattern for expert review. Not diagnosis, not treatment guidance, not causal proof, and not exposure measurement.
+  [Demo_Crew_02 @ T0_baseline] At T0_baseline (baseline), the graph matches personal baseline; no baseline-relative shift to attribute.
+  [Demo_Crew_02 @ T1_pre] At T1_pre (pre_mission), the baseline-relative graph shift is driven primarily by Metabolic regulation (23% of node change); the dominant subgraph is cardiometabolic; hazard-context alignment is strongest for hostile closed environments. Monitoring-relevant pattern for expert review. Not diagnosis, not treatment guidance, not causal proof, and not exposure measurement.
+  [Demo_Crew_02 @ T2_inflight] At T2_inflight (inflight), the baseline-relative graph shift is driven primarily by Metabolic regulation (23% of node change); the dominant subgraph is cardiometabolic; hazard-context alignment is strongest for isolation and confinement. Monitoring-relevant pattern for expert review. Not diagnosis, not treatment guidance, not causal proof, and not exposure measurement.
+  [Demo_Crew_02 @ T3_post] At T3_post (postflight), the baseline-relative graph shift is driven primarily by Metabolic regulation (22% of node change); the dominant subgraph is cardiometabolic; hazard-context alignment is strongest for isolation and confinement. Monitoring-relevant pattern for expert review. Not diagnosis, not treatment guidance, not causal proof, and not exposure measurement.
+  [Demo_Crew_02 @ T4_recovery] At T4_recovery (recovery), the baseline-relative graph shift is driven primarily by Metabolic regulation (26% of node change); the dominant subgraph is cardiometabolic; hazard-context alignment is strongest for isolation and confinement. Monitoring-relevant pattern for expert review. Not diagnosis, not treatment guidance, not causal proof, and not exposure measurement.
+
+LIMITATIONS
+------------------------------------------------------------------------------
+  - Attribution is descriptive arithmetic, not causal inference.
+  - If example data are used, they are schema demonstration only and
+    are not scientific evidence.
+  - Hazard-context attribution is hazard-context alignment, not exposure
+    attribution.
+  - Recovery metrics depend on timepoint availability and baseline quality.
+  - Sparse domains limit subgraph attribution coverage.
+
+WHY ATTRIBUTION SUPPORTS EXPERT REVIEW
+------------------------------------------------------------------------------
+  For small-N astronaut monitoring it is not enough to know that a graph changed. Reviewers need to know what drove the change and whether it appears localized, distributed, persistent, or recovery-associated. Transparent attribution provides that evidence trail.
+
+NEXT PHASE RECOMMENDATION
+------------------------------------------------------------------------------
+  Phase 8 — Reference-calibrated trajectory envelope: place each within-subject trajectory against a reference band to flag deviations that warrant closer expert review.
+
+==============================================================================
