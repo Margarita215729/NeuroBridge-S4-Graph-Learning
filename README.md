@@ -42,6 +42,28 @@ Processed NeuroBridge-S4 outputs
 → longitudinal graph trajectories
 ```
 
+## Phase 3: Biological Adaptation Graph Construction
+
+Phase 3 converts each pseudo-crew participant into a biological adaptation graph.
+
+Run:
+
+`notebooks/01_Build_Biological_Adaptation_Graphs.ipynb`
+
+Outputs:
+- GraphML files;
+- node and edge tables;
+- graph summary table;
+- static PNG graph figures;
+- interactive HTML graph visualizations;
+- plain-language Phase 3 report.
+
+Interactive graphs: Open `results/html/index.html` after running the notebook.
+
+Interpretation: The graphs are research interpretation artifacts, not diagnostic tools.
+
+---
+
 ## Interpretation guardrails
 
 This project does **not**:

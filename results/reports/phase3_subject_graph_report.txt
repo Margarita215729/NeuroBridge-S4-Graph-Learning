@@ -1,0 +1,35 @@
+======================================================================
+PHASE 3 REPORT — NeuroBridge-S4 Biological Adaptation Graphs
+Generated: 2026-06-06
+======================================================================
+
+Graphs built: 4
+
+Per-participant summary:
+  Subject Crew 97774: top domain = Hematologic / oxygen-carrying, BACI = 41.5 (mild coherence), active domains = 2
+  Subject Crew 94465: top domain = Body composition / physical status, BACI = 22.1 (low coherence), active domains = 1
+  Subject Crew 99813: top domain = Metabolic regulation, BACI = 31.5 (mild coherence), active domains = 2
+  Subject Crew 100987: top domain = Cardiovascular regulation, BACI = 28.6 (mild coherence), active domains = 1
+
+Highest activation: Subject Crew 97774 (max domain activation = 2.107285)
+Highest BACI: Subject Crew 97774 (BACI = 41.5)
+
+What Phase 3 adds to NeuroBridge-S4:
+  The original NeuroBridge-S4 project produced per-participant scores
+  (domain scores, BACI, deviation vectors) as tabular outputs.
+  Phase 3 converts those tables into structured NetworkX graphs,
+  where each participant is represented as a connected biological system.
+  This enables downstream graph feature extraction, graph embeddings,
+  novelty detection, and eventually graph neural network experiments.
+
+Output locations:
+  Static PNG graphs : results/figures/
+  GraphML files     : results/graphs/
+  Interactive HTML  : results/html/  (open index.html)
+  Node table        : results/tables/subject_nodes.csv
+  Edge table        : results/tables/subject_edges.csv
+  Summary table     : results/tables/phase3_graph_summary.csv
+
+----------------------------------------------------------------------
+Research interpretation only; not diagnosis or treatment guidance.
+----------------------------------------------------------------------

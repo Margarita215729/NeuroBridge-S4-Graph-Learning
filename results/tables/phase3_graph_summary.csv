@@ -1,0 +1,5 @@
+subject_id,n_nodes,n_edges,baci_score,baci_category,n_domains,n_active_domains,max_domain_activation,top_domain,graph_type,source_project,guardrail
+Crew 97774,6,5,41.5,mild coherence,6,2,2.107285,Hematologic / oxygen-carrying,subject_level_biological_adaptation_graph,NeuroBridge-S4 Graph Learning,Research interpretation only; not diagnosis or treatment guidance.
+Crew 94465,6,4,22.1,low coherence,6,1,1.32253,Body composition / physical status,subject_level_biological_adaptation_graph,NeuroBridge-S4 Graph Learning,Research interpretation only; not diagnosis or treatment guidance.
+Crew 99813,6,4,31.5,mild coherence,6,2,1.157896,Metabolic regulation,subject_level_biological_adaptation_graph,NeuroBridge-S4 Graph Learning,Research interpretation only; not diagnosis or treatment guidance.
+Crew 100987,6,4,28.6,mild coherence,6,1,1.881908,Cardiovascular regulation,subject_level_biological_adaptation_graph,NeuroBridge-S4 Graph Learning,Research interpretation only; not diagnosis or treatment guidance.
