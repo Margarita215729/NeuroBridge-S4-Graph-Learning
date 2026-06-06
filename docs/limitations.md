@@ -63,3 +63,24 @@ This project supports:
   unhealthy endpoint.
 - **Domain coverage limitations** affect interpretation: features without reference calibration
   are scored as `insufficient_reference` rather than guessed.
+
+## Phase 9 dashboard limitations
+
+- The dashboard **depends on Phase 6–8 output tables**; if those tables are not present in
+  `results/tables/`, it shows a readiness message instead of analysis.
+- **Missing input tables reduce available panels**: optional Phase 7/8 tables only enrich the
+  display and the dashboard runs without them, but the corresponding panels stay empty.
+- It is a **local prototype only** — no database, no authentication, no cloud deployment.
+- It is **not real-time monitoring** and reflects only the static CSV snapshots on disk.
+- It is **not validated for operational decisions** and provides **no clinical interpretation**.
+- It performs **no diagnosis, no health risk scoring, and no exposure measurement**;
+  hazard-context panels show alignment context only.
+- If example data are used, they are **schema demonstration only and are not scientific
+  evidence**; the dashboard surfaces a provenance warning when example data are detected.
+- **Derived hazard-context deltas are a fallback, not a substitute for measured inputs**: when
+  `longitudinal_hazard_deltas.csv` is missing, the dashboard derives hazard-context relevance
+  deltas from the longitudinal domain deltas and the HRP hazard-domain mapping. This derivation
+  is hazard-context relevance only — **not exposure measurement, not risk scoring, and not
+  diagnosis** — and inherits all coverage limitations of the underlying domain data. When only
+  domain deltas (no baseline/current activations) are available, baseline hazard-context
+  relevance is **assumed to be 0.0** and that assumption is recorded in the row interpretation.

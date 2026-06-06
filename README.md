@@ -219,6 +219,45 @@ measurement.
 
 ---
 
+## Phase 9: Interactive Longitudinal Review Dashboard
+
+Phase 9 provides a local Streamlit dashboard for reviewing within-subject biological adaptation
+graph trajectories.
+
+Run:
+
+```bash
+streamlit run app.py
+```
+
+The dashboard displays:
+- subject/timepoint overview;
+- baseline-relative domain trajectories;
+- graph metric trajectories;
+- HRP hazard-context shifts;
+- explainable trajectory attribution;
+- reference-calibrated envelope status;
+- recovery behavior;
+- data readiness and limitations.
+
+See `docs/dashboard.md` for details. The dashboard reads the Phase 6–8 tables from
+`results/tables/`; if required tables are missing it shows a friendly message instead of
+crashing.
+
+When `longitudinal_hazard_deltas.csv` is missing, the dashboard derives hazard-context
+trajectory deltas on the fly from the longitudinal domain deltas
+(`longitudinal_node_deltas.csv`) and the HRP hazard-domain mapping
+(`neurobridge_graph.trajectory_features.ensure_longitudinal_hazard_deltas`), saving the
+derived table back to `results/tables/`. If the required domain-delta and hazard-mapping
+inputs are also unavailable, the hazard-context panel shows a clear message instead of an
+empty chart. These derived values are hazard-context relevance, not exposure measurement,
+not risk scoring, and not diagnosis.
+
+Interpretation: The dashboard is a research-review prototype. It is not clinical monitoring,
+diagnosis, treatment guidance, exposure measurement, or health risk scoring.
+
+---
+
 ## Interpretation guardrails
 
 This project does **not**:
@@ -266,4 +305,5 @@ NeuroBridge-S4-Graph-Learning/
 - **Phase 6** — complete: within-subject longitudinal graph trajectories (primary direction).
 - **Phase 7** — complete: explainable within-subject trajectory attribution.
 - **Phase 8** — implemented: reference-calibrated trajectory envelope (calibration layer).
-- **Phase 9** — next: interactive longitudinal dashboard.
+- **Phase 9** — implemented: interactive longitudinal review dashboard (Streamlit).
+- **Phase 10** — next: HRP-like data adapter layer.
