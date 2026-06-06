@@ -210,6 +210,63 @@ def render_recovery_panel(recovery_df: pd.DataFrame) -> None:
     st.dataframe(recovery_df, width="stretch", hide_index=True)
 
 
+_RESILIENCE_GUARDRAIL = (
+    "Operational resilience interpretation is a research-review layer. It is not "
+    "diagnosis, treatment guidance, health risk scoring, exposure measurement, or "
+    "an operational medical decision."
+)
+
+
+def render_resilience_panel(resilience_data: dict) -> None:
+    """Render the Phase 11 Operational resilience tab."""
+    st.caption(
+        "Adaptive resilience interpretation derived from within-subject graph "
+        "trajectories, attribution, reference-calibrated envelope status, "
+        "recovery/persistence, HRP hazard-context alignment, and data coverage. "
+        "Research-review interpretation only."
+    )
+    if not resilience_data or not resilience_data.get("available"):
+        st.info(resilience_data.get("note", _RESILIENCE_GUARDRAIL)
+                if resilience_data else _RESILIENCE_GUARDRAIL)
+        return
+
+    r = resilience_data.get("state_row", {})
+    _metric_row([
+        ("Resilience state", str(r.get("resilience_state_label", "n/a"))),
+        ("Dominant adaptation mode", str(r.get("dominant_adaptation_mode", "n/a"))),
+        ("Confidence", str(r.get("confidence_level", "n/a"))),
+    ])
+
+    st.markdown(f"**Interpretation.** {r.get('interpretation', 'n/a')}")
+
+    chain = resilience_data.get("evidence_chain", [])
+    if chain:
+        st.markdown("**Evidence chain**")
+        for i, bullet in enumerate(chain, start=1):
+            st.markdown(f"{i}. {bullet}")
+
+    st.markdown(
+        f"**HRP hazard-context alignment.** "
+        f"{r.get('top_hazard_context_alignment', 'n/a')}")
+    st.markdown(
+        f"**Recovery / persistence.** "
+        f"{r.get('recovery_persistence_summary', 'n/a')}")
+    st.markdown(
+        f"**Data coverage and data gaps.** {r.get('data_gap_summary', 'n/a')}")
+
+    mr = resilience_data.get("mission_relevance", {})
+    if mr:
+        st.markdown(
+            f"**Mission-relevant expert review context.** "
+            f"{mr.get('mission_relevance_context', 'n/a')}")
+        if mr.get("data_streams_that_would_strengthen_interpretation"):
+            st.caption(
+                "Data streams that would strengthen interpretation: "
+                f"{mr['data_streams_that_would_strengthen_interpretation']}")
+
+    st.warning(_RESILIENCE_GUARDRAIL, icon="⚠️")
+
+
 def render_data_table_section(
     title: str,
     df: pd.DataFrame,

@@ -15,7 +15,9 @@ Demo_Crew_01,T0_baseline,baseline,0,autonomic regulation,0.0,mean_abs_delta,1,0,
 Demo_Crew_01,T2_inflight,inflight,2,autonomic regulation,13.0,mean_abs_delta,1,0,autonomic,All 1 domain variables available (self-baseline aggregation).
 Demo_Crew_01,T0_baseline,baseline,0,sleep / circadian regulation,0.0,mean_abs_delta,3,0,sleep_activity,All 3 domain variables available (self-baseline aggregation).
 Demo_Crew_01,T2_inflight,inflight,2,sleep / circadian regulation,8.766667,mean_abs_delta,3,0,sleep_activity,All 3 domain variables available (self-baseline aggregation).
-Demo_Crew_01,T0_baseline,baseline,0,recovery capacity,0.0,mean_abs_delta,2,0,questionnaire,All 2 domain variables available (self-baseline aggregation).
-Demo_Crew_01,T2_inflight,inflight,2,recovery capacity,3.0,mean_abs_delta,2,0,questionnaire,All 2 domain variables available (self-baseline aggregation).
+Demo_Crew_01,T0_baseline,baseline,0,recovery-related markers,0.0,mean_abs_delta,1,0,questionnaire,All 1 domain variables available (self-baseline aggregation).
+Demo_Crew_01,T2_inflight,inflight,2,recovery-related markers,3.0,mean_abs_delta,1,0,questionnaire,All 1 domain variables available (self-baseline aggregation).
 Demo_Crew_01,T0_baseline,baseline,0,emotional regulation,0.0,mean_abs_delta,2,0,questionnaire,All 2 domain variables available (self-baseline aggregation).
 Demo_Crew_01,T2_inflight,inflight,2,emotional regulation,2.5,mean_abs_delta,2,0,questionnaire,All 2 domain variables available (self-baseline aggregation).
+Demo_Crew_01,T0_baseline,baseline,0,recovery capacity,0.0,mean_abs_delta,1,0,questionnaire,All 1 domain variables available (self-baseline aggregation).
+Demo_Crew_01,T2_inflight,inflight,2,recovery capacity,3.0,mean_abs_delta,1,0,questionnaire,All 1 domain variables available (self-baseline aggregation).

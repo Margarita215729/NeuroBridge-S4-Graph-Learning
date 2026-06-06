@@ -8,10 +8,12 @@ from neurobridge_graph.data_adapters import (
     SCHEMA_TEMPLATE_DATA_TYPE,
     STANDARDIZED_COLUMNS,
     DOMAIN_SCORE_LONG_COLUMNS,
+    UNIT_CONVERSION_STATUSES,
     create_data_templates,
     standardize_wide_longitudinal_table,
     standardize_long_longitudinal_table,
     combine_standardized_streams,
+    standardize_units_if_known,
     compute_variable_baseline_deltas,
     build_domain_scores_from_variables,
     pivot_domain_scores_wide,
@@ -100,6 +102,41 @@ def test_combine_dedup():
 
 def test_combine_empty():
     assert combine_standardized_streams([]).empty
+
+
+# --------------------------------------------------------------------------
+# Unit conversion placeholder (Phase 10 polish)
+# --------------------------------------------------------------------------
+
+def test_unit_conversion_placeholder_statuses():
+    std, _ = standardize_long_longitudinal_table(_long(), "b")  # crp, unit mg/L
+    out, report = standardize_units_if_known(std)
+    assert "unit_conversion_status" in out.columns
+    assert set(out["unit_conversion_status"]).issubset(set(UNIT_CONVERSION_STATUSES))
+    # crp expected unit is mg/L -> already_standard
+    assert (out["unit_conversion_status"] == "already_standard").all()
+    assert not report.empty
+
+
+def test_unit_conversion_not_provided_and_unsupported():
+    df = pd.DataFrame([
+        {"subject_id": "S1", "timepoint": "T0", "mission_phase": "baseline",
+         "time_index": 0, "variable_name": "crp", "value": 1.0, "unit": "unknown",
+         "data_stream": "biomarker", "source_table": "t"},
+        {"subject_id": "S1", "timepoint": "T1", "mission_phase": "inflight",
+         "time_index": 1, "variable_name": "crp", "value": 2.0, "unit": "ug/L",
+         "data_stream": "biomarker", "source_table": "t"},
+    ])
+    out, _ = standardize_units_if_known(df)
+    statuses = list(out["unit_conversion_status"])
+    assert "not_provided" in statuses
+    assert "unsupported_conversion" in statuses
+
+
+def test_unit_conversion_empty_safe():
+    out, report = standardize_units_if_known(pd.DataFrame())
+    assert isinstance(out, pd.DataFrame)
+    assert "unit_conversion_status" in report.columns or report.empty
 
 
 # --------------------------------------------------------------------------

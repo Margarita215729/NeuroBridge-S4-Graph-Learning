@@ -54,6 +54,18 @@ def test_map_variables_dataframe_dedup():
     assert statuses["steps"] == "unmapped"
 
 
+def test_recovery_related_markers_mapping_exists():
+    # Phase 10 polish: at least one recovery-related variable maps to
+    # 'recovery-related markers'.
+    m = get_default_variable_domain_mapping()
+    rrm = m[m["domain"] == "recovery-related markers"]
+    assert not rrm.empty
+    assert map_variable_to_domain("fatigue_score")["domain"] == "recovery-related markers"
+    assert map_variable_to_domain("readiness_score")["domain"] == "recovery-related markers"
+    # recovery capacity remains populated and distinct
+    assert map_variable_to_domain("recovery_score")["domain"] == "recovery capacity"
+
+
 def test_build_domain_coverage_report():
     rep = map_variables_dataframe(["heart_rate", "glucose", "steps"])
     cov = build_domain_coverage_report(rep)

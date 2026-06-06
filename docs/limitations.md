@@ -92,10 +92,33 @@ This project supports:
 - **Templates are not evidence**: the example template rows
   (`schema_template_not_scientific_evidence`) exist only to illustrate the schema.
 - **Unit conversion is limited unless explicitly implemented**: `expected_unit` documents an
-  assumed unit; the adapter does not convert units.
+  assumed unit. Phase 10 includes a unit-standardization placeholder
+  (`standardize_units_if_known`), but broad biomedical unit conversion is not yet implemented.
+  Units are tracked and unsupported conversions are reported rather than silently transformed.
+- **Some variables are intentionally unmapped**: steps are left unmapped by default because their
+  interpretation depends on protocol context, mission phase, workload, exercise prescription, and
+  activity constraints. Users may map steps explicitly in project-specific configurations.
 - **Domain scores depend on available variables**: a domain with no mapped variables in the input
   is reported as absent rather than inferred.
 - **Missing data can reduce domain coverage**: per-timepoint availability is reported, and missing
   variables lower the available-variable count for a domain.
 - **No clinical interpretation**: the adapter validates and transforms data only. It does not
   diagnose, score risk, infer exposure, or recommend treatment.
+
+## Phase 11 operational resilience interpretation limitations
+
+- **Resilience states are rule-based research interpretations**, produced by a transparent priority
+  cascade over Phase 6-10 evidence.
+- **They are not validated operational states**: the thresholds and rules are reasonable defaults,
+  not empirically validated cut-points.
+- **They are not clinical labels**: states describe baseline-relative graph adaptation patterns, not
+  medical conditions.
+- **They are not mission readiness categories**: nothing here classifies an astronaut as fit/unfit
+  or ready/not ready.
+- **They are not health risk levels**: no state is a risk score, danger level, or alert.
+- **They are sensitive to available data streams**: coverage and timepoint density strongly affect
+  which state is assigned.
+- **Coverage-limited outputs should not be overinterpreted**: when data coverage is insufficient,
+  the state is explicitly `coverage_limited_interpretation` with `coverage_limited` confidence.
+- Operational resilience interpretation is a research-review layer. It is not diagnosis, treatment
+  guidance, health risk scoring, exposure measurement, or an operational medical decision.

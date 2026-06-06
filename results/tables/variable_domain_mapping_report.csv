@@ -15,7 +15,7 @@ light_exposure,light_exposure,light_exposure,environmental context,environmental
 heart_rate,heart_rate,heart_rate,cardiovascular regulation,vitals,bpm,heart_rate,mapped
 hrv_rmssd,hrv_rmssd,rmssd,autonomic regulation,autonomic,ms,rmssd,mapped
 sleep_duration,sleep_duration,sleep_duration,sleep / circadian regulation,sleep_activity,hours,sleep_duration,mapped
-fatigue_score,fatigue_score,fatigue_score,recovery capacity,questionnaire,score,fatigue_score,mapped
+fatigue_score,fatigue_score,fatigue_score,recovery-related markers,questionnaire,score,fatigue_score,mapped
 stress_score,stress_score,stress_score,emotional regulation,questionnaire,score,stress_score,mapped
 mood_score,mood_score,mood_score,emotional regulation,questionnaire,score,mood_score,mapped
 recovery_score,recovery_score,recovery_score,recovery capacity,questionnaire,score,recovery_score,mapped

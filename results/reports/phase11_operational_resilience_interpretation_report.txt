@@ -1,0 +1,90 @@
+NeuroBridge-S4 Graph Learning
+Phase 11 — Operational Resilience Interpretation Report
+======================================================================
+
+Overview
+----------------------------------------------------------------------
+This report translates within-subject longitudinal graph trajectories, attribution, reference-calibrated envelope status, recovery/persistence information, HRP hazard-context alignment, and adapter-layer data coverage into adaptive resilience state interpretations for expert review.
+
+Data provenance: Demonstration/longitudinal proxy data unless real HRP data were explicitly provided; not scientific evidence.
+
+Input readiness
+----------------------------------------------------------------------
+- longitudinal_node_deltas [optional]: available (60 rows)
+- longitudinal_graph_deltas [optional]: available (70 rows)
+- longitudinal_hazard_deltas [optional]: available (50 rows)
+- recovery_metrics [optional]: available (8 rows)
+- trajectory_node_attribution [required]: available (60 rows)
+- trajectory_graph_metric_attribution [optional]: available (70 rows)
+- trajectory_subgraph_attribution [required]: available (50 rows)
+- trajectory_hazard_attribution [optional]: available (50 rows)
+- recovery_attribution [optional]: available (8 rows)
+- phase7_attribution_summary [optional]: available (10 rows)
+- reference_calibrated_node_delta_scores [optional]: available (60 rows)
+- reference_calibrated_graph_delta_scores [optional]: available (70 rows)
+- reference_calibrated_hazard_delta_scores [optional]: available (50 rows)
+- phase8_reference_calibrated_summary [required]: available (10 rows)
+- domain_coverage_report [optional]: available (13 rows)
+- variable_domain_mapping_report [optional]: available (24 rows)
+- adapter_input_readiness_report [optional]: available (7 rows)
+- adapter_generated_longitudinal_domain_scores [optional]: available (2 rows)
+
+Adaptive resilience states
+----------------------------------------------------------------------
+- Stable compensated trajectory: Low baseline-relative deltas; few/no outside-envelope features; recovery near baseline.
+- Localized adaptive shift: One dominant domain/subgraph contributor with limited spread across domains.
+- Distributed adaptive load: Multiple active domains and subgraphs with broad graph-level displacement.
+- Systemic strain pattern: High graph displacement across multiple features/subgraphs with recovery not established.
+- Persistent displacement: Graph remains displaced from baseline into the post-shift (postflight/recovery) phase.
+- Recovery lag pattern: Partial or delayed return toward baseline in selected features.
+- Multi-domain instability: Mixed-direction deltas and alternating subgraph dominance across domains.
+- Coverage-limited interpretation: Interpretation limited by insufficient data coverage.
+
+Subject/timepoints interpreted: 10
+
+Distribution of resilience states
+----------------------------------------------------------------------
+- Systemic strain pattern: 4
+- Localized adaptive shift: 3
+- Stable compensated trajectory: 2
+- Persistent displacement: 1
+
+Dominant adaptation modes
+----------------------------------------------------------------------
+- Multi-subgraph distributed: 8
+- Cardiometabolic-recovery dominant: 2
+
+Example evidence chains
+----------------------------------------------------------------------
+- Demo_Crew_01 @ T0_baseline (Stable compensated trajectory): Top baseline-relative domain contributor: Body composition / physical status (contribution share 0.00). | Leading graph-metric displacement: mean_node_activation (share 0.00). | Dominant biological subgraph: cardiometabolic (share 0.00); 0 subgraph(s) involved.
+- Demo_Crew_01 @ T1_pre (Localized adaptive shift): Top baseline-relative domain contributor: Cardiovascular regulation (contribution share 0.21). | Leading graph-metric displacement: total_node_activation (share 0.76). | Dominant biological subgraph: cardiometabolic (share 0.50); 4 subgraph(s) involved.
+- Demo_Crew_01 @ T2_inflight (Systemic strain pattern): Top baseline-relative domain contributor: Body composition / physical status (contribution share 0.26). | Leading graph-metric displacement: coactivation_edge_count (share 0.42). | Dominant biological subgraph: cardiometabolic (share 0.52); 3 subgraph(s) involved.
+
+Confidence levels
+----------------------------------------------------------------------
+- high: 10
+
+Mission-relevant expert review context
+----------------------------------------------------------------------
+Mission-relevance entries describe expert review context only. They are not operational instructions, risk classifications, treatment recommendations, or readiness decisions.
+- entries generated: 10
+
+Data gaps
+----------------------------------------------------------------------
+- coverage-limited interpretations: 0 of 10
+- interpretation strength depends on available data streams; sparse coverage should not be overinterpreted.
+
+Limitations
+----------------------------------------------------------------------
+- Resilience states are rule-based research interpretations, not validated operational states.
+- They are not clinical labels, mission readiness categories, or health risk levels.
+- They are sensitive to available data streams and timepoint density.
+- Coverage-limited outputs should not be overinterpreted.
+
+Guardrail
+----------------------------------------------------------------------
+Operational resilience interpretation is a research-review layer. It describes baseline-relative adaptation patterns for expert interpretation. It is not diagnosis, treatment guidance, health risk scoring, exposure measurement, or an operational medical decision.
+
+Next phase
+----------------------------------------------------------------------
+Phase 12 — Self-supervised within-subject temporal graph learning: learn temporal graph representations to complement the rule-based interpretation layer.

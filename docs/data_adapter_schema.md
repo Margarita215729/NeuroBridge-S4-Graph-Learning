@@ -71,6 +71,15 @@ as `earliest_time_index_used_as_baseline`). Outputs:
 ... baseline_value, delta_from_baseline, percent_change_from_baseline, baseline_assumption
 ```
 
+## Unit standardization (placeholder)
+
+Phase 10 includes a unit-standardization placeholder, but broad biomedical unit
+conversion is not yet implemented. Units are tracked and unsupported conversions
+are reported rather than silently transformed. `standardize_units_if_known`
+adds a `unit_conversion_status` per row — one of `already_standard`,
+`not_provided`, `unsupported_conversion`, `not_applied` — and the pipeline emits
+`adapter_unit_conversion_report.csv`.
+
 ## Output domain-score schema (long)
 
 ```text

@@ -167,6 +167,28 @@ reality:
 The adapter validates and transforms data. It does not diagnose, score risk, infer exposure, or
 recommend treatment.
 
+## Adaptive resilience interpretation for HRP review
+
+HRP review needs system-level interpretation, not just metrics. Per-feature deltas, attribution
+tables, and envelope flags are valuable, but reviewers ultimately ask *what kind of adaptation
+pattern is this subject's trajectory showing?* Phase 11 answers that question with a structured,
+rule-based adaptive resilience state rather than leaving reviewers to integrate dozens of numbers
+by hand.
+
+- **Resilience states summarize dynamic adaptation patterns** — stable compensation, localized
+  shift, distributed load, systemic strain, persistent displacement, recovery lag, multi-domain
+  instability, or coverage-limited — across the whole within-subject trajectory.
+- **Evidence chains support expert review** — every state is accompanied by an ordered, inspectable
+  evidence chain (top domain, graph metric, subgraph, hazard-context alignment, envelope status,
+  recovery/persistence, coverage), so an expert can audit the interpretation, not just accept a
+  label.
+- **Data-gap-aware interpretation is essential in sparse astronaut datasets** — when coverage is
+  insufficient the interpretation is explicitly downgraded to coverage-limited with reduced
+  confidence, which matches the reality of small-N, partially-instrumented spaceflight cohorts.
+
+This is a research-review layer. It is not diagnosis, treatment guidance, health risk scoring,
+exposure measurement, mission readiness classification, or an operational medical decision.
+
 ## Important distinction
 
 This repository is not an official NASA project and does not include actual Artemis II data. It is an independent research prototype inspired by small-N human spaceflight data challenges.

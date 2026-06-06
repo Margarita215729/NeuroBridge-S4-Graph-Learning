@@ -130,6 +130,8 @@ from neurobridge_graph.dashboard_data import (  # noqa: F401
     get_attribution_panel_data,
     get_envelope_panel_data,
     get_recovery_panel_data,
+    load_resilience_tables,
+    get_resilience_panel_data,
     REQUIRED_TABLES as DASHBOARD_REQUIRED_TABLES,
     OPTIONAL_TABLES as DASHBOARD_OPTIONAL_TABLES,
 )
@@ -154,12 +156,14 @@ from neurobridge_graph.domain_mapping import (  # noqa: F401
     map_variable_to_domain,
     map_variables_dataframe,
     build_domain_coverage_report,
+    INTENTIONALLY_UNMAPPED_NOTE,
 )
 from neurobridge_graph.data_adapters import (  # noqa: F401
     create_data_templates,
     standardize_wide_longitudinal_table,
     standardize_long_longitudinal_table,
     combine_standardized_streams,
+    standardize_units_if_known,
     compute_variable_baseline_deltas,
     build_domain_scores_from_variables,
     pivot_domain_scores_wide,
@@ -167,7 +171,37 @@ from neurobridge_graph.data_adapters import (  # noqa: F401
     SCHEMA_TEMPLATE_DATA_TYPE,
     STANDARDIZED_COLUMNS,
     DOMAIN_SCORE_LONG_COLUMNS,
+    UNIT_CONVERSION_STATUSES,
 )
 from neurobridge_graph.adapter_reporting import (  # noqa: F401
     generate_adapter_report,
+)
+from neurobridge_graph.resilience_rules import (  # noqa: F401
+    RESILIENCE_STATES,
+    DOMINANT_ADAPTATION_MODES,
+    DEFAULT_THRESHOLDS as RESILIENCE_DEFAULT_THRESHOLDS,
+    classify_resilience_state,
+    classify_dominant_adaptation_mode,
+    evaluate_coverage_limitations,
+    derive_resilience_evidence,
+    build_evidence_chain,
+)
+from neurobridge_graph.resilience_interpretation import (  # noqa: F401
+    load_phase11_inputs,
+    build_phase11_input_readiness_report,
+    core_inputs_available,
+    get_subject_timepoint_pairs,
+    interpret_subject_timepoint_resilience,
+    build_resilience_state_table,
+    build_mission_relevance_translation,
+)
+from neurobridge_graph.resilience_reporting import (  # noqa: F401
+    generate_resilience_card,
+    generate_phase11_report,
+)
+from neurobridge_graph.resilience_visualization import (  # noqa: F401
+    plot_resilience_state_summary,
+    plot_resilience_state_timeline,
+    plot_adaptation_mode_heatmap,
+    plot_evidence_chain_summary,
 )

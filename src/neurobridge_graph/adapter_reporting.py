@@ -14,7 +14,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-from neurobridge_graph.domain_mapping import UNMAPPED_DOMAIN
+from neurobridge_graph.domain_mapping import UNMAPPED_DOMAIN, normalize_variable_name
 
 GUARDRAIL_SENTENCE = (
     "This adapter validates and transforms HRP-like longitudinal data into "
@@ -90,8 +90,15 @@ def generate_adapter_report(
         lines.append(f"- variables mapped to domains: {len(mapped)}")
         lines.append(f"- variables unmapped: {len(unmapped)}")
         if not unmapped.empty:
-            lines.append("  unmapped variables: "
-                         + ", ".join(sorted(unmapped["variable"].astype(str))))
+            unmapped_names = sorted(unmapped["variable"].astype(str))
+            lines.append("  unmapped variables: " + ", ".join(unmapped_names))
+            if any(normalize_variable_name(v) == "steps" for v in unmapped_names):
+                lines.append(
+                    "  note: Steps are intentionally left unmapped by default "
+                    "because their interpretation depends on protocol context, "
+                    "mission phase, workload, exercise prescription, and activity "
+                    "constraints. Users may map steps explicitly in "
+                    "project-specific configurations.")
     else:
         lines.append("- no variables were mapped")
 
@@ -122,6 +129,9 @@ def generate_adapter_report(
     lines.append("- standardization into a long variable table")
     lines.append("- self-baseline transformation (delta and percent change from "
                  "personal baseline)")
+    lines.append("- unit-standardization placeholder: units are tracked and "
+                 "unsupported conversions are reported, not silently transformed "
+                 "(broad biomedical unit conversion is not yet implemented)")
     lines.append("- variable-to-domain mapping")
     lines.append("- per-domain aggregation into graph-ready domain scores "
                  "(mean absolute self-baseline delta)")

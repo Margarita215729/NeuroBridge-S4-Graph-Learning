@@ -1,0 +1,28 @@
+Adaptive Resilience Interpretation Card
+
+Subject: Demo_Crew_01
+Timepoint: T2_inflight
+Mission phase: inflight
+
+Adaptive resilience state: Systemic strain pattern (confidence: high)
+Dominant adaptation mode: Multi-subgraph distributed
+Primary graph displacement pattern: distributed across multiple biological subgraphs
+
+Evidence chain:
+1. Top baseline-relative domain contributor: Body composition / physical status (contribution share 0.26).
+2. Leading graph-metric displacement: coactivation_edge_count (share 0.42).
+3. Dominant biological subgraph: cardiometabolic (share 0.52); 3 subgraph(s) involved.
+4. Reference-calibrated envelope: 18 feature(s) outside the expected envelope (node 6, graph 7, hazard 5); overall flag 'outside_expected_envelope'.
+5. HRP hazard-context alignment: isolation and confinement (share 0.29); alignment context only, not exposure measurement.
+6. Recovery / persistence: categories observed = [returned_near_baseline]; minimum recovery fraction = 0.76824.
+7. Data coverage: 11/12 biological domains covered.
+
+HRP hazard-context alignment: Leading hazard-context alignment is isolation and confinement (alignment share 0.29). This is hazard-context alignment for expert review only, not exposure measurement or causal attribution.
+
+Recovery / persistence interpretation: Recovery categories observed: returned_near_baseline; minimum recovery fraction 0.77.
+
+Data coverage and data gaps: 11/12 biological domains covered. Domains not covered by the adapter layer: body composition / physical status. Interpretation strength depends on available data streams; sparse coverage should not be overinterpreted.
+
+Mission-relevant expert review context: A stronger multi-system strain-like pattern is visible and is flagged for expert review; this is not a risk score or alert. Adding these data streams would strengthen interpretation: body composition / physical status.
+
+Guardrail: Operational resilience interpretation is a research-review layer. It is not diagnosis, treatment guidance, health risk scoring, exposure measurement, or an operational medical decision.

@@ -42,6 +42,17 @@ GUARDRAIL = (
     "treatment."
 )
 
+# Some variables are intentionally left unmapped by default; documented here so
+# the choice is explicit and surfaced in reports rather than silently dropped.
+INTENTIONALLY_UNMAPPED_NOTE: dict[str, str] = {
+    "steps": (
+        "Steps are intentionally left unmapped by default because their "
+        "interpretation depends on protocol context, mission phase, workload, "
+        "exercise prescription, and activity constraints. Users may map steps "
+        "explicitly in project-specific configurations."
+    ),
+}
+
 # ---------------------------------------------------------------------------
 # Default mapping specification: canonical_variable -> attributes.
 # `data_stream` groups variables by acquisition modality.
@@ -131,14 +142,23 @@ _MAPPING_SPEC: list[dict] = [
      "data_stream": "questionnaire", "expected_unit": "score", "direction_hint": "context"},
     {"canonical_variable": "affect_score", "domain": "emotional regulation",
      "data_stream": "questionnaire", "expected_unit": "score", "direction_hint": "context"},
-    # recovery capacity
-    {"canonical_variable": "fatigue_score", "domain": "recovery capacity",
-     "data_stream": "questionnaire", "expected_unit": "score", "direction_hint": "context"},
-    {"canonical_variable": "soreness_score", "domain": "recovery capacity",
-     "data_stream": "questionnaire", "expected_unit": "score", "direction_hint": "context"},
+    # recovery capacity (self-assessed composite capacity to recover)
     {"canonical_variable": "recovery_score", "domain": "recovery capacity",
      "data_stream": "questionnaire", "expected_unit": "score", "direction_hint": "context"},
-    {"canonical_variable": "readiness_score", "domain": "recovery capacity",
+    {"canonical_variable": "perceived_recovery", "domain": "recovery capacity",
+     "data_stream": "questionnaire", "expected_unit": "score", "direction_hint": "context"},
+    # recovery-related markers (observed recovery / strain-state indicators)
+    {"canonical_variable": "fatigue_score", "domain": "recovery-related markers",
+     "data_stream": "questionnaire", "expected_unit": "score", "direction_hint": "context"},
+    {"canonical_variable": "soreness_score", "domain": "recovery-related markers",
+     "data_stream": "questionnaire", "expected_unit": "score", "direction_hint": "context"},
+    {"canonical_variable": "muscle_soreness", "domain": "recovery-related markers",
+     "data_stream": "questionnaire", "expected_unit": "score", "direction_hint": "context"},
+    {"canonical_variable": "readiness_score", "domain": "recovery-related markers",
+     "data_stream": "questionnaire", "expected_unit": "score", "direction_hint": "context"},
+    {"canonical_variable": "sleep_recovery_score", "domain": "recovery-related markers",
+     "data_stream": "questionnaire", "expected_unit": "score", "direction_hint": "context"},
+    {"canonical_variable": "restoration_score", "domain": "recovery-related markers",
      "data_stream": "questionnaire", "expected_unit": "score", "direction_hint": "context"},
     # environmental context
     {"canonical_variable": "co2", "domain": "environmental context",
