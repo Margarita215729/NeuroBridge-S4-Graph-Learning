@@ -1,0 +1,14 @@
+domain,mapped_variable_count,variables,data_streams,coverage_status
+cardiovascular regulation,2,heart_rate; resting_hr,vitals,covered
+metabolic regulation,2,cholesterol; glucose,biomarker,covered
+body composition / physical status,0,none,none,absent
+inflammation / immune-adjacent status,1,crp,biomarker,covered
+hematologic / oxygen-carrying capacity,2,hematocrit; hemoglobin,biomarker,covered
+recovery-related markers,0,none,none,absent
+sleep / circadian regulation,3,sleep_duration; sleep_efficiency; wake_after_sleep_onset,sleep_activity,covered
+autonomic regulation,1,hrv_rmssd,autonomic,covered
+cognitive load,3,accuracy; cognitive_score; reaction_time,cognitive,covered
+emotional regulation,2,mood_score; stress_score,questionnaire,covered
+recovery capacity,2,fatigue_score; recovery_score,questionnaire,covered
+environmental context,5,co2; humidity; light_exposure; noise; temperature,environmental,covered
+unmapped,1,steps,unspecified,unmapped_variables_present

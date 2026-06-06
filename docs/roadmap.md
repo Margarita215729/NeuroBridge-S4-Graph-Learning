@@ -11,9 +11,9 @@ Phase 5 — Hazard-aware graph-feature similarity mapping: complete
 Phase 6 — Within-subject longitudinal graph trajectories: complete
 Phase 7 — Explainable trajectory attribution: complete
 Phase 8 — Reference-calibrated trajectory envelope: complete
-Phase 9 — Interactive longitudinal review dashboard: implemented
-Phase 10 — HRP-like data adapter layer: next
-Phase 11 — Monitoring priority translation layer: future
+Phase 9 — Interactive longitudinal review dashboard: complete
+Phase 10 — HRP-like data adapter layer: implemented
+Phase 11 — Monitoring priority translation layer: next
 Phase 12 — Experimental graph sequence models: future
 Phase 13 — Portfolio release: future
 ```
@@ -253,11 +253,33 @@ Run with `streamlit run app.py`. The dashboard reads `results/tables/` and degra
 when optional tables are missing. It is a local research-review prototype — not clinical
 monitoring, diagnosis, treatment guidance, exposure measurement, or health risk scoring.
 
-## Phase 10 — HRP-like data adapter layer ← next
+## Phase 10 — HRP-like data adapter layer
 
-Goal: adapter to ingest HRP-style longitudinal/analog data into the trajectory pipeline.
+Status: implemented.
 
-## Phase 11 — Monitoring priority translation layer
+Goal: ingest HRP-like multimodal longitudinal/analog data (biomarker, sleep/activity, cognitive,
+questionnaire, environmental, and generic wide/long tables) and transform them into the
+graph-ready self-baseline domain-score schema used by the Phase 6 trajectory pipeline.
+
+Flow: schema validation → variable-to-domain mapping → self-baseline transformation →
+domain-level longitudinal scores → graph-ready NeuroBridge-S4 inputs.
+
+Deliverables:
+
+- `src/neurobridge_graph/data_validation.py` (format detection, readiness/missingness reports);
+- `src/neurobridge_graph/domain_mapping.py` (variable-to-domain mapping + coverage);
+- `src/neurobridge_graph/data_adapters.py` (standardization, baseline deltas, domain scores,
+  full pipeline, templates);
+- `src/neurobridge_graph/adapter_reporting.py` (plain-language report);
+- `notebooks/07_HRP_Like_Data_Adapter_Layer.ipynb`;
+- `docs/data_adapter_schema.md`, `docs/domain_mapping.md`;
+- `data/templates/*.csv`;
+- `tests/test_data_validation.py`, `tests/test_domain_mapping.py`, `tests/test_data_adapters.py`.
+
+The adapter validates and transforms data. It does not diagnose, score risk, infer exposure, or
+recommend treatment.
+
+## Phase 11 — Monitoring priority translation layer ← next
 
 Goal: translate envelope and attribution outputs into reviewer-facing monitoring priorities.
 

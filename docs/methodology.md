@@ -218,3 +218,34 @@ and (for hazard-context features) does not measure exposure.
 How this supports expert review: in small crews where group inference is impossible, the
 envelope helps reviewers avoid overreacting to expected variability while flagging unusually
 large self-baseline shifts as candidates for closer expert review.
+
+## Data adapter layer
+
+Why an adapter layer matters: real HRP-like data rarely arrive as clean graph-ready domain
+tables. They arrive as separate biomarker, sleep/activity, cognitive, questionnaire, and
+environmental streams in wide or long formats with inconsistent column names. The Phase 10
+adapter separates *data ingestion and validation* from *graph analysis* so the trajectory
+pipeline always receives a consistent, validated, graph-ready input.
+
+From raw data to graph-ready domain scores: the adapter detects table format (wide/long),
+reconciles column-name variants to the standard longitudinal index, standardizes all inputs into
+one long variable table, maps variables to canonical biological domains, applies a self-baseline
+transformation, and aggregates baseline-relative variable deltas into per-domain scores.
+
+Self-baseline transformation: for each subject and variable the adapter computes
+`delta_from_baseline` (and percent change) against that subject's own baseline value — the
+baseline mission phase when present, otherwise the earliest time index, with the assumption
+recorded. This keeps the within-subject self-baseline principle at the point of ingestion.
+
+Domain mapping: variable-to-domain assignment is a transparent, extensible interpretation
+scaffold (see `docs/domain_mapping.md`). It is approximate and explicitly reported, never a
+clinical assignment.
+
+Coverage reporting: the adapter reports which domains are covered, which variables are unmapped,
+and per-timepoint domain availability, so reviewers can see exactly how much each domain score
+rests on.
+
+Limitations: mapping is approximate; units are not auto-converted; domain scores depend on
+available variables; missing data reduce coverage; template/example data are not evidence; and
+no clinical interpretation is performed. The adapter does not diagnose, score risk, infer
+exposure, or recommend treatment.

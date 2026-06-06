@@ -1,0 +1,98 @@
+NeuroBridge-S4 — Phase 10 HRP-Like Data Adapter Report
+========================================================
+
+Phase 10 does not interpret health status. It validates and transforms HRP-like longitudinal data streams into a graph-ready self-baseline schema for downstream NeuroBridge-S4 analysis.
+
+Data source
+-----------
+
+No real HRP-like input files were found. Schema templates were used to demonstrate adapter mechanics only. Template data are not scientific evidence.
+
+Input tables
+------------
+
+- biomarkers_template.csv: format=wide_longitudinal, rows=2, columns=10, subjects=1, timepoints=2, required=ok
+- cognitive_tests_template.csv: format=wide_longitudinal, rows=2, columns=8, subjects=1, timepoints=2, required=ok
+- environmental_context_template.csv: format=wide_longitudinal, rows=2, columns=10, subjects=1, timepoints=2, required=ok
+- longitudinal_long_template.csv: format=long_longitudinal, rows=2, columns=9, subjects=1, timepoints=2, required=ok
+- longitudinal_wide_template.csv: format=wide_longitudinal, rows=2, columns=11, subjects=1, timepoints=2, required=ok
+- questionnaires_template.csv: format=wide_longitudinal, rows=2, columns=9, subjects=1, timepoints=2, required=ok
+- sleep_activity_template.csv: format=wide_longitudinal, rows=2, columns=10, subjects=1, timepoints=2, required=ok
+
+Detected formats
+----------------
+
+- wide_longitudinal: 6 table(s)
+- long_longitudinal: 1 table(s)
+
+Subject and timepoint counts
+----------------------------
+
+- subjects with domain scores: 1
+- distinct timepoints: 2
+
+Variable-to-domain mapping
+--------------------------
+
+- variables mapped to domains: 23
+- variables unmapped: 1
+  unmapped variables: steps
+
+Domain coverage
+---------------
+
+- cardiovascular regulation: 2 variable(s) [covered]
+- metabolic regulation: 2 variable(s) [covered]
+- body composition / physical status: 0 variable(s) [absent]
+- inflammation / immune-adjacent status: 1 variable(s) [covered]
+- hematologic / oxygen-carrying capacity: 2 variable(s) [covered]
+- recovery-related markers: 0 variable(s) [absent]
+- sleep / circadian regulation: 3 variable(s) [covered]
+- autonomic regulation: 1 variable(s) [covered]
+- cognitive load: 3 variable(s) [covered]
+- emotional regulation: 2 variable(s) [covered]
+- recovery capacity: 2 variable(s) [covered]
+- environmental context: 5 variable(s) [covered]
+
+Missingness
+-----------
+
+- biomarkers_template.csv: 0 columns with missing values (mean missing fraction 0.0)
+- cognitive_tests_template.csv: 0 columns with missing values (mean missing fraction 0.0)
+- environmental_context_template.csv: 0 columns with missing values (mean missing fraction 0.0)
+- longitudinal_long_template.csv: 0 columns with missing values (mean missing fraction 0.0)
+- longitudinal_wide_template.csv: 0 columns with missing values (mean missing fraction 0.0)
+- questionnaires_template.csv: 0 columns with missing values (mean missing fraction 0.0)
+- sleep_activity_template.csv: 0 columns with missing values (mean missing fraction 0.0)
+
+Transformations applied
+-----------------------
+
+- schema validation and format detection (wide / long)
+- column-name reconciliation to the standard longitudinal schema
+- standardization into a long variable table
+- self-baseline transformation (delta and percent change from personal baseline)
+- variable-to-domain mapping
+- per-domain aggregation into graph-ready domain scores (mean absolute self-baseline delta)
+
+Graph-ready output
+------------------
+
+- adapter_generated_longitudinal_domain_scores.csv (wide, Phase-6 compatible)
+- adapter_domain_scores_long.csv (long domain scores)
+- adapter_domain_scores_wide.csv (wide domain scores)
+
+Limitations
+-----------
+
+- variable-to-domain mapping is approximate and extensible
+- template/example data are not scientific evidence
+- unit conversion is limited unless explicitly implemented
+- domain scores depend on which variables are available
+- missing data can reduce domain coverage
+- no clinical interpretation is performed
+
+Guardrails
+----------
+
+This adapter validates and transforms HRP-like longitudinal data into graph-ready domain scores. It does not diagnose, score risk, infer exposure, or recommend treatment.

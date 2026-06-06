@@ -1,0 +1,8 @@
+table_name,detected_format,rows,columns,subject_count,timepoint_count,required_columns_status,missingness_summary,notes
+biomarkers_template.csv,wide_longitudinal,2,10,1,2,ok,0 columns with missing values (mean missing fraction 0.0),ok
+cognitive_tests_template.csv,wide_longitudinal,2,8,1,2,ok,0 columns with missing values (mean missing fraction 0.0),ok
+environmental_context_template.csv,wide_longitudinal,2,10,1,2,ok,0 columns with missing values (mean missing fraction 0.0),ok
+longitudinal_long_template.csv,long_longitudinal,2,9,1,2,ok,0 columns with missing values (mean missing fraction 0.0),ok
+longitudinal_wide_template.csv,wide_longitudinal,2,11,1,2,ok,0 columns with missing values (mean missing fraction 0.0),ok
+questionnaires_template.csv,wide_longitudinal,2,9,1,2,ok,0 columns with missing values (mean missing fraction 0.0),ok
+sleep_activity_template.csv,wide_longitudinal,2,10,1,2,ok,0 columns with missing values (mean missing fraction 0.0),ok
