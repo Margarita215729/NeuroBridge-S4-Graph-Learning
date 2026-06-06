@@ -2,9 +2,14 @@
 
 ## Purpose
 
-A biological adaptation graph represents each participant as a connected biological system.
+A biological adaptation graph represents each participant at a single timepoint as a connected
+biological system. In Phase 6, graphs are extended into **within-subject longitudinal
+trajectories**: a sequence of graphs per subject, with the primary signal being change from
+personal baseline.
 
-Instead of storing biomedical measurements as isolated columns, the graph links biological domains, deviations, plausible relationships, observed co-variation, and monitoring-relevant interpretation.
+Instead of storing biomedical measurements as isolated columns, the graph links biological
+domains, deviations, plausible relationships, observed co-variation, and monitoring-relevant
+interpretation.
 
 ## Core graph object
 
@@ -63,6 +68,7 @@ Each node can include:
 | `within_subject_coactivation` | Both domains show activation ≥ threshold in this subject (Phase 3, implemented). |
 | `observed_reference_relationship` | Data-derived relationship from reference population (Phase 4+, future). |
 | `decision_support_relationship` | Biological pattern maps to monitoring priority or countermeasure category (future). |
+| `hazard_context_relationship` | Biological domain maps to a NASA HRP hazard category as interpretation context (Phase 5 mapping; future graph-expanded extension). |
 
 ## Edge attributes (Phase 3)
 
@@ -116,8 +122,61 @@ Implemented edges (both endpoints must be present in domain_scores.csv):
 HTML files are self-contained (no internet required when using pyvis inline CDN).
 Nodes are draggable; hover tooltips show domain score, activation level, and interpretation.
 
+## Phase 5 hazard-context mapping
+
+Phase 5 adds a NASA HRP five-hazard context layer linking biological domains to hazard categories.
+
+Hazard categories (canonical names):
+
+```text
+space_radiation
+isolation_and_confinement
+distance_from_earth
+gravity_fields
+hostile_closed_environments
+```
+
+The domain → hazard relevance mapping (weights in `[0, 1]`) is defined in
+`src/neurobridge_graph/hazard_mapping.py` and exported to
+`results/tables/hazard_domain_mapping.csv` with columns `hazard`, `hazard_display`, `domain`,
+`weight`, `interpretation`.
+
+**Implementation note:** the current Phase 5 implementation uses **feature-level hazard mapping**
+— hazard relevance scores are computed per subject and added as `hazard_relevance__<hazard>`
+feature columns. It does **not** add hazard nodes into each participant graph. A future extension
+could expand the graph itself with **hazard context nodes** connected to domain nodes via
+`hazard_context_relationship` edges; that graph-expanded form is not implemented yet.
+
+This is a conceptual HRP relevance mapping for interpretation context — not exposure measurement,
+diagnosis, or causal attribution.
+
+## Phase 6 — Longitudinal graph trajectories
+
+Phase 6 extends the single-timepoint graph to a **within-subject trajectory**:
+
+```text
+subject_id + timepoint → biological adaptation graph
+G_baseline → G_inflight → G_postflight → G_recovery
+DeltaGraph(t) = Graph(t) - Graph(baseline)
+```
+
+Graph-level metadata for longitudinal graphs:
+
+| Attribute | Value |
+|---|---|
+| `timepoint` | Observation label |
+| `mission_phase` | baseline / pre_mission / inflight / postflight / recovery |
+| `time_index` | Integer ordering |
+| `baseline_timepoint` | Personal baseline reference |
+| `data_type` | `schema_demonstration_not_scientific_evidence` for pipeline test data |
+| `graph_type` | `longitudinal_biological_adaptation_graph` |
+
+See `docs/longitudinal_data_schema.md` for input format and output tables.
+
 ## Future extensions
 
 - `measured_variable` nodes connecting individual biomarkers to domain nodes
 - `observed_reference_relationship` edges from reference population data
 - `decision_support_relationship` edges connecting domain patterns to monitoring priorities
+- hazard context nodes + `hazard_context_relationship` edges (graph-expanded HRP hazard layer)
+- temporal edge types linking graphs across timepoints within a subject trajectory

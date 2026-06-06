@@ -1,0 +1,65 @@
+NeuroBridge-S4 Graph Learning — Phase 6 Report
+Within-Subject Longitudinal Graph Trajectories
+================================================================
+
+The primary signal is within-subject change from the individual's own baseline. Population reference data are used only to calibrate scale, estimate noise, contextualize rarity, and stabilize feature geometry.
+
+Data source
+----------------------------------------------------------------
+  Schema demonstration / pipeline test data ONLY.
+  This is NOT scientific evidence and does NOT represent astronaut data.
+
+Analysis summary
+----------------------------------------------------------------
+  Subjects analyzed    : 2
+  Timepoints analyzed  : 5
+  GraphML files saved  : 10
+  Baseline definition  : mission_phase == baseline, else earliest time_index
+
+Largest within-subject domain shifts
+----------------------------------------------------------------
+  Demo_Crew_01 @ T3_post (postflight): Body composition / physical status delta +0.55
+  Demo_Crew_02 @ T3_post (postflight): Metabolic regulation delta +0.45
+
+Largest graph-level shifts
+----------------------------------------------------------------
+  Demo_Crew_01 @ T3_post: coactivation_edge_count delta +11.000
+  Demo_Crew_02 @ T3_post: n_active_domains delta +4.000
+
+Strongest hazard-context shifts
+----------------------------------------------------------------
+  Demo_Crew_01 @ T3_post: isolation_and_confinement delta +0.55
+  Demo_Crew_02 @ T3_post: isolation_and_confinement delta +0.55
+
+Recovery observations
+----------------------------------------------------------------
+  Demo_Crew_01 / mean_node_activation: recovery fraction 0.77
+  Demo_Crew_01 / max_node_activation: recovery fraction 0.82
+  Demo_Crew_01 / total_node_activation: recovery fraction 0.77
+  Demo_Crew_01 / n_active_domains: recovery fraction 1.00
+  Demo_Crew_02 / mean_node_activation: recovery fraction 0.81
+  Demo_Crew_02 / max_node_activation: recovery fraction 0.83
+  Demo_Crew_02 / total_node_activation: recovery fraction 0.81
+  Demo_Crew_02 / n_active_domains: recovery fraction 1.00
+
+Limitations
+----------------------------------------------------------------
+  - Self-baseline analysis requires longitudinal data across mission phases.
+  - Schema demonstration data test the pipeline only; they are not evidence.
+  - Hazard-context deltas are interpretation context, not exposure measurement.
+  - n is very small; individualized trajectories avoid underpowered group inference.
+
+Why self-baseline matters
+----------------------------------------------------------------
+  Healthy population ranges are insufficient for astronaut monitoring because operationally meaningful changes may occur within population-normal ranges, while stable individual baselines may differ from generic norms.
+  Reference cohorts remain useful for calibration but are not the main endpoint.
+
+Interpretation guardrail
+----------------------------------------------------------------
+  This report describes within-subject graph changes. It is not diagnosis,
+  treatment guidance, exposure measurement, or health outcome prediction.
+
+Next phase
+----------------------------------------------------------------
+  Phase 7 — Explainable trajectory attribution: which subgraphs and domains
+  drive the largest within-subject shifts across mission phases.

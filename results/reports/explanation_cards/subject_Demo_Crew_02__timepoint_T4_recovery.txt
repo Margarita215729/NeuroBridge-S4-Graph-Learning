@@ -1,0 +1,9 @@
+Subject: Demo_Crew_02
+Timepoint: T4_recovery
+Mission phase: recovery
+Primary graph shift: For subject Demo_Crew_02 at the recovery timepoint T4_recovery, the baseline-relative graph shift is driven primarily by Metabolic regulation and Cardiovascular regulation. Together these domains account for 46% of the observed node-level activation change. At the subgraph level, the largest shift maps to the cardiometabolic pattern (62% of node change). The graph-metric change is led by total_node_activation (74%). The hazard-context layer aligns most strongly with Isolation and Confinement relevance, but this is not evidence of actual hazard exposure or causality. On recovery, 4 metric(s) returned near personal baseline. This attribution identifies a monitoring-relevant pattern for expert review. Guardrail: This is a monitoring-relevant pattern for expert review. It is not diagnosis, not treatment guidance, not causal proof, and not exposure measurement. Hazard-context alignment is not hazard exposure.
+Top biological domain contributors: Metabolic regulation
+Top subgraph contributor: cardiometabolic
+Top HRP hazard-context alignment: isolation and confinement (alignment, not exposure)
+Recovery note: returned_near_baseline:4
+Guardrail: Monitoring-relevant pattern for expert review. Not diagnosis, not treatment guidance, not causal proof, not exposure measurement.

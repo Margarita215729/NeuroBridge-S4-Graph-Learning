@@ -1,0 +1,11 @@
+subject_id,timepoint,mission_phase,top_domain_delta,max_absolute_node_delta,n_domains_increased,n_domains_decreased,mission_phase_dominant,dominant_domain,dominant_domain_delta,dominant_domain_direction,dominant_graph_metric,dominant_graph_delta,dominant_hazard,dominant_hazard_delta
+Demo_Crew_01,T0_baseline,baseline,Body composition / physical status,0.0,0,0,baseline,Body composition / physical status,0.0,stable,mean_node_activation,0.0,space_radiation,0.0
+Demo_Crew_01,T1_pre,pre_mission,Cardiovascular regulation,0.03,6,0,pre_mission,Cardiovascular regulation,0.03,increase,total_node_activation,0.14,isolation_and_confinement,0.03
+Demo_Crew_01,T2_inflight,inflight,Body composition / physical status,0.4,6,0,inflight,Body composition / physical status,0.4,increase,coactivation_edge_count,6.0,isolation_and_confinement,0.4
+Demo_Crew_01,T3_post,postflight,Body composition / physical status,0.55,6,0,postflight,Body composition / physical status,0.55,increase,coactivation_edge_count,11.0,isolation_and_confinement,0.55
+Demo_Crew_01,T4_recovery,recovery,Inflammation / immune-adjacent,0.13,6,0,recovery,Inflammation / immune-adjacent,0.13,increase,total_node_activation,0.54,isolation_and_confinement,0.13
+Demo_Crew_02,T0_baseline,baseline,Body composition / physical status,0.0,0,0,baseline,Body composition / physical status,0.0,stable,mean_node_activation,0.0,space_radiation,0.0
+Demo_Crew_02,T1_pre,pre_mission,Metabolic regulation,0.03,6,0,pre_mission,Metabolic regulation,0.03,increase,total_node_activation,0.13,hostile_closed_environments,0.0225
+Demo_Crew_02,T2_inflight,inflight,Metabolic regulation,0.35,6,0,inflight,Metabolic regulation,0.35,increase,n_active_domains,3.0,isolation_and_confinement,0.33
+Demo_Crew_02,T3_post,postflight,Metabolic regulation,0.45,6,0,postflight,Metabolic regulation,0.45,increase,n_active_domains,4.0,isolation_and_confinement,0.43
+Demo_Crew_02,T4_recovery,recovery,Metabolic regulation,0.1,6,0,recovery,Metabolic regulation,0.1,increase,total_node_activation,0.39,isolation_and_confinement,0.08

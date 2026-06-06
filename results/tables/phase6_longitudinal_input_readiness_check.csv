@@ -1,0 +1,15 @@
+check,status,detail
+required_column:subject_id,ok,column present
+required_column:timepoint,ok,column present
+required_column:mission_phase,ok,column present
+required_column:time_index,ok,column present
+domain_columns,ok,6 numeric domain columns detected
+n_subjects,ok,2
+n_timepoints,ok,5
+mission_phases,ok,"baseline, inflight, postflight, pre_mission, recovery"
+baseline_phase_present,ok,baseline phase found
+data_type,ok,schema_demonstration_not_scientific_evidence
+missing_values:subject_id,ok,0 missing
+missing_values:timepoint,ok,0 missing
+missing_values:mission_phase,ok,0 missing
+missing_values:time_index,ok,0 missing
