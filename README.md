@@ -46,21 +46,39 @@ Processed NeuroBridge-S4 outputs
 
 Phase 3 converts each pseudo-crew participant into a biological adaptation graph.
 
-Run:
-
-`notebooks/01_Build_Biological_Adaptation_Graphs.ipynb`
+Run: `notebooks/01_Build_Biological_Adaptation_Graphs.ipynb`
 
 Outputs:
 - GraphML files;
 - node and edge tables;
 - graph summary table;
 - static PNG graph figures;
-- interactive HTML graph visualizations;
+- interactive HTML graph visualizations (polished, reviewer-facing);
 - plain-language Phase 3 report.
 
 Interactive graphs: Open `results/html/index.html` after running the notebook.
 
 Interpretation: The graphs are research interpretation artifacts, not diagnostic tools.
+
+---
+
+## Phase 4: Interpretable Graph Feature Extraction
+
+Phase 4 turns biological adaptation graphs into measurable features.
+This creates the foundation for graph embeddings, similarity mapping,
+and novelty detection in Phase 5.
+
+Run: `notebooks/02_Graph_Features_and_Embeddings_Foundation.ipynb`
+
+Outputs:
+- graph-level features (`results/tables/graph_level_features.csv`);
+- node-level features (`results/tables/node_level_features.csv`);
+- edge-level features (`results/tables/edge_level_features.csv`);
+- subgraph-level features (`results/tables/subgraph_features.csv`);
+- feature comparison figures (`results/figures/phase4_*.png`);
+- Phase 4 interpretation report (`results/reports/phase4_graph_feature_report.txt`).
+
+Interpretation: These features are not diagnostic. They prepare the project for Phase 5.
 
 ---
 
@@ -102,6 +120,8 @@ NeuroBridge-S4-Graph-Learning/
 
 ## Current status
 
-**Phase 1 complete:** repository foundation and graph schema draft.
-
-Next milestone: **Phase 2 — data import from original NeuroBridge-S4 outputs.**
+- **Phase 1** — complete: repository foundation and graph schema.
+- **Phase 2** — complete: data import from NeuroBridge-S4 outputs.
+- **Phase 3** — complete: biological adaptation graphs + improved interactive HTML.
+- **Phase 4** — complete: interpretable graph feature extraction.
+- **Phase 5** — next: graph embeddings and similarity mapping.

@@ -1,0 +1,25 @@
+subject_id,domain,activation,activation_level,domain_score,degree,weighted_degree,degree_centrality,is_active,is_top_domain,interpretation
+Crew 100987,Cardiovascular regulation,1.88191,high,1.88191,2,2.0,0.4,True,True,Cardiovascular regulation: high domain activation (strong reference-relative signal; prioritise review).
+Crew 100987,Metabolic regulation,0.68918,low,0.68918,3,3.0,0.6,False,False,Metabolic regulation: reference-relative signal is low (within typical reference range).
+Crew 100987,Body composition / physical status,0.66846,low,0.66846,1,1.0,0.2,False,False,Body composition / physical status: reference-relative signal is low (within typical reference range).
+Crew 100987,Inflammation / immune-adjacent,0.48617,low,0.48617,1,1.0,0.2,False,False,Inflammation / immune-adjacent: reference-relative signal is low (within typical reference range).
+Crew 100987,Hematologic / oxygen-carrying,0.61494,low,0.61494,1,1.0,0.2,False,False,Hematologic / oxygen-carrying: reference-relative signal is low (within typical reference range).
+Crew 100987,Recovery-related markers,0.70515,low,0.70515,0,0.0,0.0,False,False,Recovery-related markers: reference-relative signal is low (within typical reference range).
+Crew 94465,Cardiovascular regulation,0.94861,mild,0.94861,2,2.0,0.4,False,False,Cardiovascular regulation: mild reference-relative signal (slightly above typical range; monitor if sustained).
+Crew 94465,Metabolic regulation,0.83517,mild,0.83517,3,3.0,0.6,False,False,Metabolic regulation: mild reference-relative signal (slightly above typical range; monitor if sustained).
+Crew 94465,Body composition / physical status,1.32253,moderate,1.32253,1,1.0,0.2,True,True,Body composition / physical status: moderate domain activation (notable deviation from reference; warrants review).
+Crew 94465,Inflammation / immune-adjacent,0.49645,low,0.49645,1,1.0,0.2,False,False,Inflammation / immune-adjacent: reference-relative signal is low (within typical reference range).
+Crew 94465,Hematologic / oxygen-carrying,0.62773,low,0.62773,1,1.0,0.2,False,False,Hematologic / oxygen-carrying: reference-relative signal is low (within typical reference range).
+Crew 94465,Recovery-related markers,0.80638,mild,0.80638,0,0.0,0.0,False,False,Recovery-related markers: mild reference-relative signal (slightly above typical range; monitor if sustained).
+Crew 97774,Cardiovascular regulation,0.48392,low,0.48392,2,2.0,0.4,False,False,Cardiovascular regulation: reference-relative signal is low (within typical reference range).
+Crew 97774,Metabolic regulation,0.48551,low,0.48551,3,3.0,0.6,False,False,Metabolic regulation: reference-relative signal is low (within typical reference range).
+Crew 97774,Body composition / physical status,1.86727,high,1.86727,2,2.98728,0.4,True,False,Body composition / physical status: high domain activation (strong reference-relative signal; prioritise review).
+Crew 97774,Inflammation / immune-adjacent,0.4224,low,0.4224,1,1.0,0.2,False,False,Inflammation / immune-adjacent: reference-relative signal is low (within typical reference range).
+Crew 97774,Hematologic / oxygen-carrying,2.10729,high,2.10729,2,2.98728,0.4,True,True,Hematologic / oxygen-carrying: high domain activation (strong reference-relative signal; prioritise review).
+Crew 97774,Recovery-related markers,0.9438,mild,0.9438,0,0.0,0.0,False,False,Recovery-related markers: mild reference-relative signal (slightly above typical range; monitor if sustained).
+Crew 99813,Cardiovascular regulation,0.19356,low,0.19356,2,2.0,0.4,False,False,Cardiovascular regulation: reference-relative signal is low (within typical reference range).
+Crew 99813,Metabolic regulation,1.1579,moderate,1.1579,3,3.0,0.6,True,True,Metabolic regulation: moderate domain activation (notable deviation from reference; warrants review).
+Crew 99813,Body composition / physical status,0.19492,low,0.19492,1,1.0,0.2,False,False,Body composition / physical status: reference-relative signal is low (within typical reference range).
+Crew 99813,Inflammation / immune-adjacent,1.09845,moderate,1.09845,1,1.0,0.2,True,False,Inflammation / immune-adjacent: moderate domain activation (notable deviation from reference; warrants review).
+Crew 99813,Hematologic / oxygen-carrying,0.70195,low,0.70195,1,1.0,0.2,False,False,Hematologic / oxygen-carrying: reference-relative signal is low (within typical reference range).
+Crew 99813,Recovery-related markers,0.83698,mild,0.83698,0,0.0,0.0,False,False,Recovery-related markers: mild reference-relative signal (slightly above typical range; monitor if sustained).

@@ -1,0 +1,21 @@
+subject_id,subgraph_name,available_nodes,n_available_nodes,n_active_nodes,subgraph_activation_mean,subgraph_activation_sum,subgraph_activation_max,subgraph_active_fraction,dominant_node,interpretation
+Crew 100987,cardiometabolic,3,3,1,1.07985,3.23955,1.88191,0.33333,Cardiovascular regulation,The 'cardiometabolic' subgraph shows partial activation (1/3 domains active); 'Cardiovascular regulation' is dominant.
+Crew 100987,immune_metabolic,3,3,0,0.62683,1.8805,0.70515,0.0,Recovery-related markers,The 'immune_metabolic' subgraph shows low activation across all 3 available domain(s).
+Crew 100987,hematologic_cardiovascular,3,3,1,1.06733,3.20199,1.88191,0.33333,Cardiovascular regulation,The 'hematologic_cardiovascular' subgraph shows partial activation (1/3 domains active); 'Cardiovascular regulation' is dominant.
+Crew 100987,sleep_autonomic_recovery,0,0,0,,,,,n/a,No nodes matching the 'sleep_autonomic_recovery' template were found in this graph.
+Crew 100987,cognitive_emotional_recovery,1,1,0,0.70515,0.70515,0.70515,0.0,Recovery-related markers,The 'cognitive_emotional_recovery' subgraph shows low activation across all 1 available domain(s).
+Crew 94465,cardiometabolic,3,3,1,1.03544,3.10631,1.32253,0.33333,Body composition / physical status,The 'cardiometabolic' subgraph shows partial activation (1/3 domains active); 'Body composition / physical status' is dominant.
+Crew 94465,immune_metabolic,3,3,0,0.71267,2.138,0.83517,0.0,Metabolic regulation,The 'immune_metabolic' subgraph shows low activation across all 3 available domain(s).
+Crew 94465,hematologic_cardiovascular,3,3,0,0.79424,2.38273,0.94861,0.0,Cardiovascular regulation,The 'hematologic_cardiovascular' subgraph shows low activation across all 3 available domain(s).
+Crew 94465,sleep_autonomic_recovery,0,0,0,,,,,n/a,No nodes matching the 'sleep_autonomic_recovery' template were found in this graph.
+Crew 94465,cognitive_emotional_recovery,1,1,0,0.80638,0.80638,0.80638,0.0,Recovery-related markers,The 'cognitive_emotional_recovery' subgraph shows low activation across all 1 available domain(s).
+Crew 97774,cardiometabolic,3,3,1,0.94557,2.8367,1.86727,0.33333,Body composition / physical status,The 'cardiometabolic' subgraph shows partial activation (1/3 domains active); 'Body composition / physical status' is dominant.
+Crew 97774,immune_metabolic,3,3,0,0.61724,1.85171,0.9438,0.0,Recovery-related markers,The 'immune_metabolic' subgraph shows low activation across all 3 available domain(s).
+Crew 97774,hematologic_cardiovascular,3,3,1,1.17834,3.53501,2.10729,0.33333,Hematologic / oxygen-carrying,The 'hematologic_cardiovascular' subgraph shows partial activation (1/3 domains active); 'Hematologic / oxygen-carrying' is dominant.
+Crew 97774,sleep_autonomic_recovery,0,0,0,,,,,n/a,No nodes matching the 'sleep_autonomic_recovery' template were found in this graph.
+Crew 97774,cognitive_emotional_recovery,1,1,0,0.9438,0.9438,0.9438,0.0,Recovery-related markers,The 'cognitive_emotional_recovery' subgraph shows low activation across all 1 available domain(s).
+Crew 99813,cardiometabolic,3,3,1,0.51546,1.54638,1.1579,0.33333,Metabolic regulation,The 'cardiometabolic' subgraph shows partial activation (1/3 domains active); 'Metabolic regulation' is dominant.
+Crew 99813,immune_metabolic,3,3,2,1.03111,3.09333,1.1579,0.66667,Metabolic regulation,The 'immune_metabolic' subgraph shows partial activation (2/3 domains active); 'Metabolic regulation' is dominant.
+Crew 99813,hematologic_cardiovascular,3,3,0,0.5775,1.7325,0.83698,0.0,Recovery-related markers,The 'hematologic_cardiovascular' subgraph shows low activation across all 3 available domain(s).
+Crew 99813,sleep_autonomic_recovery,0,0,0,,,,,n/a,No nodes matching the 'sleep_autonomic_recovery' template were found in this graph.
+Crew 99813,cognitive_emotional_recovery,1,1,0,0.83698,0.83698,0.83698,0.0,Recovery-related markers,The 'cognitive_emotional_recovery' subgraph shows low activation across all 1 available domain(s).
