@@ -1,0 +1,62 @@
+NeuroBridge-S4 Graph Learning
+Phase 12 — PyTorch Temporal Graph Autoencoder Showcase Report
+======================================================================
+
+Overview
+----------------------------------------------------------------------
+Phase 12 uses PyTorch for self-supervised representation learning on structured within-subject biological graph trajectories. The model learns compact latent representations of baseline-relative trajectory patterns. It does not predict health outcomes, diagnose conditions, classify mission readiness, measure hazard exposure, or produce health risk scores.
+
+The model does not treat domains, features, or timepoints as independent people. It learns from structured repeated graph-derived observations within subjects.
+
+Data provenance
+----------------------------------------------------------------------
+This showcase used schema-demonstration data only. It is not scientific evidence.
+
+Input readiness
+----------------------------------------------------------------------
+- longitudinal_node_deltas [required]: available (60 rows)
+- longitudinal_graph_deltas [optional]: available (70 rows)
+- longitudinal_hazard_deltas [optional]: available (50 rows)
+- recovery_metrics [optional]: available (8 rows)
+- trajectory_node_attribution [optional]: available (60 rows)
+- trajectory_graph_metric_attribution [optional]: available (70 rows)
+- trajectory_subgraph_attribution [optional]: available (50 rows)
+- trajectory_hazard_attribution [optional]: available (50 rows)
+- recovery_attribution [optional]: available (8 rows)
+- reference_calibrated_node_delta_scores [optional]: available (60 rows)
+- reference_calibrated_graph_delta_scores [optional]: available (70 rows)
+- reference_calibrated_hazard_delta_scores [optional]: available (50 rows)
+- phase8_reference_calibrated_summary [optional]: available (10 rows)
+- resilience_state_table [optional]: available (10 rows)
+- mission_relevance_translation [optional]: available (10 rows)
+
+Model and training
+----------------------------------------------------------------------
+- trajectory rows: 10
+- latent dimension: 8
+- final reconstruction loss: 0.088143
+- reconstruction error (MSE): mean 0.066690, median 0.060702, min 0.022827, max 0.153449
+
+How to read the outputs
+----------------------------------------------------------------------
+- Training loss: reconstruction optimization only.
+- Latent space: a visualization of learned representation structure, not validation.
+- Reconstruction mismatch: how hard a trajectory state is to reconstruct; it is not a risk score.
+- Similarity matrix: latent representation similarity, not shared health state.
+- Resilience annotation view: a consistency view against Phase 11 interpretation, not validation.
+
+Limitations
+----------------------------------------------------------------------
+- Experimental prototype; not validated for operational use.
+- No clinical outcome labels; latent clusters are not clinical categories.
+- Small independent subject count remains a limitation.
+- Phase 11 resilience states are annotations, not ground-truth labels.
+- Example/schema data, if used, are not scientific evidence.
+
+Guardrails
+----------------------------------------------------------------------
+This model is an experimental self-supervised representation-learning prototype. It is not diagnosis, treatment guidance, health risk scoring, exposure measurement, mission readiness classification, or an operational medical decision system.
+
+Next phase
+----------------------------------------------------------------------
+Phase 13 — Portfolio release: package the showcase, figures, and model card for reviewer-facing presentation.

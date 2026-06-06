@@ -1,0 +1,16 @@
+table_name,required_or_optional,status,rows,columns,notes
+longitudinal_node_deltas,required,available,60,12,loaded
+longitudinal_graph_deltas,optional,available,70,10,loaded
+longitudinal_hazard_deltas,optional,available,50,10,loaded
+recovery_metrics,optional,available,8,11,loaded
+trajectory_node_attribution,optional,available,60,12,loaded
+trajectory_graph_metric_attribution,optional,available,70,12,loaded
+trajectory_subgraph_attribution,optional,available,50,11,loaded
+trajectory_hazard_attribution,optional,available,50,12,loaded
+recovery_attribution,optional,available,8,10,loaded
+reference_calibrated_node_delta_scores,optional,available,60,13,loaded
+reference_calibrated_graph_delta_scores,optional,available,70,13,loaded
+reference_calibrated_hazard_delta_scores,optional,available,50,13,loaded
+phase8_reference_calibrated_summary,optional,available,10,11,loaded
+resilience_state_table,optional,available,10,16,loaded
+mission_relevance_translation,optional,available,10,8,loaded

@@ -1,0 +1,11 @@
+trajectory_id,subject_id,timepoint,mission_phase,resilience_state_label,dominant_adaptation_mode,confidence_level,latent_0,latent_1,latent_2,latent_3,latent_4,latent_5,latent_6,latent_7
+Demo_Crew_01__T0_baseline,Demo_Crew_01,T0_baseline,baseline,Stable compensated trajectory,Cardiometabolic-recovery dominant,high,2.233793,-2.890519,3.578702,4.280646,-4.04344,3.124426,-4.747685,-1.627066
+Demo_Crew_01__T1_pre,Demo_Crew_01,T1_pre,pre_mission,Localized adaptive shift,Multi-subgraph distributed,high,-0.22643,-0.637086,2.273228,1.613693,-0.409835,-0.646923,-3.562006,1.863582
+Demo_Crew_01__T2_inflight,Demo_Crew_01,T2_inflight,inflight,Systemic strain pattern,Multi-subgraph distributed,high,-0.811945,2.373698,-3.061953,0.27789,1.497492,-1.269334,2.042843,3.414746
+Demo_Crew_01__T3_post,Demo_Crew_01,T3_post,postflight,Systemic strain pattern,Multi-subgraph distributed,high,-1.382171,2.994352,-4.775172,-0.448174,2.653491,-1.482314,3.557284,4.31326
+Demo_Crew_01__T4_recovery,Demo_Crew_01,T4_recovery,recovery,Persistent displacement,Multi-subgraph distributed,high,-0.090485,-0.002833,1.445867,1.737865,-0.467964,-0.858565,-2.429226,1.81541
+Demo_Crew_02__T0_baseline,Demo_Crew_02,T0_baseline,baseline,Stable compensated trajectory,Cardiometabolic-recovery dominant,high,2.789012,-3.20464,1.804355,2.654466,-3.519504,4.16006,-2.276494,-4.097554
+Demo_Crew_02__T1_pre,Demo_Crew_02,T1_pre,pre_mission,Localized adaptive shift,Multi-subgraph distributed,high,0.006105,-1.412219,0.334119,-1.238282,0.854359,0.785443,-0.536296,-1.476621
+Demo_Crew_02__T2_inflight,Demo_Crew_02,T2_inflight,inflight,Systemic strain pattern,Multi-subgraph distributed,high,-1.096435,-0.280366,-0.947074,-1.728208,1.957327,-0.556139,1.140464,-0.149468
+Demo_Crew_02__T3_post,Demo_Crew_02,T3_post,postflight,Systemic strain pattern,Multi-subgraph distributed,high,-1.509864,0.077973,-1.746223,-2.162066,2.653595,-0.741047,1.887219,0.496943
+Demo_Crew_02__T4_recovery,Demo_Crew_02,T4_recovery,recovery,Localized adaptive shift,Multi-subgraph distributed,high,0.011144,-1.104759,0.191897,-0.994287,0.639398,0.666638,-0.250241,-1.453471

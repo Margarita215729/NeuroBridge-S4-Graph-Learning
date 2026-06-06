@@ -328,6 +328,41 @@ decision.
 
 ---
 
+## Phase 12: PyTorch Temporal Graph Autoencoder Showcase
+
+Phase 12 adds a PyTorch self-supervised representation-learning layer.
+
+It learns compact latent representations of graph-derived within-subject biological adaptation
+trajectories using reconstruction objectives.
+
+Run:
+
+`notebooks/09_PyTorch_Temporal_Graph_Autoencoder_Showcase.ipynb`
+
+Main showcase artifact:
+
+`results/html/phase12_pytorch_showcase.html`
+
+Outputs:
+- trajectory feature matrix;
+- PyTorch autoencoder model;
+- latent trajectory embeddings;
+- reconstruction mismatch analysis;
+- trajectory similarity matrix;
+- Phase 11 resilience annotation consistency view;
+- model card;
+- standalone HTML showcase.
+
+Phase 12 does not treat features, domains, or timepoints as independent people. Independent subject
+count remains small. The learning signal comes from structured repeated graph states and
+baseline-relative trajectory segments within subjects.
+
+Interpretation: This is an experimental ML showcase. It is not diagnosis, treatment guidance, health
+risk scoring, exposure measurement, mission readiness classification, or an operational medical
+decision system.
+
+---
+
 ## Interpretation guardrails
 
 This project does **not**:

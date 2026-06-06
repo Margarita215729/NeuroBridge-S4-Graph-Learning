@@ -122,3 +122,24 @@ This project supports:
   the state is explicitly `coverage_limited_interpretation` with `coverage_limited` confidence.
 - Operational resilience interpretation is a research-review layer. It is not diagnosis, treatment
   guidance, health risk scoring, exposure measurement, or an operational medical decision.
+
+## Phase 12 PyTorch temporal graph autoencoder limitations
+
+- **Phase 12 is experimental**: it is a self-supervised representation-learning prototype, not a
+  production or clinical system.
+- **Not validated for operational use**: there is no validation against outcomes, and it must not be
+  used for operational decisions.
+- **No clinical outcome labels**: the model is trained only on a reconstruction objective; it has no
+  health, risk, or readiness target.
+- **No population-level generalization claims**: the model does not generalize to a population and
+  makes no population-level predictions.
+- **Small independent subject count remains a limitation**: features, domains, and timepoints are not
+  independent people; the independent subject count is small.
+- **Reconstruction mismatch is not risk**: reconstruction error measures representation quality, not
+  health risk, severity, or danger.
+- **Latent clusters are not clinical categories**: structure in the latent space is a representation
+  artifact, not a clinical or diagnostic grouping.
+- **Phase 11 resilience states are used as annotations, not ground-truth labels**: the consistency
+  view does not validate either the resilience layer or the learned representation.
+- **Example/schema data are not evidence**: when schema-demonstration or example data are used, all
+  outputs are illustrative only and are not scientific evidence.

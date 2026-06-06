@@ -205,3 +205,45 @@ from neurobridge_graph.resilience_visualization import (  # noqa: F401
     plot_adaptation_mode_heatmap,
     plot_evidence_chain_summary,
 )
+
+# Phase 12 (PyTorch) is optional: guard the import so the package still loads if
+# torch is not installed in a given environment.
+try:  # noqa: SIM105
+    from neurobridge_graph.torch_dataset import (  # noqa: F401
+        load_phase12_input_tables,
+        build_phase12_input_readiness_report,
+        build_trajectory_feature_matrix,
+        encode_resilience_metadata,
+        select_numeric_model_features,
+        scale_model_features,
+        create_masked_training_data,
+        build_mask_summary,
+        TrajectoryFeatureDataset,
+    )
+    from neurobridge_graph.torch_autoencoder import (  # noqa: F401
+        TrajectoryAutoencoder,
+        choose_latent_dim,
+        count_trainable_parameters,
+    )
+    from neurobridge_graph.torch_training import (  # noqa: F401
+        set_torch_seed,
+        resolve_device,
+        sufficient_for_training,
+        train_autoencoder,
+        compute_embeddings_and_reconstructions,
+        compute_reconstruction_error_table,
+        compute_similarity_matrix,
+        save_model_state,
+    )
+    from neurobridge_graph.torch_reporting import (  # noqa: F401
+        generate_phase12_model_card,
+        generate_phase12_showcase_report,
+        build_resilience_consistency_view,
+    )
+    from neurobridge_graph.torch_showcase import (  # noqa: F401
+        create_phase12_showcase_html,
+        generate_phase12_figures,
+    )
+    _TORCH_AVAILABLE = True
+except ImportError:  # pragma: no cover - torch is an optional dependency
+    _TORCH_AVAILABLE = False

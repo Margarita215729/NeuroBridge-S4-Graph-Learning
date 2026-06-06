@@ -13,9 +13,9 @@ Phase 7 — Explainable trajectory attribution: complete
 Phase 8 — Reference-calibrated trajectory envelope: complete
 Phase 9 — Interactive longitudinal review dashboard: complete
 Phase 10 — HRP-like data adapter layer: complete
-Phase 11 — Operational resilience interpretation layer: implemented
-Phase 12 — Self-supervised within-subject temporal graph learning: next
-Phase 13 — Portfolio release: future
+Phase 11 — Operational resilience interpretation layer: complete
+Phase 12 — PyTorch temporal graph autoencoder showcase: implemented
+Phase 13 — Portfolio release: next
 ```
 
 > **Primary methodological direction:** within-subject longitudinal graph trajectories.
@@ -314,9 +314,38 @@ Deliverables:
 This is a research-review layer. It is not diagnosis, treatment guidance, health risk scoring,
 exposure measurement, mission readiness classification, or an operational medical decision.
 
-## Phase 12 — Self-supervised within-subject temporal graph learning ← next
+## Phase 12 — PyTorch temporal graph autoencoder showcase
 
-Only after transparent trajectory baselines work. No supervised training on n=4.
+Status: implemented in this package.
+
+A PyTorch self-supervised representation-learning layer over the graph-derived,
+baseline-relative, within-subject trajectory features produced by Phases 6-11.
+
+Goals:
+
+- learn compact latent representations of within-subject trajectory states using
+  reconstruction and masked-reconstruction objectives;
+- visualize the learned representation (latent embedding, similarity, reconstruction mismatch);
+- provide a consistency view against Phase 11 operational resilience annotations;
+- ship a polished, standalone HTML showcase as the main portfolio artifact.
+
+This is not supervised training on n=4. Phase 12 does not treat features, domains, or
+timepoints as independent people; it learns from structured repeated graph-derived
+observations within subjects.
+
+Deliverables:
+
+- `src/neurobridge_graph/torch_dataset.py`, `torch_autoencoder.py`, `torch_training.py`,
+  `torch_reporting.py`, `torch_showcase.py`
+- `notebooks/09_PyTorch_Temporal_Graph_Autoencoder_Showcase.ipynb`
+- `results/html/phase12_pytorch_showcase.html` (main artifact)
+- `results/models/phase12_trajectory_autoencoder.pt`
+- `results/reports/phase12_model_card.md`
+- Phase 12 tables and figures under `results/tables/` and `results/figures/`
+
+Guardrails: experimental ML showcase only — not diagnosis, treatment guidance, health risk
+scoring, exposure measurement, mission readiness classification, or an operational medical
+decision system.
 
 ## Phase 13 — Portfolio and reviewer polish
 
