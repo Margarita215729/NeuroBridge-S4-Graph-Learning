@@ -41,7 +41,7 @@ Deliverables:
 
 ## Phase 3 — Subject-level biological adaptation graphs
 
-Status: **implemented**.
+Status: **complete; interactive HTML improved**.
 
 Goal: convert each participant into a computable biological adaptation graph.
 
@@ -49,32 +49,46 @@ Deliverables:
 
 - `src/neurobridge_graph/graph_builder.py` — full graph construction pipeline
 - `src/neurobridge_graph/visualization.py` — static PNG figures
-- `src/neurobridge_graph/interactive.py` — interactive HTML graph export (pyvis)
+- `src/neurobridge_graph/interactive.py` — polished interactive HTML graph export (pyvis)
 - `notebooks/01_Build_Biological_Adaptation_Graphs.ipynb` — reviewer-friendly notebook
 - `results/graphs/*.graphml` — one GraphML file per participant
 - `results/tables/subject_nodes.csv` — all node attributes
 - `results/tables/subject_edges.csv` — all edge attributes
 - `results/tables/phase3_graph_summary.csv` — graph-level summary
 - `results/figures/subject_graph_*.png` — static PNG graph visualizations
-- `results/html/subject_graph_*.html` — interactive HTML graph visualizations
-- `results/html/index.html` — index page linking all subject graphs
+- `results/html/subject_graph_*.html` — interactive HTML graph visualizations (polished)
+- `results/html/index.html` — index page with summary table and legend
 - `results/reports/phase3_subject_graph_report.txt` — plain-language report
 - `tests/test_graph_builder.py` — unit tests
 - `tests/test_interactive_export.py` — HTML export tests
 
-## Phase 4 — Graph feature extraction ← next
+HTML improvements: single clean title, plain-text tooltips (no raw HTML tags),
+activation-aware colours and node sizes, legend panel, guardrail note, improved
+index page with participant summary table.
 
-Goal: compute interpretable graph-level and node-level features.
+## Phase 4 — Interpretable graph feature extraction
+
+Status: **implemented**.
+
+Goal: convert biological adaptation graphs into interpretable tabular features.
 
 Deliverables:
 
-- centrality features;
-- active domain counts;
-- active subgraph sizes;
-- coherence-weighted activation;
-- cluster scores.
+- `src/neurobridge_graph/graph_features.py` — graph-level, node-level, edge-level features
+- `src/neurobridge_graph/subgraph_features.py` — subgraph template feature extraction
+- `notebooks/02_Graph_Features_and_Embeddings_Foundation.ipynb` — reviewer-friendly notebook
+- `results/tables/graph_level_features.csv`
+- `results/tables/node_level_features.csv`
+- `results/tables/edge_level_features.csv`
+- `results/tables/subgraph_features.csv`
+- `results/figures/phase4_graph_level_feature_comparison.png`
+- `results/figures/phase4_node_activation_heatmap.png`
+- `results/figures/phase4_node_centrality_heatmap.png`
+- `results/figures/phase4_subgraph_activation_heatmap.png`
+- `results/reports/phase4_graph_feature_report.txt`
+- `tests/test_graph_features.py` — unit tests
 
-## Phase 5 — Graph embeddings and similarity maps
+## Phase 5 — Graph embeddings and similarity maps ← next
 
 Goal: compare participants in graph space using transparent baseline methods.
 

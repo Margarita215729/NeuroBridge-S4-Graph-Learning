@@ -1,0 +1,5 @@
+subject_id,n_nodes,n_edges,graph_density,mean_node_activation,median_node_activation,max_node_activation,total_node_activation,n_active_domains,active_domain_fraction,mean_edge_weight,max_edge_weight,conceptual_edge_count,coactivation_edge_count,top_domain,top_domain_activation,baci_score,baci_category
+Crew 100987,6,4,0.26667,0.84097,0.68918,1.88191,5.0458,1,0.16667,1.0,1.0,4,0,Cardiovascular regulation,1.88191,28.6,mild coherence
+Crew 94465,6,4,0.26667,0.83948,0.83517,1.32253,5.03688,1,0.16667,1.0,1.0,4,0,Body composition / physical status,1.32253,22.1,low coherence
+Crew 97774,6,5,0.33333,1.0517,0.9438,2.10729,6.31018,2,0.33333,1.19746,1.98728,4,1,Hematologic / oxygen-carrying,2.10729,41.5,mild coherence
+Crew 99813,6,4,0.26667,0.69729,0.83698,1.1579,4.18376,2,0.33333,1.0,1.0,4,0,Metabolic regulation,1.1579,31.5,mild coherence

@@ -1,0 +1,32 @@
+NeuroBridge-S4 Graph Learning — Phase 4 Interpretation Report
+============================================================
+Generated: 2026-06-06 09:20
+
+Graphs analysed: 4
+Participants: Crew 100987, Crew 94465, Crew 97774, Crew 99813
+
+--- Activation summary ---
+Highest max activation: Crew 97774 (2.107)
+Broadest activation: Crew 97774 (2 active domains)
+Most frequently active domain: Body composition / physical status
+
+--- Dominant subgraph per participant ---
+  Crew 100987: cardiometabolic (mean activation 1.080)
+  Crew 94465: cardiometabolic (mean activation 1.035)
+  Crew 97774: hematologic_cardiovascular (mean activation 1.178)
+  Crew 99813: immune_metabolic (mean activation 1.031)
+
+--- Interpretation guardrail ---
+These features are research interpretation outputs.
+They are not diagnostic. They do not prove causality.
+They do not predict astronaut health.
+
+--- Preparing for Phase 5 ---
+Phase 4 feature tables will serve as input to Phase 5 graph embeddings.
+Key tables:
+  results/tables/graph_level_features.csv
+  results/tables/node_level_features.csv
+  results/tables/edge_level_features.csv
+  results/tables/subgraph_features.csv
+In Phase 5, these will be used to build graph embeddings, similarity maps,
+and reference-relative novelty scores.

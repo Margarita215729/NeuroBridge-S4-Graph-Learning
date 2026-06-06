@@ -49,3 +49,23 @@ This supports:
 ## Responsible interpretation
 
 The project is not a diagnostic system. It is a research framework for signal triage and graph-based interpretation.
+
+## Phase 4: Bridge between graph construction and graph learning
+
+Phase 4 is the bridge between graph construction and graph learning.
+It extracts interpretable structural features before applying embeddings or machine learning.
+
+Each biological adaptation graph is converted into four feature levels:
+
+1. **Graph-level features** — density, activation statistics, edge counts, BACI score.
+   These allow participants to be compared as whole biological systems.
+2. **Node-level features** — per-domain activation, centrality, active flags.
+   These identify which domains are activated and how structurally central they are.
+3. **Edge-level features** — edge type, weight, active-domain connection flags.
+   These preserve the distinction between conceptual and co-activation edges.
+4. **Subgraph-level features** — template-based cluster activation.
+   These ask whether activation is concentrated in biologically meaningful clusters
+   (cardiometabolic, immune-metabolic, hematologic-cardiovascular, etc.).
+
+Phase 4 features are interpretable without machine-learning knowledge and do not require
+training data. They are the foundation for Phase 5 graph embeddings and Phase 6 novelty detection.

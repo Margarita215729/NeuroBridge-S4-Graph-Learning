@@ -47,7 +47,8 @@ def test_export_html_contains_subject_id(tmp_path):
     out = tmp_path / "graph_sid.html"
     export_interactive_graph_html(G, out)
     content = out.read_text(encoding="utf-8")
-    assert "subject_xyz" in content
+    # _participant_label converts underscores to spaces
+    assert "subject xyz" in content or "subject_xyz" in content
 
 
 def test_export_html_nonempty(tmp_path):
