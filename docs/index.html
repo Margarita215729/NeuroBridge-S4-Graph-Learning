@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NeuroBridge-S4 — Operational Resilience Graph Learning for Small-N Human Spaceflight Research</title>
+<meta name="description" content="An end-to-end ML research engineering prototype connecting HRP-like longitudinal data, self-baseline biological graph trajectories, operational resilience interpretation, and PyTorch self-supervised temporal representation learning." />
+<link rel="stylesheet" href="assets/css/site.css" />
+</head>
+<body>
+
+<div class="topnav">
+  <div class="wrap">
+    <div class="brand">NeuroBridge<span>-S4</span></div>
+    <nav>
+      <a href="#why">Why</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#does">What it does</a>
+      <a href="#showcase">PyTorch showcase</a>
+      <a href="#outputs">Outputs</a>
+      <a href="#limitations">Guardrails</a>
+      <a href="phase12_pytorch_showcase.html">Showcase &rarr;</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Research engineering prototype &middot; v1.0 portfolio release</div>
+    <h1>NeuroBridge-S4<br />Operational Resilience Graph Learning for Small-N Human Spaceflight Research</h1>
+    <p class="subtitle">An end-to-end ML research engineering prototype connecting HRP-like
+    longitudinal data, self-baseline biological graph trajectories, operational resilience
+    interpretation, and PyTorch self-supervised temporal representation learning.</p>
+
+    <div class="summary-line">
+      HRP-like longitudinal data &rarr; self-baseline biological graph trajectories &rarr;
+      operational resilience interpretation &rarr; PyTorch temporal graph autoencoder showcase.
+    </div>
+
+    <div class="banner">&#9888;&#65039; Research prototype only. Not diagnosis, not treatment
+    guidance, not health risk scoring, not exposure measurement, and not mission readiness
+    classification.</div>
+
+    <div class="btns">
+      <a class="btn primary" href="phase12_pytorch_showcase.html">View PyTorch Showcase</a>
+      <a class="btn" href="#architecture">View Architecture</a>
+      <a class="btn ghost" href="https://github.com/Margarita215729/NeuroBridge-S4-Graph-Learning/blob/main/docs/methodology.md">View Methodology</a>
+      <a class="btn ghost" href="https://github.com/Margarita215729/NeuroBridge-S4-Graph-Learning">View GitHub Repository</a>
+    </div>
+
+    <div class="metrics">
+      <div class="metric"><div class="v">12</div><div class="k">Phases Implemented</div></div>
+      <div class="metric"><div class="v">301</div><div class="k">Tests Passing</div></div>
+      <div class="metric"><div class="v">PyTorch</div><div class="k">Autoencoder</div></div>
+      <div class="metric"><div class="v">Zero-Install</div><div class="k">HTML Showcase</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- 1. Why -->
+  <section id="why">
+    <h2>1 &middot; Why this project exists</h2>
+    <p class="lead">Small-N human spaceflight research cannot rely only on population-scale inference.</p>
+    <div class="card">
+      <p>NeuroBridge-S4 focuses on <strong>within-subject longitudinal adaptation</strong>: how one
+      organism changes relative to its own baseline over time. With only a handful of crew members,
+      comparing individuals to a large population is inappropriate. Instead, each subject is its own
+      reference, and the system models the shape of that subject's biological adaptation trajectory
+      across mission phases (baseline, pre, inflight, post, recovery).</p>
+    </div>
+  </section>
+
+  <!-- 2. Architecture -->
+  <section id="architecture">
+    <h2>2 &middot; End-to-end architecture</h2>
+    <p class="lead">A transparent pipeline from raw HRP-like inputs to a public showcase, with a
+    PyTorch representation-learning layer on top.</p>
+    <div class="card">
+      <div class="flow">
+        <span class="node">HRP-like inputs</span><span class="arrow">&rarr;</span>
+        <span class="node accent">data adapter layer</span><span class="arrow">&rarr;</span>
+        <span class="node">self-baseline domain scores</span><span class="arrow">&rarr;</span>
+        <span class="node">biological adaptation graphs</span><span class="arrow">&rarr;</span>
+        <span class="node">graph features</span><span class="arrow">&rarr;</span>
+        <span class="node">longitudinal trajectories</span><span class="arrow">&rarr;</span>
+        <span class="node">attribution</span><span class="arrow">&rarr;</span>
+        <span class="node">reference-calibrated envelope</span><span class="arrow">&rarr;</span>
+        <span class="node accent">operational resilience interpretation</span><span class="arrow">&rarr;</span>
+        <span class="node">dashboard</span><span class="arrow">&rarr;</span>
+        <span class="node torch">PyTorch temporal graph autoencoder</span><span class="arrow">&rarr;</span>
+        <span class="node torch">public showcase</span>
+      </div>
+      <p class="muted" style="margin-top:16px">See the full diagram and component descriptions in
+      <a href="https://github.com/Margarita215729/NeuroBridge-S4-Graph-Learning/blob/main/docs/architecture.md">docs/architecture.md</a>.</p>
+    </div>
+  </section>
+
+  <!-- 3. What it does -->
+  <section id="does">
+    <h2>3 &middot; What the system does</h2>
+    <div class="grid cols-4">
+      <div class="feature"><h3>HRP-like data adapter</h3><p>Validates and standardizes heterogeneous longitudinal inputs into a graph-ready format.</p></div>
+      <div class="feature"><h3>Self-baseline graph trajectories</h3><p>Builds within-subject biological adaptation graphs and tracks change from each subject's own baseline.</p></div>
+      <div class="feature"><h3>Explainable attribution</h3><p>Transparent arithmetic explaining which domains, subgraphs, and hazards drive each change.</p></div>
+      <div class="feature"><h3>Reference-calibrated envelope</h3><p>Calibrates change magnitude against reference variability using robust statistics.</p></div>
+      <div class="feature"><h3>Operational resilience interpretation</h3><p>Rule-based, evidence-chain resilience-state interpretation for expert review.</p></div>
+      <div class="feature"><h3>Streamlit review dashboard</h3><p>Interactive longitudinal review of trajectories, attribution, and resilience cards.</p></div>
+      <div class="feature"><h3>PyTorch temporal graph autoencoder</h3><p>Self-supervised latent representations of within-subject trajectory states.</p></div>
+      <div class="feature"><h3>Static GitHub Pages showcase</h3><p>This zero-install public site plus the self-contained PyTorch showcase page.</p></div>
+    </div>
+  </section>
+
+  <!-- 4. PyTorch showcase highlight -->
+  <section id="showcase">
+    <h2>4 &middot; PyTorch showcase highlight</h2>
+    <div class="card">
+      <p>The Phase 12 showcase demonstrates a PyTorch self-supervised temporal autoencoder that
+      learns compact latent representations of graph-derived within-subject biological trajectory
+      patterns.</p>
+      <div class="guard" style="margin:14px 0">It is an experimental representation-learning
+      prototype, not a clinical predictor.</div>
+      <div class="grid cols-2">
+        <div class="figcard">
+          <img src="assets/figures/phase12_latent_space.png" alt="Latent trajectory embedding"
+               onerror="this.parentNode.style.display='none'" />
+          <div class="cap">Latent trajectory embedding (learned representation, not validation).</div>
+        </div>
+        <div class="figcard">
+          <img src="assets/figures/phase12_resilience_annotation_view.png" alt="Reconstruction mismatch by resilience state"
+               onerror="this.parentNode.style.display='none'" />
+          <div class="cap">Reconstruction mismatch by resilience state (consistency view, not validation).</div>
+        </div>
+      </div>
+      <div class="btns"><a class="btn primary" href="phase12_pytorch_showcase.html">Open the PyTorch showcase &rarr;</a></div>
+    </div>
+  </section>
+
+  <!-- 5. Key outputs -->
+  <section id="outputs">
+    <h2>5 &middot; Key outputs</h2>
+    <div class="grid cols-2">
+      <div class="card">
+        <ul class="tight">
+          <li>PyTorch model card</li>
+          <li>latent trajectory embeddings</li>
+          <li>reconstruction mismatch analysis</li>
+          <li>trajectory similarity matrix</li>
+          <li>operational resilience cards</li>
+          <li>dashboard review interface</li>
+          <li>adapter-generated graph-ready domain scores</li>
+        </ul>
+      </div>
+      <div class="figcard">
+        <img src="assets/figures/phase12_similarity_heatmap.png" alt="Latent trajectory similarity"
+             onerror="this.parentNode.style.display='none'" />
+        <div class="cap">Latent trajectory similarity (representation similarity, not shared health state).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Non-programmer reviewers -->
+  <section id="reviewers-easy">
+    <h2>6 &middot; For non-programmer reviewers</h2>
+    <div class="card">
+      <p>Start with this GitHub Pages site and the PyTorch showcase. No installation is required.</p>
+      <div class="btns">
+        <a class="btn primary" href="phase12_pytorch_showcase.html">PyTorch showcase</a>
+        <a class="btn" href="https://github.com/Margarita215729/NeuroBridge-S4-Graph-Learning/blob/main/PROJECT_OVERVIEW.md">Project overview</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Technical reviewers -->
+  <section id="reviewers-tech">
+    <h2>7 &middot; For technical reviewers</h2>
+    <div class="card">
+<pre><code>pip install -r requirements.txt
+pytest
+streamlit run app.py</code></pre>
+      <p class="muted">Open <code>results/html/phase12_pytorch_showcase.html</code> locally after
+      running Phase 12.</p>
+    </div>
+  </section>
+
+  <!-- 8. Limitations -->
+  <section id="limitations">
+    <h2>8 &middot; Limitations and guardrails</h2>
+    <div class="card">
+      <ul class="tight">
+        <li>schema-demonstration data are not evidence;</li>
+        <li>small independent subject count;</li>
+        <li>model is experimental;</li>
+        <li>no clinical outcome labels;</li>
+        <li>no operational validation;</li>
+        <li>reconstruction mismatch is not risk;</li>
+        <li>latent clusters are not clinical categories.</li>
+      </ul>
+      <div class="guard" style="margin-top:14px">Research prototype only. Not diagnosis, not
+      treatment guidance, not health risk scoring, not exposure measurement, and not mission
+      readiness classification.</div>
+    </div>
+  </section>
+
+  <!-- 9. Repository links -->
+  <section id="links" style="border-bottom:none">
+    <h2>9 &middot; Repository &amp; documentation</h2>
+    <div class="grid cols-3">
+      <div class="feature"><h3>GitHub repository</h3><p><a href="https://github.com/Margarita215729/NeuroBridge-S4-Graph-Learning">github.com/&hellip;/NeuroBridge-S4-Graph-Learning</a></p></div>
+      <div class="feature"><h3>README</h3><p><a href="https://github.com/Margarita215729/NeuroBridge-S4-Graph-Learning/blob/main/README.md">README.md</a></p></div>
+      <div class="feature"><h3>Quickstart</h3><p><a href="https://github.com/Margarita215729/NeuroBridge-S4-Graph-Learning/blob/main/QUICKSTART.md">QUICKSTART.md</a></p></div>
+      <div class="feature"><h3>Project overview</h3><p><a href="https://github.com/Margarita215729/NeuroBridge-S4-Graph-Learning/blob/main/PROJECT_OVERVIEW.md">PROJECT_OVERVIEW.md</a></p></div>
+      <div class="feature"><h3>PyTorch showcase</h3><p><a href="phase12_pytorch_showcase.html">phase12_pytorch_showcase.html</a></p></div>
+      <div class="feature"><h3>Architecture</h3><p><a href="https://github.com/Margarita215729/NeuroBridge-S4-Graph-Learning/blob/main/docs/architecture.md">docs/architecture.md</a></p></div>
+      <div class="feature"><h3>Notebook index</h3><p><a href="https://github.com/Margarita215729/NeuroBridge-S4-Graph-Learning/blob/main/docs/notebook_index.md">docs/notebook_index.md</a></p></div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    NeuroBridge-S4 Graph Learning &middot; v1.0 portfolio release &middot; Research engineering
+    prototype. Not diagnosis, treatment guidance, health risk scoring, exposure measurement, or
+    mission readiness classification.
+  </div>
+</footer>
+
+</body>
+</html>
