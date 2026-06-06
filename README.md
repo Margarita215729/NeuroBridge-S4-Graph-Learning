@@ -258,6 +258,36 @@ diagnosis, treatment guidance, exposure measurement, or health risk scoring.
 
 ---
 
+## Phase 10: HRP-Like Data Adapter Layer
+
+Phase 10 adds a reusable adapter layer for converting HRP-like longitudinal input streams into
+graph-ready NeuroBridge-S4 domain scores.
+
+Run:
+
+`notebooks/07_HRP_Like_Data_Adapter_Layer.ipynb`
+
+Inputs:
+- optional CSV files in `data/hrp_like_inputs/`
+- schema templates in `data/templates/`
+
+Outputs:
+- standardized longitudinal variables;
+- variable baseline deltas;
+- variable-to-domain mapping report;
+- domain coverage report;
+- graph-ready domain scores;
+- adapter report.
+
+The graph-ready output (`adapter_generated_longitudinal_domain_scores.csv`) is compatible with
+the Phase 6 within-subject longitudinal graph trajectory code. See `docs/data_adapter_schema.md`
+and `docs/domain_mapping.md`.
+
+Interpretation: The adapter validates and transforms data. It does not diagnose, score risk,
+infer exposure, or recommend treatment.
+
+---
+
 ## Interpretation guardrails
 
 This project does **not**:
@@ -305,5 +335,6 @@ NeuroBridge-S4-Graph-Learning/
 - **Phase 6** — complete: within-subject longitudinal graph trajectories (primary direction).
 - **Phase 7** — complete: explainable within-subject trajectory attribution.
 - **Phase 8** — implemented: reference-calibrated trajectory envelope (calibration layer).
-- **Phase 9** — implemented: interactive longitudinal review dashboard (Streamlit).
-- **Phase 10** — next: HRP-like data adapter layer.
+- **Phase 9** — complete: interactive longitudinal review dashboard (Streamlit).
+- **Phase 10** — implemented: HRP-like data adapter layer (ingestion + validation + domain mapping).
+- **Phase 11** — next: monitoring priority translation layer.

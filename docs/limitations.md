@@ -84,3 +84,18 @@ This project supports:
   diagnosis** — and inherits all coverage limitations of the underlying domain data. When only
   domain deltas (no baseline/current activations) are available, baseline hazard-context
   relevance is **assumed to be 0.0** and that assumption is recorded in the row interpretation.
+
+## Phase 10 data adapter limitations
+
+- **Variable-to-domain mapping is approximate and extensible**: it is a structural interpretation
+  scaffold, not a clinical assignment, and can be extended for new variables.
+- **Templates are not evidence**: the example template rows
+  (`schema_template_not_scientific_evidence`) exist only to illustrate the schema.
+- **Unit conversion is limited unless explicitly implemented**: `expected_unit` documents an
+  assumed unit; the adapter does not convert units.
+- **Domain scores depend on available variables**: a domain with no mapped variables in the input
+  is reported as absent rather than inferred.
+- **Missing data can reduce domain coverage**: per-timepoint availability is reported, and missing
+  variables lower the available-variable count for a domain.
+- **No clinical interpretation**: the adapter validates and transforms data only. It does not
+  diagnose, score risk, infer exposure, or recommend treatment.

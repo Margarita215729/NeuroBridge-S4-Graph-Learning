@@ -148,6 +148,25 @@ dashboard supports that workflow:
 The dashboard is a local research-review prototype. It is not a clinical monitoring system, not
 diagnosis, not treatment guidance, not exposure measurement, and not health risk scoring.
 
+## Why HRP-like data adapters matter
+
+HRP human research data are likely **multimodal**: biomarkers, sleep/activity wearables,
+cognitive test batteries, questionnaires, and environmental/habitat context arrive as separate
+tables in inconsistent formats. A reusable adapter layer makes the framework practical for that
+reality:
+
+- HRP-like data are **multimodal and heterogeneous**; the adapter standardizes wide and long
+  streams into one validated schema;
+- adapters make the framework **extensible** — new variables and data streams map onto the
+  canonical biological domains without changing the trajectory pipeline;
+- they **separate ingestion from interpretation**, so validation and self-baseline transformation
+  happen before any graph analysis;
+- they **improve reproducibility and reviewability** by emitting explicit readiness, mapping, and
+  coverage reports alongside the graph-ready output.
+
+The adapter validates and transforms data. It does not diagnose, score risk, infer exposure, or
+recommend treatment.
+
 ## Important distinction
 
 This repository is not an official NASA project and does not include actual Artemis II data. It is an independent research prototype inspired by small-N human spaceflight data challenges.

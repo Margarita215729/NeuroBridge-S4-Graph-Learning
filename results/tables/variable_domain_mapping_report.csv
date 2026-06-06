@@ -1,0 +1,25 @@
+variable,normalized_variable,canonical_variable,domain,data_stream,expected_unit,matched_pattern,mapping_status
+crp,crp,crp,inflammation / immune-adjacent status,biomarker,mg/L,crp,mapped
+glucose,glucose,glucose,metabolic regulation,biomarker,mg/dL,glucose,mapped
+hemoglobin,hemoglobin,hemoglobin,hematologic / oxygen-carrying capacity,biomarker,g/dL,hemoglobin,mapped
+hematocrit,hematocrit,hematocrit,hematologic / oxygen-carrying capacity,biomarker,%,hematocrit,mapped
+cholesterol,cholesterol,cholesterol,metabolic regulation,biomarker,mg/dL,cholesterol,mapped
+reaction_time,reaction_time,reaction_time,cognitive load,cognitive,ms,reaction_time,mapped
+accuracy,accuracy,accuracy,cognitive load,cognitive,%,accuracy,mapped
+cognitive_score,cognitive_score,cognitive_score,cognitive load,cognitive,score,cognitive_score,mapped
+co2,co2,co2,environmental context,environmental,ppm,co2,mapped
+temperature,temperature,temperature,environmental context,environmental,C,temperature,mapped
+humidity,humidity,humidity,environmental context,environmental,%,humidity,mapped
+noise,noise,noise,environmental context,environmental,dB,noise,mapped
+light_exposure,light_exposure,light_exposure,environmental context,environmental,lux,light_exposure,mapped
+heart_rate,heart_rate,heart_rate,cardiovascular regulation,vitals,bpm,heart_rate,mapped
+hrv_rmssd,hrv_rmssd,rmssd,autonomic regulation,autonomic,ms,rmssd,mapped
+sleep_duration,sleep_duration,sleep_duration,sleep / circadian regulation,sleep_activity,hours,sleep_duration,mapped
+fatigue_score,fatigue_score,fatigue_score,recovery capacity,questionnaire,score,fatigue_score,mapped
+stress_score,stress_score,stress_score,emotional regulation,questionnaire,score,stress_score,mapped
+mood_score,mood_score,mood_score,emotional regulation,questionnaire,score,mood_score,mapped
+recovery_score,recovery_score,recovery_score,recovery capacity,questionnaire,score,recovery_score,mapped
+sleep_efficiency,sleep_efficiency,sleep_efficiency,sleep / circadian regulation,sleep_activity,%,sleep_efficiency,mapped
+wake_after_sleep_onset,wake_after_sleep_onset,wake_after_sleep_onset,sleep / circadian regulation,sleep_activity,min,wake_after_sleep_onset,mapped
+steps,steps,steps,unmapped,unspecified,unknown,n/a,unmapped
+resting_hr,resting_hr,resting_hr,cardiovascular regulation,vitals,bpm,resting_hr,mapped

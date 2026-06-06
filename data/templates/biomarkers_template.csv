@@ -1,0 +1,3 @@
+subject_id,timepoint,mission_phase,time_index,crp,glucose,hemoglobin,hematocrit,cholesterol,data_type
+Demo_Crew_01,T0_baseline,baseline,0,1.0,90,14.5,43,180,schema_template_not_scientific_evidence
+Demo_Crew_01,T2_inflight,inflight,2,1.8,102,13.8,41,195,schema_template_not_scientific_evidence

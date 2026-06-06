@@ -138,3 +138,36 @@ from neurobridge_graph.dashboard_text import (  # noqa: F401
     get_dashboard_intro_text,
     get_guardrail_text,
 )
+from neurobridge_graph.data_validation import (  # noqa: F401
+    normalize_column_name,
+    detect_table_format,
+    detect_standard_columns,
+    validate_required_columns,
+    validate_longitudinal_structure,
+    summarize_missingness,
+    build_input_readiness_report,
+)
+from neurobridge_graph.domain_mapping import (  # noqa: F401
+    CANONICAL_DOMAINS,
+    get_default_variable_domain_mapping,
+    normalize_variable_name,
+    map_variable_to_domain,
+    map_variables_dataframe,
+    build_domain_coverage_report,
+)
+from neurobridge_graph.data_adapters import (  # noqa: F401
+    create_data_templates,
+    standardize_wide_longitudinal_table,
+    standardize_long_longitudinal_table,
+    combine_standardized_streams,
+    compute_variable_baseline_deltas,
+    build_domain_scores_from_variables,
+    pivot_domain_scores_wide,
+    run_adapter_pipeline,
+    SCHEMA_TEMPLATE_DATA_TYPE,
+    STANDARDIZED_COLUMNS,
+    DOMAIN_SCORE_LONG_COLUMNS,
+)
+from neurobridge_graph.adapter_reporting import (  # noqa: F401
+    generate_adapter_report,
+)
