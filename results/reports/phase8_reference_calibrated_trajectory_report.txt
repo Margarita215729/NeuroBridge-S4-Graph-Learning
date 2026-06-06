@@ -1,0 +1,102 @@
+==============================================================================
+NeuroBridge-S4 Graph Learning
+Phase 8 — Reference-Calibrated Trajectory Envelope
+==============================================================================
+
+OVERVIEW
+------------------------------------------------------------------------------
+Phase 8 keeps within-subject self-baseline tracking as the primary method and adds a reference-calibrated variability envelope. It estimates whether each subject's own baseline-relative graph change is small, moderate, or unusually large relative to expected variability.
+
+WHAT THE ENVELOPE IS
+------------------------------------------------------------------------------
+  The reference envelope does not define whether a person is healthy or unhealthy. It calibrates how large a within-subject graph change is relative to expected variability in available proxy or analog data.
+
+WHAT THE ENVELOPE IS NOT
+------------------------------------------------------------------------------
+  - It is not a diagnosis or abnormality label.
+  - It is not a health risk score.
+  - It is not treatment guidance.
+  - It is not an exposure measurement.
+  - It does not define a healthy-vs-unhealthy endpoint.
+
+INPUT / CALIBRATION DATA STATUS
+------------------------------------------------------------------------------
+  Calibration source: EXAMPLE schema-demonstration envelope only. Not scientific evidence; replace with real analog/reference variability data.
+  NOTE: Example envelope used only to demonstrate the calibration workflow; results are illustrative, not scientific findings.
+  Envelope features calibrated: 18
+  - Node / domain delta scoring: available
+  - Graph metric delta scoring: available
+  - Hazard-context delta scoring: available
+
+SCOPE
+------------------------------------------------------------------------------
+  Subject-timepoints scored: 10
+  - outside_expected_envelope: 5 subject-timepoint(s)
+  - within_expected_envelope: 4 subject-timepoint(s)
+  - near_envelope_boundary: 1 subject-timepoint(s)
+
+DOMAIN DELTAS OUTSIDE EXPECTED ENVELOPE
+------------------------------------------------------------------------------
+  - Demo_Crew_01 @ T3_post: Body composition / physical status (robust z +7.42, exceedance 0.430)
+  - Demo_Crew_01 @ T3_post: Inflammation / immune-adjacent (robust z +6.18, exceedance 0.410)
+  - Demo_Crew_02 @ T3_post: Metabolic regulation (robust z +6.07, exceedance 0.330)
+  - Demo_Crew_02 @ T3_post: Inflammation / immune-adjacent (robust z +4.83, exceedance 0.290)
+  - Demo_Crew_01 @ T3_post: Cardiovascular regulation (robust z +5.40, exceedance 0.280)
+  - Demo_Crew_01 @ T2_inflight: Body composition / physical status (robust z +5.40, exceedance 0.280)
+  - Demo_Crew_01 @ T2_inflight: Inflammation / immune-adjacent (robust z +4.50, exceedance 0.260)
+  - Demo_Crew_02 @ T2_inflight: Metabolic regulation (robust z +4.72, exceedance 0.230)
+
+GRAPH METRIC DELTAS OUTSIDE EXPECTED ENVELOPE
+------------------------------------------------------------------------------
+  - Demo_Crew_01 @ T3_post: coactivation_edge_count (robust z +7.42, exceedance 8.500)
+  - Demo_Crew_01 @ T3_post: n_active_domains (robust z +8.09, exceedance 5.000)
+  - Demo_Crew_01 @ T2_inflight: n_active_domains (robust z +6.74, exceedance 4.000)
+  - Demo_Crew_01 @ T2_inflight: coactivation_edge_count (robust z +4.05, exceedance 3.500)
+  - Demo_Crew_02 @ T3_post: n_active_domains (robust z +5.40, exceedance 3.000)
+  - Demo_Crew_02 @ T2_inflight: n_active_domains (robust z +4.05, exceedance 2.000)
+  - Demo_Crew_01 @ T3_post: total_node_activation (robust z +7.86, exceedance 1.830)
+  - Demo_Crew_02 @ T3_post: total_node_activation (robust z +6.74, exceedance 1.500)
+
+HAZARD-CONTEXT DELTAS OUTSIDE EXPECTED ENVELOPE (alignment, not exposure)
+------------------------------------------------------------------------------
+  - Demo_Crew_01 @ T3_post: isolation_and_confinement (robust z +7.42, exceedance 0.430)
+  - Demo_Crew_02 @ T3_post: isolation_and_confinement (robust z +5.80, exceedance 0.310)
+  - Demo_Crew_01 @ T3_post: distance_from_earth (robust z +5.40, exceedance 0.280)
+  - Demo_Crew_01 @ T2_inflight: isolation_and_confinement (robust z +5.40, exceedance 0.280)
+  - Demo_Crew_01 @ T3_post: space_radiation (robust z +5.20, exceedance 0.265)
+  - Demo_Crew_01 @ T3_post: gravity_fields (robust z +5.03, exceedance 0.253)
+  - Demo_Crew_01 @ T3_post: hostile_closed_environments (robust z +5.00, exceedance 0.251)
+  - Demo_Crew_02 @ T3_post: distance_from_earth (robust z +4.72, exceedance 0.230)
+
+PER SUBJECT-TIMEPOINT SUMMARY
+------------------------------------------------------------------------------
+  [Demo_Crew_01 @ T0_baseline] flag=within_expected_envelope (node:0 graph:0 hazard:0)
+  [Demo_Crew_01 @ T1_pre] flag=within_expected_envelope (node:0 graph:0 hazard:0)
+  [Demo_Crew_01 @ T2_inflight] flag=outside_expected_envelope (node:6 graph:7 hazard:5)
+  [Demo_Crew_01 @ T3_post] flag=outside_expected_envelope (node:6 graph:7 hazard:5)
+  [Demo_Crew_01 @ T4_recovery] flag=outside_expected_envelope (node:0 graph:2 hazard:1)
+  [Demo_Crew_02 @ T0_baseline] flag=within_expected_envelope (node:0 graph:0 hazard:0)
+  [Demo_Crew_02 @ T1_pre] flag=within_expected_envelope (node:0 graph:0 hazard:0)
+  [Demo_Crew_02 @ T2_inflight] flag=outside_expected_envelope (node:6 graph:6 hazard:5)
+  [Demo_Crew_02 @ T3_post] flag=outside_expected_envelope (node:6 graph:7 hazard:5)
+  [Demo_Crew_02 @ T4_recovery] flag=near_envelope_boundary (node:0 graph:0 hazard:0)
+
+LIMITATIONS
+------------------------------------------------------------------------------
+  - Envelope quality depends entirely on reference/analog data quality.
+  - Example envelopes are schema demonstration only and are not evidence.
+  - Envelope exceedance is descriptive, not a clinical threshold.
+  - The envelope does not validate clinical or operational thresholds.
+  - Domain coverage limitations affect which deltas can be scored.
+
+HOW THIS SUPPORTS HRP REVIEW
+------------------------------------------------------------------------------
+  Astronauts may show operationally meaningful within-subject shifts that still sit inside population-normal ranges. A reference-calibrated envelope helps reviewers avoid overreacting to expected variability while flagging unusually large self-baseline shifts for closer expert review — useful when crews are too small for group inference.
+
+  Outside-envelope does not mean disease, danger, or health risk. It means the baseline-relative graph change is larger than expected under the current calibration envelope and may deserve expert review.
+
+NEXT PHASE RECOMMENDATION
+------------------------------------------------------------------------------
+  Phase 9 — Interactive longitudinal dashboard: let reviewers explore trajectories, attribution, and envelope exceedance together.
+
+==============================================================================

@@ -193,6 +193,32 @@ review. It is not diagnosis, treatment guidance, exposure attribution, or causal
 
 ---
 
+## Phase 8: Reference-Calibrated Trajectory Envelope
+
+Phase 8 keeps self-baseline tracking as the primary method and adds a reference-calibrated
+variability envelope.
+
+It does not ask whether a subject is normal compared with healthy people. It asks whether the
+subject's own change from baseline is larger than expected under a calibration envelope.
+
+Run:
+
+`notebooks/06_Reference_Calibrated_Trajectory_Envelope.ipynb`
+
+Outputs:
+- reference trajectory envelope;
+- node delta envelope scores;
+- graph metric envelope scores;
+- hazard-context delta envelope scores;
+- envelope figures;
+- plain-language Phase 8 report.
+
+Interpretation: Outside-envelope means a baseline-relative change is larger than expected under
+the current calibration data. It is not diagnosis, risk scoring, treatment guidance, or exposure
+measurement.
+
+---
+
 ## Interpretation guardrails
 
 This project does **not**:
@@ -238,5 +264,6 @@ NeuroBridge-S4-Graph-Learning/
 - **Phase 4** — complete: interpretable graph feature extraction.
 - **Phase 5** — implemented: hazard-aware graph-feature similarity mapping (structural demonstration).
 - **Phase 6** — complete: within-subject longitudinal graph trajectories (primary direction).
-- **Phase 7** — implemented: explainable within-subject trajectory attribution.
-- **Phase 8** — next: reference-calibrated trajectory envelope.
+- **Phase 7** — complete: explainable within-subject trajectory attribution.
+- **Phase 8** — implemented: reference-calibrated trajectory envelope (calibration layer).
+- **Phase 9** — next: interactive longitudinal dashboard.

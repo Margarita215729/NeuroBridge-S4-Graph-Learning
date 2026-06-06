@@ -51,3 +51,15 @@ This project supports:
   noisy timepoints reduce the reliability of recovery categories.
 - Sparse domains limit **subgraph attribution**: a subgraph whose domains are absent from the
   dataset is reported as unavailable rather than inferred.
+
+## Phase 8 reference-envelope limitations
+
+- Envelope quality depends entirely on **reference/analog data quality**; a poor calibration
+  source yields a poor envelope.
+- **Example envelopes are not evidence**: the schema-demonstration envelope exists only to
+  exercise the workflow and must be replaced with real analog/reference variability data.
+- **Envelope exceedance is descriptive**, not a clinical or operational threshold.
+- The envelope **does not validate clinical thresholds** and does not define a healthy-vs-
+  unhealthy endpoint.
+- **Domain coverage limitations** affect interpretation: features without reference calibration
+  are scored as `insufficient_reference` rather than guessed.

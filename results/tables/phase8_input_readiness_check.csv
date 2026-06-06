@@ -1,0 +1,5 @@
+file,status,rows,columns,required_or_optional,notes
+longitudinal_node_deltas.csv,found,60,12,required,loaded
+longitudinal_graph_deltas.csv,found,70,10,required,loaded
+longitudinal_hazard_deltas.csv,found,50,9,optional,loaded
+phase7_attribution_summary.csv,found,10,10,optional,loaded

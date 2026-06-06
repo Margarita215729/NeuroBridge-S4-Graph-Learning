@@ -1,0 +1,19 @@
+feature,feature_type,group,n_reference,median_delta,mad_delta,lower_q,upper_q,lower_bound,upper_bound,envelope_method,data_type
+Body composition / physical status,node,,30,0.0,0.05,0.05,0.95,-0.12,0.12,example_summary_quantile_mad,schema_demonstration_not_scientific_evidence
+Cardiovascular regulation,node,,30,0.0,0.05,0.05,0.95,-0.12,0.12,example_summary_quantile_mad,schema_demonstration_not_scientific_evidence
+Hematologic / oxygen-carrying,node,,30,0.0,0.045,0.05,0.95,-0.11,0.11,example_summary_quantile_mad,schema_demonstration_not_scientific_evidence
+Inflammation / immune-adjacent,node,,30,0.0,0.06,0.05,0.95,-0.14,0.14,example_summary_quantile_mad,schema_demonstration_not_scientific_evidence
+Metabolic regulation,node,,30,0.0,0.05,0.05,0.95,-0.12,0.12,example_summary_quantile_mad,schema_demonstration_not_scientific_evidence
+Recovery-related markers,node,,30,0.0,0.05,0.05,0.95,-0.12,0.12,example_summary_quantile_mad,schema_demonstration_not_scientific_evidence
+mean_node_activation,graph,,30,0.0,0.03,0.05,0.95,-0.08,0.08,example_summary_quantile_mad,schema_demonstration_not_scientific_evidence
+max_node_activation,graph,,30,0.0,0.04,0.05,0.95,-0.1,0.1,example_summary_quantile_mad,schema_demonstration_not_scientific_evidence
+total_node_activation,graph,,30,0.0,0.2,0.05,0.95,-0.5,0.5,example_summary_quantile_mad,schema_demonstration_not_scientific_evidence
+n_active_domains,graph,,30,0.0,0.5,0.05,0.95,-1.0,1.0,example_summary_quantile_mad,schema_demonstration_not_scientific_evidence
+active_domain_fraction,graph,,30,0.0,0.08,0.05,0.95,-0.2,0.2,example_summary_quantile_mad,schema_demonstration_not_scientific_evidence
+graph_density,graph,,30,0.0,0.05,0.05,0.95,-0.12,0.12,example_summary_quantile_mad,schema_demonstration_not_scientific_evidence
+coactivation_edge_count,graph,,30,0.0,1.0,0.05,0.95,-2.5,2.5,example_summary_quantile_mad,schema_demonstration_not_scientific_evidence
+space_radiation,hazard,,30,0.0,0.05,0.05,0.95,-0.12,0.12,example_summary_quantile_mad,schema_demonstration_not_scientific_evidence
+isolation_and_confinement,hazard,,30,0.0,0.05,0.05,0.95,-0.12,0.12,example_summary_quantile_mad,schema_demonstration_not_scientific_evidence
+distance_from_earth,hazard,,30,0.0,0.05,0.05,0.95,-0.12,0.12,example_summary_quantile_mad,schema_demonstration_not_scientific_evidence
+gravity_fields,hazard,,30,0.0,0.05,0.05,0.95,-0.12,0.12,example_summary_quantile_mad,schema_demonstration_not_scientific_evidence
+hostile_closed_environments,hazard,,30,0.0,0.05,0.05,0.95,-0.12,0.12,example_summary_quantile_mad,schema_demonstration_not_scientific_evidence

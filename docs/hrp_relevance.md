@@ -111,6 +111,26 @@ trail: baseline-relative change → domain contributors → subgraph contributor
 alignment → recovery behavior → plain-language explanation. This is hazard-context alignment
 and monitoring-relevant interpretation, never exposure attribution or diagnosis.
 
+## Why reference-calibrated envelopes matter for HRP
+
+A within-subject trajectory tells HRP reviewers *that* a graph changed and *what* drove it, but
+not whether the magnitude is unusual. A reference-calibrated variability envelope adds that
+missing calibration:
+
+- Astronauts may show operationally meaningful within-subject shifts that still sit **inside
+  population-normal ranges** — a population-normal check would miss them.
+- Envelope calibration helps reviewers **avoid overreacting** to normal biological/measurement
+  variability.
+- Envelope calibration helps **identify unusually large self-baseline shifts** that warrant
+  closer expert review.
+- This is especially useful when **crews are too small for group inference**: the envelope
+  borrows variability structure from reference/analog data without making the cohort the
+  endpoint.
+
+The envelope is a calibration layer, never a health-status verdict. Outside-envelope means a
+baseline-relative change is larger than expected under the current calibration data — a
+candidate for expert review, not diagnosis, a risk score, or an exposure measurement.
+
 ## Important distinction
 
 This repository is not an official NASA project and does not include actual Artemis II data. It is an independent research prototype inspired by small-N human spaceflight data challenges.

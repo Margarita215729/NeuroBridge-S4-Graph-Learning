@@ -9,10 +9,13 @@ Phase 3 — Single-timepoint biological adaptation graphs: complete
 Phase 4 — Single-timepoint graph feature extraction: complete
 Phase 5 — Hazard-aware graph-feature similarity mapping: complete
 Phase 6 — Within-subject longitudinal graph trajectories: complete
-Phase 7 — Explainable trajectory attribution: implemented
-Phase 8 — Reference-calibrated trajectory envelope: next
-Phase 9 — Interactive longitudinal dashboard: future
-Phase 10 — Experimental graph sequence models / graph autoencoders: future
+Phase 7 — Explainable trajectory attribution: complete
+Phase 8 — Reference-calibrated trajectory envelope: implemented
+Phase 9 — Interactive longitudinal dashboard: next
+Phase 10 — HRP-like data adapter layer: future
+Phase 11 — Monitoring priority translation layer: future
+Phase 12 — Experimental graph sequence models: future
+Phase 13 — Portfolio release: future
 ```
 
 > **Primary methodological direction:** within-subject longitudinal graph trajectories.
@@ -192,20 +195,60 @@ Deliverables:
 - `results/reports/explanation_cards/*.txt`
 - `tests/test_trajectory_attribution.py`, `tests/test_explanation_generator.py`
 
-## Phase 8 — Reference-calibrated trajectory envelope ← next
+## Phase 8 — Reference-calibrated trajectory envelope
 
-Goal: place each within-subject trajectory against a reference band/envelope so deviations
-that warrant closer expert review can be flagged (calibration layer, not primary endpoint).
+Status: **implemented**.
 
-## Phase 9 — Interactive longitudinal dashboard
+Goal: estimate whether each within-subject baseline-relative graph change is small, moderate,
+or unusually large relative to a reference-calibrated **expected-variability envelope**. The
+self-baseline comparison remains primary; reference/analog data are used **only** to calibrate
+expected variability (envelope bounds, noise scale, rarity context), never as a healthy-vs-
+unhealthy endpoint.
 
-Goal: reviewer-facing interactive exploration of trajectories and attribution.
+> The reference envelope does not define whether a person is healthy or unhealthy. It
+> calibrates how large a within-subject graph change is relative to expected variability in
+> available proxy or analog data.
 
-## Phase 10 — Experimental graph sequence models / graph autoencoders
+Outside-envelope means a baseline-relative change is larger than expected under the current
+calibration data — a candidate for expert review. It is **not** diagnosis, a health risk score,
+treatment guidance, or exposure measurement.
+
+Deliverables:
+
+- `src/neurobridge_graph/reference_envelope.py` — envelope construction, robust-z scoring,
+  classification, and per-layer delta scoring + summary
+- `src/neurobridge_graph/envelope_visualization.py` — envelope figures
+- `src/neurobridge_graph/envelope_reporting.py` — plain-language interpretation and report
+- `notebooks/06_Reference_Calibrated_Trajectory_Envelope.ipynb`
+- `data/examples/example_reference_variability_envelope.csv` (schema demonstration only)
+- `results/tables/phase8_input_readiness_check.csv`
+- `results/tables/reference_trajectory_envelope.csv`
+- `results/tables/reference_calibrated_node_delta_scores.csv`
+- `results/tables/reference_calibrated_graph_delta_scores.csv`
+- `results/tables/reference_calibrated_hazard_delta_scores.csv`
+- `results/tables/phase8_reference_calibrated_summary.csv`
+- `results/figures/phase8_*.png`
+- `results/reports/phase8_reference_calibrated_trajectory_report.txt`
+- `tests/test_reference_envelope.py`, `tests/test_envelope_reporting.py`
+
+## Phase 9 — Interactive longitudinal dashboard ← next
+
+Goal: reviewer-facing interactive exploration of trajectories, attribution, and envelope
+exceedance together.
+
+## Phase 10 — HRP-like data adapter layer
+
+Goal: adapter to ingest HRP-style longitudinal/analog data into the trajectory pipeline.
+
+## Phase 11 — Monitoring priority translation layer
+
+Goal: translate envelope and attribution outputs into reviewer-facing monitoring priorities.
+
+## Phase 12 — Experimental graph sequence models / graph autoencoders
 
 Only after transparent trajectory baselines work. No supervised training on n=4.
 
-## Phase 11 — Portfolio and reviewer polish
+## Phase 13 — Portfolio and reviewer polish
 
 Goal: make the repository useful for scientific outreach and job applications.
 
