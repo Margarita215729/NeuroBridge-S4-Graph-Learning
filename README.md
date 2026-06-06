@@ -1,0 +1,85 @@
+# NeuroBridge-S4 Graph Learning
+
+Graph learning extension of **NeuroBridge-S4** for small-N biomedical human adaptation modeling using real public proxy datasets.
+
+> This is an independent research prototype. It is not an official NASA project and does not contain actual Artemis II astronaut data.
+
+## Purpose
+
+The original NeuroBridge-S4 project demonstrated a methodology for small-N human research data: real proxy datasets, biological domain mapping, BACI, graph representation, and reviewer-friendly adaptation profiles.
+
+This repository begins the next stage: making those graphs computational.
+
+The goal is to represent each participant as a connected biological adaptation graph rather than as isolated rows and columns in a biomedical dataset.
+
+## Core question
+
+How can we represent each participant as a connected biological system and determine whether their adaptation graph is unusual, coherent, or research-relevant relative to a real reference population?
+
+## What Phase 1 contains
+
+Phase 1 is the **graph schema and repository foundation** stage. It defines:
+
+- what a biological adaptation graph is;
+- what nodes represent;
+- what edges represent;
+- what node and edge attributes should contain;
+- how this project will later connect to NeuroBridge-S4 processed outputs;
+- what guardrails are required for responsible interpretation.
+
+No model training is performed in Phase 1.
+
+## Planned workflow
+
+```text
+Processed NeuroBridge-S4 outputs
+→ participant-level biological domains
+→ subject-level biological adaptation graphs
+→ graph features
+→ graph embeddings
+→ reference-relative novelty detection
+→ explainable subgraph profiles
+→ longitudinal graph trajectories
+```
+
+## Interpretation guardrails
+
+This project does **not**:
+
+- use actual Artemis II astronaut data;
+- diagnose medical or psychiatric conditions;
+- prescribe treatment;
+- infer brain chemistry directly;
+- claim NHANES is astronaut-equivalent;
+- train supervised models on n=4.
+
+This project does:
+
+- use real public proxy data in later phases;
+- create a transparent graph schema;
+- compare small-N participants to larger reference graph spaces;
+- support human-review and research interpretation;
+- generate explainable graph-based adaptation profiles.
+
+## Repository structure
+
+```text
+NeuroBridge-S4-Graph-Learning/
+├── README.md
+├── LICENSE
+├── requirements.txt
+├── environment.yml
+├── .gitignore
+├── notebooks/
+├── src/neurobridge_graph/
+├── docs/
+├── data/
+├── results/
+└── tests/
+```
+
+## Current status
+
+**Phase 1 complete:** repository foundation and graph schema draft.
+
+Next milestone: **Phase 2 — data import from original NeuroBridge-S4 outputs.**

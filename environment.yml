@@ -1,0 +1,12 @@
+name: neurobridge-graph
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pandas
+  - numpy
+  - networkx
+  - matplotlib
+  - scikit-learn
+  - jupyter
+  - pytest
