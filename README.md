@@ -1,5 +1,7 @@
 # NeuroBridge-S4 Graph Learning
 
+[![CI](https://github.com/Margarita215729/NeuroBridge-S4-Graph-Learning/actions/workflows/ci.yml/badge.svg)](https://github.com/Margarita215729/NeuroBridge-S4-Graph-Learning/actions/workflows/ci.yml)
+
 End-to-end ML research engineering prototype for within-subject biological graph trajectory analysis
 in small-N human spaceflight contexts.
 
@@ -31,8 +33,28 @@ operational resilience interpretation → PyTorch temporal graph autoencoder sho
 - PyTorch self-supervised learning
 - dashboard and static public showcase
 - robust testing and documentation
+- reproducible Linux container and GitHub Actions CI
 
 > This is an independent research prototype. It is not an official NASA project and does not contain actual Artemis II astronaut data.
+
+## Reproducible Linux workflow
+
+Run the full test suite from a clean checkout:
+
+```bash
+python -m pip install --requirement requirements.txt
+python -m pytest --quiet
+```
+
+Run the dashboard in a non-root Linux container:
+
+```bash
+docker compose up --build
+```
+
+Open `http://localhost:8501`. The image includes only the application package and the
+precomputed tables needed by the dashboard. GitHub Actions runs the Python test suite, builds the
+container, starts it on Ubuntu, and checks Streamlit's health endpoint for every pull request.
 
 ## Primary methodological direction: within-subject trajectories
 
