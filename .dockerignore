@@ -1,0 +1,21 @@
+.git
+.github
+.venv
+__pycache__
+*.py[cod]
+.pytest_cache
+.coverage
+htmlcov
+.ipynb_checkpoints
+.DS_Store
+
+# The runtime dashboard reads results/tables only. Keep research artifacts and
+# notebooks out of the image so the container stays focused and reproducible.
+notebooks
+docs
+results/figures
+results/graphs
+results/html
+results/models
+*.ipynb
+*.pt
