@@ -14,14 +14,32 @@ Open the public GitHub Pages site — no installation, no commands, no notebooks
 ## Local technical review
 
 ```bash
-pip install -r requirements.txt
-pytest
+python -m pip install --requirement requirements.txt
+python -m pytest --quiet
 streamlit run app.py
 ```
 
 - `pip install -r requirements.txt` installs all dependencies, including PyTorch (CPU is sufficient).
 - `pytest` runs the full test suite.
 - `streamlit run app.py` launches the interactive longitudinal review dashboard.
+
+## Reproducible Linux container
+
+Build and run the dashboard with Docker Compose:
+
+```bash
+docker compose up --build
+```
+
+Then open `http://localhost:8501`. The container runs as an unprivileged user, uses a read-only
+root filesystem under Compose, and exposes a health check used by CI.
+
+To run the same smoke test used on GitHub Actions:
+
+```bash
+docker build --tag neurobridge-s4:ci .
+scripts/container_smoke_test.sh neurobridge-s4:ci
+```
 
 ## Open the PyTorch showcase locally
 
